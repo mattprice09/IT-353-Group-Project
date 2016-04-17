@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui">
+    <head>
+        <meta charset="utf-8"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta> 
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <title>Aiming Higher</title>
+
+        <!-- Custom styles for this template -->
+        <link href=".\css\styles.css" rel="stylesheet"></link>
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"></link>
+
+        <!-- JQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"></link>
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+        <nav class="navbar navbar-fixed-top navbar-inverse">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+                <a class="navbar-brand" href="./index.xhtml">Aiming Higher</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="./index.xhtml">Home</a></li>
+                <!--<li><a href="#">Assignment 1</a></li>-->
+              </ul>
+              <h:form class="navbar-form navbar-right">
+                  <div class="form-group">
+                        <h:inputText a:placeholder="Username" id="userID" value="#{loginController.currentUser.userID}">
+                            <f:validateLength
+                                minimum="2"
+                                maximum="25"/>
+                            </h:inputText><h:message showSummary="true" showDetail="false"
+                                style="color: red;
+                                font-family: 'New Century Schoolbook', serif;
+                                font-style: oblique"
+                                id="errors1"
+                                for="userID"/>
+                        <h:inputSecret a:placeholder="Password" id="password" redisplay="false" value="#{loginController.currentUser.password}">
+                            <f:validateLength
+                                minimum="2"
+                                maximum="25"/>
+                            </h:inputSecret><h:message showSummary="true" showDetail="false"
+                                style="color: red;
+                                font-family: 'New Century Schoolbook', serif;
+                                font-style: oblique"
+                                id="errors4"
+                                for="password"/>
+                  </div>
+                  <h:commandButton id="submitID" value="Login" action="#{loginController.authenticate()}"/>
+              </h:form>
+            </div><!-- /.nav-collapse -->
+          </div><!-- /.container -->
+          
+          
+        </nav><!-- /.navbar -->
+      <div class="container">
+
+      </div>
+  </body>
+</html>
+
