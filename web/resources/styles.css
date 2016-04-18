@@ -1,6 +1,6 @@
  * {
   font-family: sans-serif;
-  color: #000000;
+  /*color: #000000;*/
  }
  
  body {
@@ -18,4 +18,8 @@
     text-align: center;
     display: block;
     margin: 0 auto;
+}
+
+.navbarLogin {
+    display: none;
 }

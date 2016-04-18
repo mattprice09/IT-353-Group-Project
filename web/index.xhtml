@@ -15,10 +15,17 @@
 
         <!-- Custom styles for this template -->
         <link href="resources/styles.css" rel="stylesheet"></link>
+        
+        <!-- JQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
   </h:head>
 
   <h:body>
+      <!-- hidden Bean variables to access from JS -->
+      <h:inputText id="loggedIn" value="#{loginController.loggedIn}" style="display:none"/>
+      
+      
       <!-- NAV BAR begin-->
         <b:navBar brand="Aiming Higher" brandHref="./index.xhtml" inverse="true" static="true">
             <b:navbarLinks>
@@ -27,32 +34,40 @@
                 <b:navLink value="Register" href="#"></b:navLink>
             </b:navbarLinks>
             
-            <h:form class="navbar-form navbar-right">
+            <!-- this container only shows if user is logged in -->
+            <b:container id="welcomeContainer" class="navbarLogin">
+                <p class="navbar-text navbar-right">Welcome, <strong>#{loginController.currentUser.userID}!</strong></p>
+            </b:container>
+            
+            <!-- this is the login form (if user is not logged in) -->
+            <b:container id="loginContainer" class="navbarLogin">
+                <h:form class="navbar-form navbar-right">
                   <div class="form-group">
-                        <h:inputText a:placeholder="Username" id="userID" value="#{loginController.currentUser.userID}">
+                        <b:inputText a:placeholder="Username" id="userID" value="#{loginController.currentUser.userID}">
                             <f:validateLength
                                 minimum="2"
                                 maximum="25"/>
-                            </h:inputText><h:message showSummary="true" showDetail="false"
+                            </b:inputText><b:message showSummary="true" showDetail="false"
                                 style="color: red;
                                 font-family: 'New Century Schoolbook', serif;
                                 font-style: oblique"
                                 id="errors1"
                                 for="userID"/>
-                        <h:inputSecret a:placeholder="Password" id="password" redisplay="false" value="#{loginController.currentUser.password}">
+                        <b:inputSecret a:placeholder="Password" id="password" value="#{loginController.currentUser.password}">
                             <f:validateLength
                                 minimum="2"
                                 maximum="25"/>
-                            </h:inputSecret><h:message showSummary="true" showDetail="false"
+                            </b:inputSecret><b:message showSummary="false" showDetail="false"
                                 style="color: red;
                                 font-family: 'New Century Schoolbook', serif;
                                 font-style: oblique"
                                 id="errors4"
                                 for="password"/>
                   </div>
-                  <b:button id="loginBtn" value="Login" outcome="#{loginController.authenticate()}"  look="primary"/>
-                  <b:button id="registerBtn" value="Register" outcome="#{loginController.registerUser()}" look="primary"/>
+                    <b:commandButton id="loginBtn" value="Login" actionListener="#{loginController.authenticate()}"  look="primary"/>
+                  <b:commandButton id="registerBtn" value="Register" actionListener="#{loginController.registerUser()}" look="primary"/>
               </h:form>
+            </b:container>
         </b:navBar>
       <!-- NAV BAR end-->
       
@@ -75,6 +90,7 @@
           </b:row><!--row (main image) -->
           
       </b:container><!--container (main container)-->
+      <script type="text/javascript" src="javascript/functionality.js"></script>
   </h:body>
 </html>
 

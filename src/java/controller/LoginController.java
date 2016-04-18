@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import dao.MainDaoImpl;
@@ -14,17 +9,13 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
 import model.User;
 
-/**
- *
- * @author LPrice
- */
 @Named(value = "loginController")
 @SessionScoped
 public class LoginController implements Serializable {
 
     private User currentUser;
     private int numAttempts;
-    private boolean loggedIn;
+    private String loggedIn;
     
     /**
      * Creates a new instance of LoginController
@@ -32,21 +23,12 @@ public class LoginController implements Serializable {
     public LoginController() {
         this.currentUser = new User();
         this.numAttempts = 0;
-        this.loggedIn = false;
+        this.loggedIn = "N";
     }
     
-//    public String isLoggedIn(ComponentSystemEvent event) {
-//        String navi = null;
-//        if (!loggedIn) {
-//            FacesContext fc = FacesContext.getCurrentInstance();
-//            ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler) fc.getApplication().getNavigationHandler();
-//            nav.performNavigation("login.xhtml?faces-redirect=true");
-//        }
-//        return navi;
-//    }
-    
     public String authenticate() {
-        return "update.xhtml";
+        this.loggedIn = "Y";
+        return "faces/index.xhtml";
 //        MainDaoImpl dao = new MainDaoImpl();
 ////        if (numAttempts == 3) {
 ////            return "MaxAttempts.xhtml";
@@ -90,6 +72,34 @@ public class LoginController implements Serializable {
      */
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
+    }
+
+    /**
+     * @return the numAttempts
+     */
+    public int getNumAttempts() {
+        return numAttempts;
+    }
+
+    /**
+     * @param numAttempts the numAttempts to set
+     */
+    public void setNumAttempts(int numAttempts) {
+        this.numAttempts = numAttempts;
+    }
+
+    /**
+     * @return the loggedIn
+     */
+    public String getLoggedIn() {
+        return loggedIn;
+    }
+
+    /**
+     * @param loggedIn the loggedIn to set
+     */
+    public void setLoggedIn(String loggedIn) {
+        this.loggedIn = loggedIn;
     }
     
 }
