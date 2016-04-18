@@ -4,8 +4,9 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:b="http://bootsfaces.net/ui"
       xmlns:p="http://primefaces.org/ui">
-    <head>
+    <h:head>
         <meta charset="utf-8"></meta>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta> 
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
@@ -13,40 +14,20 @@
         <title>Aiming Higher</title>
 
         <!-- Custom styles for this template -->
-        <link href=".\css\styles.css" rel="stylesheet"></link>
+        <link href="resources/styles.css" rel="stylesheet"></link>
 
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"></link>
+  </h:head>
 
-        <!-- JQuery -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"></link>
-
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  </head>
-
-  <body>
-        <nav class="navbar navbar-fixed-top navbar-inverse">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-
-                <a class="navbar-brand" href="./index.xhtml">Aiming Higher</a>
-            </div>
-            <div id="navbar" class="collapse navbar-collapse">
-              <ul class="nav navbar-nav">
-                <li class="active"><a href="./index.xhtml">Home</a></li>
-                <!--<li><a href="#">Assignment 1</a></li>-->
-              </ul>
-              <h:form class="navbar-form navbar-right">
+  <h:body>
+      <!-- NAV BAR begin-->
+        <b:navBar brand="Aiming Higher" brandHref="./index.xhtml" inverse="true" static="true">
+            <b:navbarLinks>
+                <b:navLink active="true" value="Home" href="faces/index.xhtml"></b:navLink>
+                <b:navLink value="Donate" href="#"></b:navLink>
+                <b:navLink value="Register" href="#"></b:navLink>
+            </b:navbarLinks>
+            
+            <h:form class="navbar-form navbar-right">
                   <div class="form-group">
                         <h:inputText a:placeholder="Username" id="userID" value="#{loginController.currentUser.userID}">
                             <f:validateLength
@@ -69,16 +50,31 @@
                                 id="errors4"
                                 for="password"/>
                   </div>
-                  <h:commandButton id="submitID" value="Login" action="#{loginController.authenticate()}"/>
+                  <b:button id="loginBtn" value="Login" outcome="#{loginController.authenticate()}"  look="primary"/>
+                  <b:button id="registerBtn" value="Register" outcome="#{loginController.registerUser()}" look="primary"/>
               </h:form>
-            </div><!-- /.nav-collapse -->
-          </div><!-- /.container -->
+        </b:navBar>
+      <!-- NAV BAR end-->
+      
+      <b:container>
+          <b:row>
+              <b:column span="12">
+                  <h3 align="center"><strong>Progress Towards Our Goal</strong></h3>
+              </b:column>
+              <b:column span="12">
+                  <p:progressBar widgetVar="pbAjax" ajax="true" value="#{dashboardController.progress}" labelTemplate="{value}%" styleClass="animated" global="false"></p:progressBar>
+              </b:column>
+          </b:row> <!--row (dashboard) -->
           
+          <hr/>
+              
+          <b:row>
+              <b:column span="12">
+                  <img class="imageStyle" src="resources/MainImage.jpeg"/>
+              </b:column>
+          </b:row><!--row (main image) -->
           
-        </nav><!-- /.navbar -->
-      <div class="container">
-
-      </div>
-  </body>
+      </b:container><!--container (main container)-->
+  </h:body>
 </html>
 

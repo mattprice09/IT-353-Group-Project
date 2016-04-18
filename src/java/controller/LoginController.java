@@ -35,32 +35,34 @@ public class LoginController implements Serializable {
         this.loggedIn = false;
     }
     
-    public String isLoggedIn(ComponentSystemEvent event) {
-        String navi = null;
-        if (!loggedIn) {
-            FacesContext fc = FacesContext.getCurrentInstance();
-            ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler) fc.getApplication().getNavigationHandler();
-            nav.performNavigation("login.xhtml?faces-redirect=true");
-        }
-        return navi;
-    }
+//    public String isLoggedIn(ComponentSystemEvent event) {
+//        String navi = null;
+//        if (!loggedIn) {
+//            FacesContext fc = FacesContext.getCurrentInstance();
+//            ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler) fc.getApplication().getNavigationHandler();
+//            nav.performNavigation("login.xhtml?faces-redirect=true");
+//        }
+//        return navi;
+//    }
     
     public String authenticate() {
-        MainDaoImpl dao = new MainDaoImpl();
-        if (numAttempts == 3) {
-            return "MaxAttempts.xhtml";
-        }
-        int status = dao.authenticate(this.currentUser);
-        if (status == 1) {
-            currentUser = (User) dao.getUser(currentUser.getUserID());
-            this.loggedIn = true;
-            return "update.xhtml";
-        } else {
-            numAttempts++;
-            return "LoginBad.xhtml";
-        }
+        return "update.xhtml";
+//        MainDaoImpl dao = new MainDaoImpl();
+////        if (numAttempts == 3) {
+////            return "MaxAttempts.xhtml";
+////        }
+//        int status = dao.authenticate(this.currentUser);
+//        if (status == 1) {
+//            currentUser = (User) dao.getUser(currentUser.getUserID());
+//            this.loggedIn = true;
+//            return "update.xhtml";
+//        } else {
+//            numAttempts++;
+//            return "LoginBad.xhtml";
+//        }
     }
     
+    // Update's the current user's login info
     public String updateUser() {
         MainDaoImpl dao = new MainDaoImpl();
         int response = dao.updateUser(this.currentUser);
@@ -69,6 +71,11 @@ public class LoginController implements Serializable {
             return "error.xhtml";
         }
         return "update.xhtml";
+    }
+    
+    // Incomplete
+    public String registerUser() {
+        return "register.xhtml";
     }
 
     /**

@@ -1,0 +1,21 @@
+ * {
+  font-family: sans-serif;
+  color: #000000;
+ }
+ 
+ body {
+    /*height: 200px;*/
+    background: #D2D8FA; /* For browsers that do not support gradients */    
+    background: -webzit-linear-gradient(left top, #D2D8FA, #F5F6FA); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right, #D2D8FA, #F5F6FA); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right, #D2D8FA, #F5F6FA); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom right, #D2D8FA, #F5F6FA); /* Standard syntax (must be last) */
+}
+
+.imageStyle {
+    height: 750px;
+    width: 1000px;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+}
