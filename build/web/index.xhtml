@@ -24,7 +24,7 @@
   <h:body>
       <!-- hidden Bean variables to access from JS -->
       <h:inputText id="loggedIn" value="#{loginController.loggedIn}" style="display:none"/>
-      
+      <h:inputText id="numSold" style="display:none" value="#{dashboardController.numSold}"/>
       
       <!-- NAV BAR begin-->
         <b:navBar brand="Aiming Higher" brandHref="./index.xhtml" inverse="true" static="true">
@@ -82,15 +82,20 @@
           </b:row> <!--row (dashboard) -->
           
           <hr/>
-              
+          
           <b:row>
+              <div class="popover" style="z-index:1000">
+                  <p id="popupMsg"></p>
+              </div>
               <b:column span="12">
-                  <img class="imageStyle" src="resources/MainImage.jpeg"/>
+                  <canvas id="MainCanvas" width="1155" height="866" class="imageStyle"/>
               </b:column>
           </b:row><!--row (main image) -->
           
       </b:container><!--container (main container)-->
-      <script type="text/javascript" src="javascript/functionality.js"></script>
+      
+      <hr/>
+      <script type="text/javascript" src="functionality.js"></script>
   </h:body>
 </html>
 

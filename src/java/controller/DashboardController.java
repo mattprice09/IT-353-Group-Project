@@ -18,11 +18,16 @@ import java.io.Serializable;
 public class DashboardController implements Serializable {
 
     private int progress;
+    private int numSold;
+    private int numRemaining;
     /**
      * Creates a new instance of DashboardController
      */
     public DashboardController() {
+        int total = 1000230;
         progress = 34;
+        numSold = 875019;
+        numRemaining = total - numSold;
     }
 
     /**
@@ -37,6 +42,34 @@ public class DashboardController implements Serializable {
      */
     public void setProgress(int progress) {
         this.progress = progress;
+    }
+
+    /**
+     * @return the numSold
+     */
+    public int getNumSold() {
+        return numSold;
+    }
+
+    /**
+     * @param numSold the numSold to set
+     */
+    public void setNumSold(int numSold) {
+        this.numSold = numSold;
+    }
+
+    /**
+     * @return the numRemaining
+     */
+    public int getNumRemaining() {
+        return numRemaining;
+    }
+
+    /**
+     * @param numRemaining the numRemaining to set
+     */
+    public void setNumRemaining(int numRemaining) {
+        this.numRemaining = numRemaining;
     }
     
 }

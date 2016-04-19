@@ -13,8 +13,8 @@
 }
 
 .imageStyle {
-    height: 750px;
-    width: 1000px;
+/*    height: 750px;
+    width: 1000px;*/
     text-align: center;
     display: block;
     margin: 0 auto;
@@ -22,4 +22,39 @@
 
 .navbarLogin {
     display: none;
+}
+
+/*~~~~~~~~~~~~~~~~~~ Popover stuff*/ 
+
+.popover {
+    position:absolute;
+    display:none;
+    background: #D2D8FA;
+    border: 1px solid #999;
+    padding:10px;
+    width:auto;
+    box-shadow:0 0 10px rgba(0, 0, 0, .5);
+}
+.popover:after, .popover:before {
+    right: 100%;
+    border: solid transparent;
+    content:" ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
+.popover:after {
+    border-color: rgba(255, 255, 255, 0);
+    border-right-color: #ffffff;
+    border-width: 10px;
+    top: 50%;
+    margin-top: -10px;
+}
+.popover:before {
+    border-color: rgba(201, 201, 201, 0);
+    border-right-color: #c9c9c9;
+    border-width: 11px;
+    top: 50%;
+    margin-top: -11px;
 }
