@@ -10,6 +10,7 @@ package model;
  * @author LPrice
  */
 public class User {
+
     private String firstName;
     private String lastName;
     private String userID;
@@ -17,6 +18,8 @@ public class User {
     private String email;
     private String securityQuestion;
     private String securityAnswer;
+    private String state;
+    private String country;
 
     /**
      * @return the firstName
@@ -114,5 +117,33 @@ public class User {
      */
     public void setSecurityAnswer(String securityAnswer) {
         this.securityAnswer = securityAnswer;
+    }
+
+    /**
+     * @return the state
+     */
+    public String getState() {
+        return state;
+    }
+
+    /**
+     * @param state the state to set
+     */
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    /**
+     * @return the country
+     */
+    public String getCountry() {
+        return country;
+    }
+
+    /**
+     * @param country the country to set
+     */
+    public void setCountry(String country) {
+        this.country = country;
     }
 }
