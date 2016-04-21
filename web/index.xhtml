@@ -7,6 +7,9 @@
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
+        <f:metadata>
+            <f:event type="preRenderView" listener="#{dashboardController.updateStats()}"/>
+        </f:metadata>
         <meta charset="utf-8"></meta>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta> 
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
@@ -23,7 +26,7 @@
 
   <h:body>
       <!-- NAV BAR begin-->
-        <b:navBar brand="Aiming Higher" brandHref="./index.xhtml" inverse="true" static="true">
+        <b:navBar brand="Aiming Higher" brandHref="faces/index.xhtml" inverse="true" static="true">
             <b:navbarLinks>
                 <b:navLink active="true" value="Home" href="faces/index.xhtml"></b:navLink>
                 <b:navLink value="Donate" href="#"></b:navLink>
@@ -71,7 +74,7 @@
                         </b:row><!--b:row (error msg row)-->
                     </div><!--form-group -->
                     <b:commandButton id="loginBtn" value="Login" action="#{loginController.authenticate()}"  look="primary"/>
-                    <b:commandButton id="registerBtn" value="Register" action="#{loginController.registerUser()}" look="primary"/>
+                    <b:button id="registerBtn" value="Register" outcome="#{loginController.registerUser()}" look="primary"/>
                 </h:form>
             </b:container>
             
@@ -88,6 +91,17 @@
       
       <!-- Container containing dashboard and main image -->
       <b:container>
+          
+          <!-- Test Buy for presentation -->
+          <b:container>
+              <b:row>
+              <h:form>
+                  <b:inputText a:placeholder="# of Donations" id="numDonations" value="#{transactionController.numDonations}"></b:inputText>
+                  <b:commandButton id="buyBtn" value="Buy" action="#{transactionController.testBuy()}"  look="danger"/>
+              </h:form>
+          </b:row>
+          </b:container>
+          
           <b:row> <!-- Dashboard row -->
               <b:column span="12">
                   <h3 align="center"><strong>Progress Towards Our Goal</strong></h3>

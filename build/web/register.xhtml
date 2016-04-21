@@ -17,7 +17,9 @@ and open the template in the editor.
     <h:body>
         <b:navBar brand="Aiming Higher" brandHref="./index.xhtml" inverse="true" static="true">
             <b:navbarLinks>
+                <b:navLink value="Home" href="faces/index.xhtml"></b:navLink>
                 <b:navLink value="Donate" href="#"></b:navLink>
+                <b:navLink active="true" value="Register" href="faces/register.xhtml"></b:navLink>
             </b:navbarLinks>         
         </b:navBar>
         <b:container id="registerContainer">
@@ -332,6 +334,7 @@ and open the template in the editor.
                             <option value="Wisconsin">Wisconsin</option>
                             <option value="Wyoming">Wyoming</option>
                         </select></h4></div>
+                <h4>Username: <h:inputText id="userID" value="#{loginController.currentUser.userName}" required ="true">
                     </h:inputText></h4>
                 <h4>Password: <input type = "password" id="passcode" value="#{loginController.currentUser.password}" required="true">
                     </input></h4>

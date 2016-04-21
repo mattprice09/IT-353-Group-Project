@@ -60,7 +60,7 @@
 
         // Incomplete
         public String registerUser() {
-            return "register.xhtml";
+            return "faces/register.xhtml";
         }
 
         /**

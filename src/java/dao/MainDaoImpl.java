@@ -2,53 +2,13 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import model.User;
 
 public class MainDaoImpl implements MainDAO {
-
-    @Override
-    public int createUser(User user) {
-        
-        // Copied DB code formatting from Dr. Bee Lim's ProfileMatchApp
-        try {
-            Class.forName("org.apache.derby.jdbc.ClientDriver");
-        } catch (ClassNotFoundException e) {
-            System.err.println(e.getMessage());
-            System.exit(0);
-        }
-
-        int rowCount = 0;
-        try {
-            String myDB = "jdbc:derby://localhost:1527/FinalProject";
-            Connection DBConn = DriverManager.getConnection(myDB, "itkstu", "itkstu");
-            String temp = "";
-            
-            String insertString;
-            Statement stmt = DBConn.createStatement();
-            insertString = "INSERT INTO FinalProject.Users VALUES ('"
-                    + ("" + user.getUserNum()).replace("'", "''")
-                    + "','" + user.getFirstName().replace("'", "''")
-                    + "','" + user.getLastName().replace("'", "''")
-                    + "','" + user.getState().replace("'", "''")
-                    + "','" + user.getCountry().replace("'", "''")
-                    + "','" + user.getUserName().replace("'", "''")
-                    + "','" + user.getPassword().replace("'", "''")
-                    + "','" + ("" + user.getNumDonated()).replace("'", "''")
-                    + "')";
-
-            rowCount = stmt.executeUpdate(insertString);
-            System.out.println("insert string =" + insertString);
-            DBConn.close();
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
-        }
-
-        // if insert is successful, rowCount will be set to 1 (1 row inserted successfully). Else, insert failed.
-        return rowCount;
-    }
     
     @Override
     public int updateUser(User user) {
@@ -94,6 +54,203 @@ public class MainDaoImpl implements MainDAO {
 //        return rowCount;
     }
     
+    //Ryan's code
+    @Override
+    public int createUser(User user) {
+        try {
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+        } catch (ClassNotFoundException e) {
+            System.err.println(e.getMessage());
+            System.exit(0);
+        }
+
+        int rowCount = 0;
+        try {
+            String myDB = "jdbc:derby://localhost:1527/MealProject";
+            Connection DBConn = DriverManager.getConnection(myDB, "itkstu", "student");
+            if(!checkIfUsed(user.getUserName())){
+                String insertString;
+                Statement stmt = DBConn.createStatement();
+                insertString = "INSERT INTO USERS (userNum, lastName, firstName, homeState, country, userName, password) VALUES("
+                        + createNextUserNum()
+                        + ",'" + user.getFirstName()
+                        + "','" + user.getLastName()
+                        + "','" + user.getState()
+                        + "','" + user.getCountry()
+                        + "','" + user.getUserName()
+                        + "','" + user.getPassword()
+                        + "')";      
+
+                rowCount = stmt.executeUpdate(insertString);
+                 System.out.println("insert string =" + insertString);
+            }
+            else{
+                rowCount = 2;//error code for username already used
+            }
+           
+            DBConn.close();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+
+        // if insert is successful, rowCount will be set to 1 (1 row inserted successfully). Else, insert failed.
+        return rowCount;
+    }
+    
+    public boolean checkIfUsed(String userName) {
+        Connection DBConn = null;
+        boolean exists = false;
+        try {
+            DBHelper.loadDriver("org.apache.derby.jdbc.ClientDriver");
+            // if doing the above in Oracle: DBHelper.loadDriver("oracle.jdbc.driver.OracleDriver");
+            String myDB = "jdbc:derby://localhost:1527/MealProject";
+            // if doing the above in Oracle:  String myDB = "jdbc:oracle:thin:@oracle.itk.ilstu.edu:1521:ora478";
+            DBConn = DBHelper.connect2DB(myDB, "itkstu", "student");
+
+            // With the connection made, create a statement to talk to the DB server.
+            // Create a SQL statement to query, retrieve the rows one by one (by going to the
+            // columns), and formulate the result string to send back to the client.
+            PreparedStatement stmt = DBConn.prepareStatement("SELECT userName FROM USERS WHERE userName = ?");
+            stmt.setString(1, userName);
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                exists = true;
+            }
+            rs.close();
+            stmt.close();
+        }catch (Exception e) {
+            System.err.println("ERROR: Problems with SQL select");
+            e.printStackTrace();
+        }
+        try {
+            DBConn.close();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return exists;
+    }
+    
+    //automatically creates userNum primary keys
+    public String createNextUserNum() {
+
+        String query = "SELECT MAX(userNum) FROM USERS";
+        String numStr = "0";
+        int num;
+        Connection DBConn = null;
+        try {
+            DBHelper.loadDriver("org.apache.derby.jdbc.ClientDriver");
+            // if doing the above in Oracle: DBHelper.loadDriver("oracle.jdbc.driver.OracleDriver");
+            String myDB = "jdbc:derby://localhost:1527/MealProject";
+            // if doing the above in Oracle:  String myDB = "jdbc:oracle:thin:@oracle.itk.ilstu.edu:1521:ora478";
+            DBConn = DBHelper.connect2DB(myDB, "itkstu", "student");
+
+            // With the connection made, create a statement to talk to the DB server.
+            // Create a SQL statement to query, retrieve the rows one by one (by going to the
+            // columns), and formulate the result string to send back to the client.
+            Statement stmt = DBConn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            if(rs.next()){
+                numStr = rs.getString(1);
+            }
+            rs.close();
+            stmt.close();
+        }catch (Exception e) {
+            System.err.println("ERROR: Problems with SQL select");
+            e.printStackTrace();
+        }
+        try {
+            DBConn.close();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        
+        num = Integer.parseInt(numStr) + 1;
+        //System.out.print(rs.getString(1));
+        return Integer.toString(num);
+    }
+    //End Ryan's Code
+    
+    // Retrieve the # of donations
+    public String getNumDonations() {
+
+        String query = "SELECT MAX(donationNum) FROM DONATIONS";
+        String numStr = "0";
+        int num;
+        Connection DBConn = null;
+        try {
+            DBHelper.loadDriver("org.apache.derby.jdbc.ClientDriver");
+            // if doing the above in Oracle: DBHelper.loadDriver("oracle.jdbc.driver.OracleDriver");
+            String myDB = "jdbc:derby://localhost:1527/MealProject";
+            // if doing the above in Oracle:  String myDB = "jdbc:oracle:thin:@oracle.itk.ilstu.edu:1521:ora478";
+            DBConn = DBHelper.connect2DB(myDB, "itkstu", "student");
+
+            // With the connection made, create a statement to talk to the DB server.
+            // Create a SQL statement to query, retrieve the rows one by one (by going to the
+            // columns), and formulate the result string to send back to the client.
+            Statement stmt = DBConn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            if(rs.next()){
+                numStr = rs.getString(1);
+            }
+            rs.close();
+            stmt.close();
+        }catch (Exception e) {
+            System.err.println("ERROR: Problems with SQL select");
+            e.printStackTrace();
+        }
+        try {
+            DBConn.close();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        
+        return numStr;
+    }
+    
+    public int makePurchase(int userNum, int numDonations) {
+        try {
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+        } catch (ClassNotFoundException e) {
+            System.err.println(e.getMessage());
+            System.exit(0);
+        }
+
+        int rowCount = Integer.parseInt(getNumDonations());
+        int afterAdd = rowCount;
+        try {
+            String myDB = "jdbc:derby://localhost:1527/MealProject";
+            Connection DBConn = DriverManager.getConnection(myDB, "itkstu", "student");
+            for (int i = 0; i < numDonations; i++) {
+                afterAdd++;
+                
+                int xPixel = afterAdd % 1155;
+                int yPixel = afterAdd / 1155;
+                
+                String insertString;
+                Statement stmt = DBConn.createStatement();
+                insertString = "INSERT INTO DONATIONS (donationNum, userNum, pixelX, pixelY) VALUES("
+                        + afterAdd
+                        + "," + userNum
+                        + "," + xPixel
+                        + "," + yPixel
+                        + ")";      
+
+                rowCount = stmt.executeUpdate(insertString);
+                System.out.println("insert string =" + insertString);
+            }
+           
+            DBConn.close();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+
+        // nothing was added
+        if (afterAdd == rowCount) {
+            return -1;
+        }
+        return rowCount;
+    }
+    
     @Override
     public int authenticate(User user) {
         int success = 0;
@@ -101,12 +258,12 @@ public class MainDaoImpl implements MainDAO {
         String userName = user.getUserName();
         String password = user.getPassword();
         
-        String query = "SELECT * FROM ITKSTU.Users " + "WHERE userName='"
+        String query = "SELECT * FROM Users " + "WHERE userName='"
                 + userName + "'";
         
         DBHelper.loadDriver("org.apache.derby.jdbc.ClientDriver");
-        String myDB = "jdbc:derby://localhost:1527/FinalProject";
-        Connection DBConn = DBHelper.connect2DB(myDB, "itkstu", "itkstu");
+        String myDB = "jdbc:derby://localhost:1527/MealProject";
+        Connection DBConn = DBHelper.connect2DB(myDB, "itkstu", "student");
         
         try {
             Statement stmt = DBConn.createStatement();
@@ -170,12 +327,12 @@ public class MainDaoImpl implements MainDAO {
     public User getUser(String userName) {
         User user = new User();
         
-        String query = "SELECT * FROM ITKSTU.Users " + "WHERE userName='"
+        String query = "SELECT * FROM Users " + "WHERE userName='"
                 + userName + "'";
         
         DBHelper.loadDriver("org.apache.derby.jdbc.ClientDriver");
-        String myDB = "jdbc:derby://localhost:1527/FinalProject";
-        Connection DBConn = DBHelper.connect2DB(myDB, "itkstu", "itkstu");
+        String myDB = "jdbc:derby://localhost:1527/MealProject";
+        Connection DBConn = DBHelper.connect2DB(myDB, "itkstu", "student");
 
         try {
             Statement stmt = DBConn.createStatement();

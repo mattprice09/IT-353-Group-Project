@@ -17,10 +17,13 @@ and open the template in the editor.
     <h:body>
         <b:navBar brand="Aiming Higher" brandHref="./index.xhtml" inverse="true" static="true">
             <b:navbarLinks>
+                <b:navLink value="Home" href="faces/index.xhtml"></b:navLink>
                 <b:navLink value="Donate" href="#"></b:navLink>
+                <b:navLink active="true" value="Register" href="faces/register.xhtml"></b:navLink>
             </b:navbarLinks>         
         </b:navBar>
         <b:container id="registerContainer">
+            <h4>Thank you <strong>#{loginController.currentUser.userName}!</strong> Your registration was successful</h4><br/>
             <h5>Please log in to access your account</h5><br/>
         </b:container>             
         
