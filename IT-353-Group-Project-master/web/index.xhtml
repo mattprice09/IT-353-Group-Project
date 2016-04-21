@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <meta charset="utf-8"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta> 
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <title>Aiming Higher</title>
+
+        <!-- Custom styles for this template -->
+        <link href="resources/styles.css" rel="stylesheet"></link>
+        
+        <!-- JQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+  </h:head>
+
+  <h:body>
+      <!-- hidden Bean variables to access from JS -->
+      <h:inputText id="loggedIn" value="#{loginController.loggedIn}" style="display:none"/>
+      <h:inputText id="numSold" style="display:none" value="#{dashboardController.numSold}"/>
+      
+      <!-- NAV BAR begin-->
+        <b:navBar brand="Aiming Higher" brandHref="./index.xhtml" inverse="true" static="true">
+            <b:navbarLinks>
+                <b:navLink active="true" value="Home" href="faces/index.xhtml"></b:navLink>
+                <b:navLink value="Donate" href="#"></b:navLink>
+                <b:navLink value="Register" href="faces/register.xhtml"></b:navLink>
+            </b:navbarLinks>
+            
+            <!-- this container only shows if user is logged in -->
+            <b:container id="welcomeContainer" class="navbarLogin">
+                <p class="navbar-text navbar-right">Welcome, <strong>#{loginController.currentUser.userName}!</strong></p>
+            </b:container>
+            
+            <!-- this is the login form (if user is not logged in) -->
+            <b:container id="loginContainer" class="navbarLogin">
+                <h:form class="navbar-form navbar-right">
+                  <div class="form-group">
+                        <b:inputText a:placeholder="Username" id="userID" value="#{loginController.currentUser.userName}">
+                            <f:validateLength
+                                minimum="2"
+                                maximum="25"/>
+                            </b:inputText><b:message showSummary="true" showDetail="false"
+                                style="color: red;
+                                font-family: 'New Century Schoolbook', serif;
+                                font-style: oblique"
+                                id="errors1"
+                                for="userID"/>
+                        <b:inputSecret a:placeholder="Password" id="password" value="#{loginController.currentUser.password}">
+                            <f:validateLength
+                                minimum="2"
+                                maximum="25"/>
+                            </b:inputSecret><b:message showSummary="false" showDetail="false"
+                                style="color: red;
+                                font-family: 'New Century Schoolbook', serif;
+                                font-style: oblique"
+                                id="errors4"
+                                for="password"/>
+                  </div>
+                    <b:commandButton id="loginBtn" value="Login" actionListener="#{loginController.authenticate()}"  look="primary"/>
+                  <b:commandButton id="registerBtn" value="Register" actionListener="#{loginController.registerUser()}" look="primary"/>
+              </h:form>
+            </b:container>
+        </b:navBar>
+      <!-- NAV BAR end-->
+      
+      <b:container>
+          <b:row>
+              <b:column span="12">
+                  <h3 align="center"><strong>Progress Towards Our Goal</strong></h3>
+              </b:column>
+              <b:column span="12">
+                  <p:progressBar widgetVar="pbAjax" ajax="true" value="#{dashboardController.progress}" labelTemplate="{value}%" styleClass="animated" global="false"></p:progressBar>
+              </b:column>
+          </b:row> <!--row (dashboard) -->
+          
+          <hr/>
+          
+          <b:row>
+              <div class="popover" style="z-index:1000">
+                  <p id="popupMsg"></p>
+              </div>
+              <b:column span="12">
+                  <canvas id="MainCanvas" width="1155" height="866" class="imageStyle"/>
+              </b:column>
+          </b:row><!--row (main image) -->
+          
+      </b:container><!--container (main container)-->
+      
+      <hr/>
+      <script type="text/javascript" src="functionality.js"></script>
+  </h:body>
+</html>
+
