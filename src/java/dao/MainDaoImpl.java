@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dao;
 
 import java.sql.Connection;
@@ -10,24 +5,12 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Date;
 import model.User;
 
-/**
- *
- * @author LPrice
- */
 public class MainDaoImpl implements MainDAO {
 
     @Override
     public int createUser(User user) {
-        
-        // Create credentials in UserLogin table
-        int authStatus = createCredentials(user);
-        if (authStatus == 0) {
-            return 0;
-        }
         
         // Copied DB code formatting from Dr. Bee Lim's ProfileMatchApp
         try {
@@ -39,19 +22,21 @@ public class MainDaoImpl implements MainDAO {
 
         int rowCount = 0;
         try {
-            String myDB = "jdbc:derby://localhost:1527/Project353";
-            Connection DBConn = DriverManager.getConnection(myDB, "itkstu", "student");
+            String myDB = "jdbc:derby://localhost:1527/FinalProject";
+            Connection DBConn = DriverManager.getConnection(myDB, "itkstu", "itkstu");
             String temp = "";
             
             String insertString;
             Statement stmt = DBConn.createStatement();
-            insertString = "INSERT INTO Project353.Users VALUES ('"
-                    + user.getFirstName().replace("'", "''")
+            insertString = "INSERT INTO FinalProject.Users VALUES ('"
+                    + ("" + user.getUserNum()).replace("'", "''")
+                    + "','" + user.getFirstName().replace("'", "''")
                     + "','" + user.getLastName().replace("'", "''")
-                    + "','" + user.getUserID().replace("'", "''")
-                    + "','" + user.getEmail().replace("'", "''")
-                    + "','" + user.getSecurityQuestion().replace("'", "''")
-                    + "','" + user.getSecurityAnswer().replace("'", "''")
+                    + "','" + user.getHomeState().replace("'", "''")
+                    + "','" + user.getCountry().replace("'", "''")
+                    + "','" + user.getUserName().replace("'", "''")
+                    + "','" + user.getPassword().replace("'", "''")
+                    + "','" + ("" + user.getNumDonated()).replace("'", "''")
                     + "')";
 
             rowCount = stmt.executeUpdate(insertString);
@@ -67,130 +52,61 @@ public class MainDaoImpl implements MainDAO {
     
     @Override
     public int updateUser(User user) {
-        
-        // Create credentials in UserLogin table
-        int authStatus = updatePassword(user);
-        if (authStatus == 0) {
-            return 0;
-        }
-        
-        // Copied DB code formatting from Dr. Bee Lim's ProfileMatchApp
-        try {
-            Class.forName("org.apache.derby.jdbc.ClientDriver");
-        } catch (ClassNotFoundException e) {
-            System.err.println(e.getMessage());
-            System.exit(0);
-        }
-
-        int rowCount = 0;
-        try {
-            String myDB = "jdbc:derby://localhost:1527/Project353";
-            Connection DBConn = DriverManager.getConnection(myDB, "itkstu", "student");
-            String temp = "";
-            
-            String updateString;
-            Statement stmt = DBConn.createStatement();
-            updateString = "UPDATE Project353.Users Set "
-                    + "firstName = '" + user.getFirstName().replace("'", "''") + "', "
-                    + "lastName = '" + user.getLastName().replace("'", "''") + "', "
-                    + "email = '" + user.getEmail().replace("'", "''") + "', "
-                    + "securityQuestion = '" + user.getSecurityQuestion().replace("'", "''") + "', "
-                    + "securityAnswer = '" + user.getSecurityAnswer().replace("'", "''") + "' "
-                    + "WHERE userid = '" + user.getUserID().replace("'", "''") + "'";
-
-            rowCount = stmt.executeUpdate(updateString);
-            System.out.println("insert string =" + updateString);
-            DBConn.close();
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
-        }
-
-        // if insert is successful, rowCount will be set to 1 (1 row inserted successfully). Else, insert failed.
-        return rowCount;
+        return 0;
+//        // Create credentials in UserLogin table
+//        int authStatus = updatePassword(user);
+//        if (authStatus == 0) {
+//            return 0;
+//        }
+//        
+//        // Copied DB code formatting from Dr. Bee Lim's ProfileMatchApp
+//        try {
+//            Class.forName("org.apache.derby.jdbc.ClientDriver");
+//        } catch (ClassNotFoundException e) {
+//            System.err.println(e.getMessage());
+//            System.exit(0);
+//        }
+//
+//        int rowCount = 0;
+//        try {
+//            String myDB = "jdbc:derby://localhost:1527/FinalProject";
+//            Connection DBConn = DriverManager.getConnection(myDB, "itkstu", "itkstu");
+//            String temp = "";
+//            
+//            String updateString;
+//            Statement stmt = DBConn.createStatement();
+//            updateString = "UPDATE Project353.Users Set "
+//                    + "firstName = '" + user.getFirstName().replace("'", "''") + "', "
+//                    + "lastName = '" + user.getLastName().replace("'", "''") + "', "
+//                    + "email = '" + user.getEmail().replace("'", "''") + "', "
+//                    + "securityQuestion = '" + user.getSecurityQuestion().replace("'", "''") + "', "
+//                    + "securityAnswer = '" + user.getSecurityAnswer().replace("'", "''") + "' "
+//                    + "WHERE userid = '" + user.getUserID().replace("'", "''") + "'";
+//
+//            rowCount = stmt.executeUpdate(updateString);
+//            System.out.println("insert string =" + updateString);
+//            DBConn.close();
+//        } catch (SQLException e) {
+//            System.err.println(e.getMessage());
+//        }
+//
+//        // if insert is successful, rowCount will be set to 1 (1 row inserted successfully). Else, insert failed.
+//        return rowCount;
     }
     
-    public int createCredentials(User user) {
-        // Copied DB code formatting from Dr. Bee Lim's ProfileMatchApp
-        try {
-            Class.forName("org.apache.derby.jdbc.ClientDriver");
-        } catch (ClassNotFoundException e) {
-            System.err.println(e.getMessage());
-            System.exit(0);
-        }
-
-        int rowCount = 0;
-        try {
-            String myDB = "jdbc:derby://localhost:1527/Project353";
-            Connection DBConn = DriverManager.getConnection(myDB, "itkstu", "student");
-            String temp = "";
-            
-            String insertString;
-            Statement stmt = DBConn.createStatement();
-            insertString = "INSERT INTO Project353.LoginInfo VALUES ('"
-                    + user.getUserID().replace("'", "''")
-                    + "','" + user.getPassword().replace("'", "''")
-                    + "')";
-
-            rowCount = stmt.executeUpdate(insertString);
-            System.out.println("insert string =" + insertString);
-            DBConn.close();
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
-        }
-
-        // if insert is successful, rowCount will be set to 1 (1 row inserted successfully). Else, insert failed.
-        return rowCount;
-    }
-    
-    public int updatePassword(User user) {
-        if (user.getPassword() == null) {
-            return 1;
-        }
-        // Copied DB code formatting from Dr. Bee Lim's ProfileMatchApp
-        try {
-            Class.forName("org.apache.derby.jdbc.ClientDriver");
-        } catch (ClassNotFoundException e) {
-            System.err.println(e.getMessage());
-            System.exit(0);
-        }
-
-        int rowCount = 0;
-        try {
-            String myDB = "jdbc:derby://localhost:1527/Project353";
-            Connection DBConn = DriverManager.getConnection(myDB, "itkstu", "student");
-            String temp = "";
-            
-            String updateString;
-            Statement stmt = DBConn.createStatement();
- 
-            updateString = "UPDATE Project353.LoginInfo Set "
-                    + "password = '" + user.getPassword() + "' "
-                    + "WHERE userid = '" + user.getUserID() + "'";
-
-            rowCount = stmt.executeUpdate(updateString);
-            System.out.println("insert string =" + updateString);
-            DBConn.close();
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
-        }
-
-        // if insert is successful, rowCount will be set to 1 (1 row inserted successfully). Else, insert failed.
-        return rowCount;
-    }
-
     @Override
     public int authenticate(User user) {
         int success = 0;
         
-        String userID = user.getUserID();
+        String userName = user.getUserName();
         String password = user.getPassword();
         
-        String query = "SELECT * FROM Project353.LoginInfo " + "WHERE userID='"
-                + userID + "'";
+        String query = "SELECT * FROM ITKSTU.Users " + "WHERE userName='"
+                + userName + "'";
         
         DBHelper.loadDriver("org.apache.derby.jdbc.ClientDriver");
-        String myDB = "jdbc:derby://localhost:1527/Project353";
-        Connection DBConn = DBHelper.connect2DB(myDB, "itkstu", "student");
+        String myDB = "jdbc:derby://localhost:1527/FinalProject";
+        Connection DBConn = DBHelper.connect2DB(myDB, "itkstu", "itkstu");
         
         try {
             Statement stmt = DBConn.createStatement();
@@ -198,7 +114,7 @@ public class MainDaoImpl implements MainDAO {
             
             // Authenticate
             if (rs.next()) {
-                if (userID.equals(rs.getString("userid")) && password.equals(rs.getString("password"))) {
+                if (userName.equals(rs.getString("username")) && password.equals(rs.getString("password"))) {
                     success = 1;
                 }
             }
@@ -218,15 +134,15 @@ public class MainDaoImpl implements MainDAO {
     }
 
     @Override
-    public boolean idExists(String userID) {
+    public boolean idExists(String userName) {
         boolean found = false;
         
-        String query = "SELECT * FROM Project353.LoginInfo " + "WHERE userID='"
-                + userID + "'";
+        String query = "SELECT * FROM FinalProject.Users " + "WHERE userName='"
+                + userName + "'";
         
         DBHelper.loadDriver("org.apache.derby.jdbc.ClientDriver");
-        String myDB = "jdbc:derby://localhost:1527/Project353";
-        Connection DBConn = DBHelper.connect2DB(myDB, "itkstu", "student");
+        String myDB = "jdbc:derby://localhost:1527/FinalProject";
+        Connection DBConn = DBHelper.connect2DB(myDB, "itkstu", "itkstu");
 
         try {
             Statement stmt = DBConn.createStatement();
@@ -251,15 +167,15 @@ public class MainDaoImpl implements MainDAO {
         return found;
     }
     
-    public User getUser(String userID) {
+    public User getUser(String userName) {
         User user = new User();
         
-        String query = "SELECT * FROM Project353.Users " + "WHERE userID='"
-                + userID + "'";
+        String query = "SELECT * FROM ITKSTU.Users " + "WHERE userName='"
+                + userName + "'";
         
         DBHelper.loadDriver("org.apache.derby.jdbc.ClientDriver");
-        String myDB = "jdbc:derby://localhost:1527/Project353";
-        Connection DBConn = DBHelper.connect2DB(myDB, "itkstu", "student");
+        String myDB = "jdbc:derby://localhost:1527/FinalProject";
+        Connection DBConn = DBHelper.connect2DB(myDB, "itkstu", "itkstu");
 
         try {
             Statement stmt = DBConn.createStatement();
@@ -276,12 +192,15 @@ public class MainDaoImpl implements MainDAO {
                     break;
                 }
                 
+                // Assign values
+                user.setUserNum(rs.getInt("usernum"));
                 user.setFirstName(rs.getString("firstname"));
                 user.setLastName(rs.getString("lastname"));
-                user.setUserID(rs.getString("userid"));
-                user.setEmail(rs.getString("email"));
-                user.setSecurityQuestion(rs.getString("securityquestion"));
-                user.setSecurityAnswer(rs.getString("securityanswer"));
+                user.setHomeState(rs.getString("homestate"));
+                user.setCountry(rs.getString("country"));
+                user.setUserName(rs.getString("username"));
+                user.setPassword(rs.getString("password"));
+                user.setNumDonated(rs.getInt("numdonated"));
             }
             
             rs.close();

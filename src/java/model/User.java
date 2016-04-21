@@ -1,22 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
-/**
- *
- * @author LPrice
- */
 public class User {
+    private int userNum;
     private String firstName;
     private String lastName;
-    private String userID;
+    private String homeState;
+    private String country;
+    private String userName;
     private String password;
-    private String email;
-    private String securityQuestion;
-    private String securityAnswer;
+    private int numDonated;
 
     /**
      * @return the firstName
@@ -47,17 +39,17 @@ public class User {
     }
 
     /**
-     * @return the userID
+     * @return the userName
      */
-    public String getUserID() {
-        return userID;
+    public String getUserName() {
+        return userName;
     }
 
     /**
-     * @param userID the userID to set
+     * @param userName the userName to set
      */
-    public void setUserID(String userID) {
-        this.userID = userID;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     /**
@@ -75,44 +67,58 @@ public class User {
     }
 
     /**
-     * @return the email
+     * @return the userNum
      */
-    public String getEmail() {
-        return email;
+    public int getUserNum() {
+        return userNum;
     }
 
     /**
-     * @param email the email to set
+     * @param userNum the userNum to set
      */
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUserNum(int userNum) {
+        this.userNum = userNum;
     }
 
     /**
-     * @return the securityQuestion
+     * @return the homeState
      */
-    public String getSecurityQuestion() {
-        return securityQuestion;
+    public String getHomeState() {
+        return homeState;
     }
 
     /**
-     * @param securityQuestion the securityQuestion to set
+     * @param homeState the homeState to set
      */
-    public void setSecurityQuestion(String securityQuestion) {
-        this.securityQuestion = securityQuestion;
+    public void setHomeState(String homeState) {
+        this.homeState = homeState;
     }
 
     /**
-     * @return the securityAnswer
+     * @return the country
      */
-    public String getSecurityAnswer() {
-        return securityAnswer;
+    public String getCountry() {
+        return country;
     }
 
     /**
-     * @param securityAnswer the securityAnswer to set
+     * @param country the country to set
      */
-    public void setSecurityAnswer(String securityAnswer) {
-        this.securityAnswer = securityAnswer;
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    /**
+     * @return the numDonated
+     */
+    public int getNumDonated() {
+        return numDonated;
+    }
+
+    /**
+     * @param numDonated the numDonated to set
+     */
+    public void setNumDonated(int numDonated) {
+        this.numDonated = numDonated;
     }
 }

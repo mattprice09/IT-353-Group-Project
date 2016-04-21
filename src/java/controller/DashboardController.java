@@ -24,9 +24,9 @@ public class DashboardController implements Serializable {
      * Creates a new instance of DashboardController
      */
     public DashboardController() {
-        int total = 1000230;
-        progress = 34;
-        numSold = 875019;
+        final int total = 1000230;
+        numSold = 434858;
+        progress = 46;
         numRemaining = total - numSold;
     }
 

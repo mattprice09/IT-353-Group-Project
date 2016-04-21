@@ -18,14 +18,10 @@
         
         <!-- JQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-
+        
   </h:head>
 
   <h:body>
-      <!-- hidden Bean variables to access from JS -->
-      <h:inputText id="loggedIn" value="#{loginController.loggedIn}" style="display:none"/>
-      <h:inputText id="numSold" style="display:none" value="#{dashboardController.numSold}"/>
-      
       <!-- NAV BAR begin-->
         <b:navBar brand="Aiming Higher" brandHref="./index.xhtml" inverse="true" static="true">
             <b:navbarLinks>
@@ -34,56 +30,76 @@
                 <b:navLink value="Register" href="#"></b:navLink>
             </b:navbarLinks>
             
-            <!-- this container only shows if user is logged in -->
-            <b:container id="welcomeContainer" class="navbarLogin">
-                <p class="navbar-text navbar-right">Welcome, <strong>#{loginController.currentUser.userID}!</strong></p>
-            </b:container>
-            
             <!-- this is the login form (if user is not logged in) -->
             <b:container id="loginContainer" class="navbarLogin">
                 <h:form class="navbar-form navbar-right">
-                  <div class="form-group">
-                        <b:inputText a:placeholder="Username" id="userID" value="#{loginController.currentUser.userID}">
-                            <f:validateLength
-                                minimum="2"
-                                maximum="25"/>
-                            </b:inputText><b:message showSummary="true" showDetail="false"
-                                style="color: red;
-                                font-family: 'New Century Schoolbook', serif;
-                                font-style: oblique"
-                                id="errors1"
-                                for="userID"/>
-                        <b:inputSecret a:placeholder="Password" id="password" value="#{loginController.currentUser.password}">
-                            <f:validateLength
-                                minimum="2"
-                                maximum="25"/>
-                            </b:inputSecret><b:message showSummary="false" showDetail="false"
-                                style="color: red;
-                                font-family: 'New Century Schoolbook', serif;
-                                font-style: oblique"
-                                id="errors4"
-                                for="password"/>
-                  </div>
-                    <b:commandButton id="loginBtn" value="Login" actionListener="#{loginController.authenticate()}"  look="primary"/>
-                  <b:commandButton id="registerBtn" value="Register" actionListener="#{loginController.registerUser()}" look="primary"/>
-              </h:form>
+                    <!-- hidden Bean variables to access from JS -->
+                    <div class="form-group">
+                        <b:row>
+                            <b:column span="6">
+                                <b:inputText a:placeholder="Username" id="userID" value="#{loginController.currentUser.userName}"
+                                         validatorMessage="Invalid username. Please try again.">
+                                    <f:validateLength
+                                        minimum="2"
+                                        maximum="20"/>
+                                </b:inputText>
+                            </b:column><!--b:column (userName input)-->
+                            <b:column span="6">
+                                <b:inputSecret a:placeholder="Password" id="password" value="#{loginController.currentUser.password}"
+                                               validatorMessage="Invalid password. Please try again.">
+                                    <f:validateLength
+                                        minimum="2"
+                                        maximum="20"/>
+                                </b:inputSecret>
+                            </b:column><!--b:column (password input)-->
+                        </b:row><!--b:row (login input row)-->
+                        <b:row>
+                            <b:column span="6">
+                                <b:message 
+                                    class="errorMsg"
+                                    showDetail="true"
+                                    id="errors1"
+                                    for="userID"/>
+                            </b:column>
+                            <b:column span="6">
+                                <b:message 
+                                    class="errorMsg"
+                                    showDetail="true"
+                                    id="errors2"
+                                    for="password"/>
+                            </b:column>
+                        </b:row><!--b:row (error msg row)-->
+                    </div><!--form-group -->
+                    <b:commandButton id="loginBtn" value="Login" action="#{loginController.authenticate()}"  look="primary"/>
+                    <b:commandButton id="registerBtn" value="Register" action="#{loginController.registerUser()}" look="primary"/>
+                </h:form>
             </b:container>
+            
+            <!-- this container only shows if user is logged in -->
+            <b:container id="welcomeContainer" class="navbarLogin">
+                <h:form class="navbar-right">
+                    <h:outputLabel class="navbar-text">Welcome, <strong>#{loginController.currentUser.userName}!</strong></h:outputLabel>
+                    <h:commandLink class="navbar-text italicText" value="Log Out" action="#{loginController.logOut()}"/>
+                </h:form>
+            </b:container>
+            
         </b:navBar>
       <!-- NAV BAR end-->
       
+      <!-- Container containing dashboard and main image -->
       <b:container>
-          <b:row>
+          <b:row> <!-- Dashboard row -->
               <b:column span="12">
                   <h3 align="center"><strong>Progress Towards Our Goal</strong></h3>
               </b:column>
               <b:column span="12">
-                  <p:progressBar widgetVar="pbAjax" ajax="true" value="#{dashboardController.progress}" labelTemplate="{value}%" styleClass="animated" global="false"></p:progressBar>
+                  <p:progressBar widgetVar="pbClient" value="#{dashboardController.progress}" labelTemplate="{value}%" global="false"></p:progressBar>
               </b:column>
-          </b:row> <!--row (dashboard) -->
+          </b:row> <!--row (Dashboard) -->
           
           <hr/>
           
-          <b:row>
+          <b:row> <!-- Main image row -->
               <div class="popover" style="z-index:1000">
                   <p id="popupMsg"></p>
               </div>
@@ -95,6 +111,11 @@
       </b:container><!--container (main container)-->
       
       <hr/>
+      
+        <!-- Store variables to be accessed from JavaScript client side -->
+        <h:inputText id="loggedIn" value="#{loginController.loggedIn}" style="display:none"/>
+        <h:inputText id="numSold" value="#{dashboardController.numSold}" style="display:none"/>
+    
       <script type="text/javascript" src="functionality.js"></script>
   </h:body>
 </html>
