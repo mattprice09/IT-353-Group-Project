@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html lang="en"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets" 
+        
+    xmlns:b="http://bootsfaces.net/ui"        
+    xmlns:a="http://bootsfaces.net/ui">
+    <h:head>
+        <title>
+            <ui:insert name="title">Aiming Higher</ui:insert>
+        </title>        
+    </h:head>
+    <h:body>
+        <b:navBar brand="Aiming Higher" brandHref="./index.xhtml" inverse="true" static="true">
+            <b:navbarLinks>
+                <b:navLink active="true" value="Home" href="faces/index.xhtml"></b:navLink>
+                <b:navLink value="Donate" href="#"></b:navLink>
+                <b:navLink value="Register" href="faces/register.xhtml"></b:navLink>
+            </b:navbarLinks>
+            
+            <!-- this container only shows if user is logged in -->
+            <b:container id="welcomeContainer" class="navbarLogin">
+                <p class="navbar-text navbar-right">Welcome, <strong>#{loginController.currentUser.userID}!</strong></p>
+            </b:container>
+            
+            <!-- this is the login form (if user is not logged in) -->
+            <b:container id="loginContainer" class="navbarLogin">
+                <h:form class="navbar-form navbar-right">
+                  <div class="form-group">
+                        <b:inputText a:placeholder="Username" id="userID" value="#{loginController.currentUser.userID}">
+                            <f:validateLength
+                                minimum="2"
+                                maximum="25"/>
+                            </b:inputText><b:message showSummary="true" showDetail="false"
+                                style="color: red;
+                                font-family: 'New Century Schoolbook', serif;
+                                font-style: oblique"
+                                id="errors1"
+                                for="userID"/>
+                        <b:inputSecret a:placeholder="Password" id="password" value="#{loginController.currentUser.password}">
+                            <f:validateLength
+                                minimum="2"
+                                maximum="25"/>
+                            </b:inputSecret><b:message showSummary="false" showDetail="false"
+                                style="color: red;
+                                font-family: 'New Century Schoolbook', serif;
+                                font-style: oblique"
+                                id="errors4"
+                                for="password"/>
+                  </div>
+                    <b:commandButton id="loginBtn" value="Login" actionListener="#{loginController.authenticate()}"  look="primary"/>
+                  <b:commandButton id="registerBtn" value="Register" actionListener="#{loginController.registerUser()}" look="primary"/>
+              </h:form>
+            </b:container>
+        </b:navBar>
+    </h:body>
+
+
+</html>

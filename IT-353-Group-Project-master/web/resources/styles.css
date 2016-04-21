@@ -1,0 +1,60 @@
+ * {
+  font-family: sans-serif;
+  /*color: #000000;*/
+ }
+ 
+ body {
+    /*height: 200px;*/
+    background: #D2D8FA; /* For browsers that do not support gradients */    
+    background: -webzit-linear-gradient(left top, #D2D8FA, #F5F6FA); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right, #D2D8FA, #F5F6FA); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right, #D2D8FA, #F5F6FA); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom right, #D2D8FA, #F5F6FA); /* Standard syntax (must be last) */
+}
+
+.imageStyle {
+/*    height: 750px;
+    width: 1000px;*/
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+}
+
+.navbarLogin {
+    display: none;
+}
+
+/*~~~~~~~~~~~~~~~~~~ Popover stuff*/ 
+
+.popover {
+    position:absolute;
+    display:none;
+    background: #D2D8FA;
+    border: 1px solid #999;
+    padding:10px;
+    width:auto;
+    box-shadow:0 0 10px rgba(0, 0, 0, .5);
+}
+.popover:after, .popover:before {
+    right: 100%;
+    border: solid transparent;
+    content:" ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
+.popover:after {
+    border-color: rgba(255, 255, 255, 0);
+    border-right-color: #ffffff;
+    border-width: 10px;
+    top: 50%;
+    margin-top: -10px;
+}
+.popover:before {
+    border-color: rgba(201, 201, 201, 0);
+    border-right-color: #c9c9c9;
+    border-width: 11px;
+    top: 50%;
+    margin-top: -11px;
+}
