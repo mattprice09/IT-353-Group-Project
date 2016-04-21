@@ -251,15 +251,20 @@ public class MainDaoImpl implements MainDAO {
         return rowCount;
     }
     
-    @Override
+     @Override
     public int authenticate(User user) {
         int success = 0;
         
         String userName = user.getUserName();
         String password = user.getPassword();
         
-        String query = "SELECT * FROM Users " + "WHERE userName='"
+        System.out.println("these ar the vals of current user!!!!!!!");
+        System.out.println(userName + "    " + password);
+        
+        String query = "SELECT * FROM USERS " + "WHERE userName='"
                 + userName + "'";
+        
+        System.out.println(query);
         
         DBHelper.loadDriver("org.apache.derby.jdbc.ClientDriver");
         String myDB = "jdbc:derby://localhost:1527/MealProject";
@@ -268,10 +273,11 @@ public class MainDaoImpl implements MainDAO {
         try {
             Statement stmt = DBConn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            
+            //System.out.println("these ar the vals of the result set!!!!!!!");
+            //System.out.println(rs.getString("userName") + "    " + rs.getString("password"));
             // Authenticate
             if (rs.next()) {
-                if (userName.equals(rs.getString("username")) && password.equals(rs.getString("password"))) {
+                if (userName.equals(rs.getString(6)) && password.equals(rs.getString(7))) {
                     success = 1;
                 }
             }

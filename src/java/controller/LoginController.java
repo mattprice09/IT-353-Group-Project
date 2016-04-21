@@ -1,5 +1,6 @@
     package controller;
 
+import dao.MainDAO;
     import dao.MainDaoImpl;
     import javax.inject.Named;
     import javax.enterprise.context.SessionScoped;
@@ -60,8 +61,14 @@
 
         // Incomplete
         public String registerUser() {
-            return "faces/register.xhtml";
-        }
+            MainDAO aUserDAO = new MainDaoImpl();    // Creating a new object each time.
+            int rowCount = aUserDAO.createUser(currentUser); // Doing anything with the object after this?
+            System.out.println(rowCount);
+            if (rowCount == 1)
+                return "faces/response.xhtml"; // navigate to "response.xhtml"
+            else
+                return "faces/register.xhtml";
+            }
 
         /**
          * @return the currentUser
