@@ -32,7 +32,7 @@ public class MainDaoImpl implements MainDAO {
                     + ("" + user.getUserNum()).replace("'", "''")
                     + "','" + user.getFirstName().replace("'", "''")
                     + "','" + user.getLastName().replace("'", "''")
-                    + "','" + user.getHomeState().replace("'", "''")
+                    + "','" + user.getState().replace("'", "''")
                     + "','" + user.getCountry().replace("'", "''")
                     + "','" + user.getUserName().replace("'", "''")
                     + "','" + user.getPassword().replace("'", "''")
@@ -196,7 +196,7 @@ public class MainDaoImpl implements MainDAO {
                 user.setUserNum(rs.getInt("usernum"));
                 user.setFirstName(rs.getString("firstname"));
                 user.setLastName(rs.getString("lastname"));
-                user.setHomeState(rs.getString("homestate"));
+                user.setState(rs.getString("homestate"));
                 user.setCountry(rs.getString("country"));
                 user.setUserName(rs.getString("username"));
                 user.setPassword(rs.getString("password"));

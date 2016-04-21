@@ -4,7 +4,7 @@ public class User {
     private int userNum;
     private String firstName;
     private String lastName;
-    private String homeState;
+    private String state;
     private String country;
     private String userName;
     private String password;
@@ -81,17 +81,17 @@ public class User {
     }
 
     /**
-     * @return the homeState
+     * @return the state
      */
-    public String getHomeState() {
-        return homeState;
+    public String getState() {
+        return state;
     }
 
     /**
-     * @param homeState the homeState to set
+     * @param state the homeState to set
      */
-    public void setHomeState(String homeState) {
-        this.homeState = homeState;
+    public void setState(String state) {
+        this.state = state;
     }
 
     /**
