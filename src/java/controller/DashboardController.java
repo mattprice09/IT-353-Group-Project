@@ -6,6 +6,7 @@
 package controller;
 
 import dao.MainDaoImpl;
+import dao.MainDAO;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -18,7 +19,7 @@ import java.io.Serializable;
 @SessionScoped
 public class DashboardController implements Serializable {
 
-    final int total = 1000230;
+    private final int total = 1000230;
     private int progress;
     private int numSold;
     private int numRemaining;
@@ -27,16 +28,15 @@ public class DashboardController implements Serializable {
      */
     public DashboardController() {
         numSold = 0;
-        progress = 0;
-        numRemaining = total - numSold;
+        progress = 20;
+        numRemaining = 0;
     }
     
-    public void updateStats() {
-        MainDaoImpl dao = new MainDaoImpl();
-        
-        numSold = Integer.parseInt(dao.getNumDonations());
+    public void updateProgress(){
+        MainDaoImpl aUserDAO = new MainDaoImpl();    // Creating a new object each time.
+        numSold = Integer.parseInt(aUserDAO.getNumDonations()); // Doing anything with the object after this?
         numRemaining = total - numSold;
-        progress = (numSold / total) * 100;
+        progress = (int)(((double)numSold / total) * 100);
     }
 
     /**

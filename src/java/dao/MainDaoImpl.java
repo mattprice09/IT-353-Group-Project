@@ -192,6 +192,9 @@ public class MainDaoImpl implements MainDAO {
             if(rs.next()){
                 numStr = rs.getString(1);
             }
+            if(numStr == null){
+                numStr = "0";
+            }
             rs.close();
             stmt.close();
         }catch (Exception e) {
@@ -203,7 +206,7 @@ public class MainDaoImpl implements MainDAO {
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
-        
+        //System.out.print(rs.getString(1));
         return numStr;
     }
     

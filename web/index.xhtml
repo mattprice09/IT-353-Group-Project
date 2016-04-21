@@ -8,7 +8,7 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <f:metadata>
-            <f:event type="preRenderView" listener="#{dashboardController.updateStats()}"/>
+            <f:event type="preRenderView" listener="#{dashboardController.updateProgress()}"/>
         </f:metadata>
         <meta charset="utf-8"></meta>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta> 
@@ -107,7 +107,7 @@
                   <h3 align="center"><strong>Progress Towards Our Goal</strong></h3>
               </b:column>
               <b:column span="12">
-                  <p:progressBar widgetVar="pbClient" value="#{dashboardController.progress}" labelTemplate="{value}%" global="false"></p:progressBar>
+                  <p:progressBar value="#{dashboardController.progress}" labelTemplate="{value}%" ></p:progressBar>
               </b:column>
           </b:row> <!--row (Dashboard) -->
           
