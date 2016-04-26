@@ -1,8 +1,4 @@
-$(document).ready(function() {
-    
-    var W = 1155;
-    var H = 866;
-  
+var setLoginBar = function() {
     // Handle nav bar display based off of login status
     if ($("#loggedIn").val() == "Y") {
         // logged in
@@ -13,6 +9,13 @@ $(document).ready(function() {
         $("#welcomeContainer").css('display', 'none');
         $("#loginContainer").css('display', 'block');
     }
+}
+
+$(document).ready(function() {
+    var W = 1155;
+    var H = 866;
+  
+    setLoginBar();
     
     // ~~~ IMAGE Processing begin
     var canvas = document.getElementById("MainCanvas");
@@ -81,5 +84,4 @@ $(document).ready(function() {
     $("#MainCanvas").mouseout(function(e) {
         $(".popover").hide();
     });
-    
 });

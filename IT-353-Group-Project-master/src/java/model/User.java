@@ -1,39 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
-/**
- *
- * @author LPrice
- */
 public class User {
-
-    private String userNum;
+    private int userNum;
     private String firstName;
     private String lastName;
-    private String userName;
-    private String password;
-    private String email;
-    private String securityQuestion;
-    private String securityAnswer;
     private String state;
     private String country;
+    private String userName;
+    private String password;
+    private int numDonated;
 
-    public User(){
-        
-    }
-    public User(String userNum, String firstName, String lastName, String state, String country, String userName, String password) {
-        this.userNum = userNum;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.state = state;
-        this.country = country;
-        this.userName = userName;
-        this.password = password;
-    }
     /**
      * @return the firstName
      */
@@ -63,14 +39,14 @@ public class User {
     }
 
     /**
-     * @return the userID
+     * @return the userName
      */
     public String getUserName() {
         return userName;
     }
 
     /**
-     * @param userID the userID to set
+     * @param userName the userName to set
      */
     public void setUserName(String userName) {
         this.userName = userName;
@@ -91,45 +67,17 @@ public class User {
     }
 
     /**
-     * @return the email
+     * @return the userNum
      */
-    public String getEmail() {
-        return email;
+    public int getUserNum() {
+        return userNum;
     }
 
     /**
-     * @param email the email to set
+     * @param userNum the userNum to set
      */
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    /**
-     * @return the securityQuestion
-     */
-    public String getSecurityQuestion() {
-        return securityQuestion;
-    }
-
-    /**
-     * @param securityQuestion the securityQuestion to set
-     */
-    public void setSecurityQuestion(String securityQuestion) {
-        this.securityQuestion = securityQuestion;
-    }
-
-    /**
-     * @return the securityAnswer
-     */
-    public String getSecurityAnswer() {
-        return securityAnswer;
-    }
-
-    /**
-     * @param securityAnswer the securityAnswer to set
-     */
-    public void setSecurityAnswer(String securityAnswer) {
-        this.securityAnswer = securityAnswer;
+    public void setUserNum(int userNum) {
+        this.userNum = userNum;
     }
 
     /**
@@ -140,7 +88,7 @@ public class User {
     }
 
     /**
-     * @param state the state to set
+     * @param state the homeState to set
      */
     public void setState(String state) {
         this.state = state;
@@ -157,21 +105,20 @@ public class User {
      * @param country the country to set
      */
     public void setCountry(String country) {
-        System.out.println("The is the country!!!!!!!!!!!!!: " + country);
         this.country = country;
     }
 
     /**
-     * @return the userNum
+     * @return the numDonated
      */
-    public String getUserNum() {
-        return userNum;
+    public int getNumDonated() {
+        return numDonated;
     }
 
     /**
-     * @param userNum the userNum to set
+     * @param numDonated the numDonated to set
      */
-    public void setUserNum(String userNum) {
-        this.userNum = userNum;
+    public void setNumDonated(int numDonated) {
+        this.numDonated = numDonated;
     }
 }
