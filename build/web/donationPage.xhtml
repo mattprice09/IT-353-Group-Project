@@ -4,9 +4,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:b="http://bootsfaces.net/ui"
-      xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets">
     
     <h:head>
@@ -16,22 +13,23 @@
         
         <title>Make a Donation</title>
         
+        <f:event listener="#{loginController.checkLoggedIn}" type="preRenderView" />
     </h:head>
     
     <h:body>
         <!-- Main template-->
         <ui:composition template="templates/MainTemplate.xhtml">
             
-            <!-- Override main content facelet -->
-            <ui:define name="mainContent">
-                
-            </ui:define> <!-- end of main content container -->
-            
             <!-- Override section to store bean values to be accessed by JS -->
             <ui:define name="hiddenValues">
                 <h:inputHidden id="loggedIn" value="#{loginController.loggedIn}"/>
                 <h:inputHidden id="numSold" value="#{dashboardController.numSold}"/>
             </ui:define>
+            
+            <!-- Override main content facelet -->
+            <ui:define name="mainContent">
+                "Donation page"
+            </ui:define> <!-- end of main content container -->
             
             <!-- Override the JQuery.document(ready) function -->
             <ui:define name="onReadyJS">

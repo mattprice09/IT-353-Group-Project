@@ -3,11 +3,15 @@ var setLoginBar = function() {
     if ($("#loggedIn").val() == "Y") {
         // logged in
         $("#loginContainer").css('display', 'none');
+        $("#registerNav").css('display', 'none');
+        $("#updateNav").css('display', 'block');
         $("#welcomeContainer").css('display', 'block');
     } else {
         // not logged in
+        $("#updateNav").css('display', 'none');
         $("#welcomeContainer").css('display', 'none');
         $("#loginContainer").css('display', 'block');
+        $("#registerNav").css('display', 'block');
     }
 }
 

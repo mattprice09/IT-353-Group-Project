@@ -16,6 +16,11 @@
         <!-- Main template-->
         <ui:composition template="templates/MainTemplate.xhtml">
             
+            <!-- Override section to store bean values to be accessed by JS -->
+            <ui:define name="hiddenValues">
+                <h:inputHidden id="loggedIn" value="#{loginController.loggedIn}"/>
+            </ui:define>
+            
             <!-- Override main content facelet -->
             <ui:define name="mainContent">
                 <b:container id="registerContainer">
@@ -359,11 +364,6 @@
                     }
                 </script>
             </ui:define> <!-- end of main content container -->
-            
-            <!-- Override section to store bean values to be accessed by JS -->
-            <ui:define name="hiddenValues">
-                <h:inputHidden id="loggedIn" value="#{loginController.loggedIn}"/>
-            </ui:define>
             
             <!-- Override the JQuery.document(ready) function -->
             <ui:define name="onReadyJS">
