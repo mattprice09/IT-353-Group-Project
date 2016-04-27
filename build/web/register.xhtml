@@ -8,20 +8,20 @@ and open the template in the editor.
 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:b="http://bootsfaces.net/ui">
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
         <title>Register</title>
         <link href="resources/styles.css" rel="stylesheet"></link>
 
     </h:head>
     <h:body>
-        <b:navBar brand="Aiming Higher" brandHref="./index.xhtml" inverse="true" static="true">
-            <b:navbarLinks>
-                <b:navLink value="Home" href="faces/index.xhtml"></b:navLink>
-                <b:navLink value="Donate" href="#"></b:navLink>
-                <b:navLink active="true" value="Register" href="faces/register.xhtml"></b:navLink>
-            </b:navbarLinks>         
-        </b:navBar>
+        <!-- Include navbar template-->
+        <div id="navBarSlot">
+            <ui:insert name="navBarTemplate">
+                <ui:include src="templates/navBarTemplate.xhtml" />
+            </ui:insert>
+        </div>
         <b:container id="registerContainer">
             <h2>Register</h2><br/>
             <h:form>

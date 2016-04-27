@@ -39,7 +39,7 @@ import dao.MainDAO;
                 return "faces/index.xhtml";
             } else {
                 numAttempts++;
-                return "faces/loginBad.xhtml";
+                return logOut();
             }
         }
         

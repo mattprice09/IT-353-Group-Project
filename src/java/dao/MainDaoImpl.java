@@ -71,7 +71,7 @@ public class MainDaoImpl implements MainDAO {
             if(!checkIfUsed(user.getUserName())){
                 String insertString;
                 Statement stmt = DBConn.createStatement();
-                insertString = "INSERT INTO USERS (userNum, lastName, firstName, homeState, country, userName, password) VALUES("
+                insertString = "INSERT INTO USERS (userNum, firstName, lastName, homeState, country, userName, password) VALUES("
                         + createNextUserNum()
                         + ",'" + user.getFirstName()
                         + "','" + user.getLastName()
