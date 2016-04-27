@@ -12,8 +12,9 @@
     background: linear-gradient(to bottom right, #D2D8FA, #F5F6FA); /* Standard syntax (must be last) */
 }
 
-.customNavbar {
-    color: #FF0000;
+.loginField {
+    width: 100%;
+    margin-right: 1em;
 }
 
 .italicText {
@@ -47,7 +48,6 @@
 }
 
 /*~~~~~~~~~~~~~~~~~~ Popover stuff*/ 
-
 .popover {
     position:absolute;
     display:none;
