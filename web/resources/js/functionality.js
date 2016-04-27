@@ -11,7 +11,7 @@ var setLoginBar = function() {
     }
 }
 
-$(document).ready(function() {
+var initializeHomePage = function() {
     var W = 1155;
     var H = 866;
   
@@ -84,4 +84,4 @@ $(document).ready(function() {
     $("#MainCanvas").mouseout(function(e) {
         $(".popover").hide();
     });
-});
+}

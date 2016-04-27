@@ -173,7 +173,7 @@ public class MainDaoImpl implements MainDAO {
     // Retrieve the # of donations
     public String getNumDonations() {
 
-        String query = "SELECT MAX(donationNum) FROM DONATIONS";
+        String query = "SELECT MAX(pixelEnd) FROM DONATIONS";
         String numStr = "0";
         int num;
         Connection DBConn = null;
@@ -210,6 +210,44 @@ public class MainDaoImpl implements MainDAO {
         return numStr;
     }
     
+    public String createNextDonationNum() {
+
+        String query = "SELECT MAX(donationNum) FROM DONATIONS";
+        String numStr = "0";
+        int num;
+        Connection DBConn = null;
+        try {
+            DBHelper.loadDriver("org.apache.derby.jdbc.ClientDriver");
+            // if doing the above in Oracle: DBHelper.loadDriver("oracle.jdbc.driver.OracleDriver");
+            String myDB = "jdbc:derby://localhost:1527/MealProject";
+            // if doing the above in Oracle:  String myDB = "jdbc:oracle:thin:@oracle.itk.ilstu.edu:1521:ora478";
+            DBConn = DBHelper.connect2DB(myDB, "itkstu", "student");
+
+            // With the connection made, create a statement to talk to the DB server.
+            // Create a SQL statement to query, retrieve the rows one by one (by going to the
+            // columns), and formulate the result string to send back to the client.
+            Statement stmt = DBConn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            if(rs.next()){
+                numStr = rs.getString(1);
+            }
+            rs.close();
+            stmt.close();
+        }catch (Exception e) {
+            System.err.println("ERROR: Problems with SQL select");
+            e.printStackTrace();
+        }
+        try {
+            DBConn.close();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        
+        num = Integer.parseInt(numStr) + 1;
+        //System.out.print(rs.getString(1));
+        return Integer.toString(num);
+    }
+    
     public int makePurchase(int userNum, int numDonations) {
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
@@ -218,38 +256,32 @@ public class MainDaoImpl implements MainDAO {
             System.exit(0);
         }
 
-        int rowCount = Integer.parseInt(getNumDonations());
-        int afterAdd = rowCount;
+        int fistPixel = Integer.parseInt(getNumDonations()) + 1;
+        int lastPixel = fistPixel + numDonations - 1;
+        System.out.println("The last pixel is:   " + lastPixel);
+        if(lastPixel > 1000230){
+            lastPixel = 1000230;
+        }
+        System.out.println("The last pixel is:   " + lastPixel);
+        int rowCount = 0;
         try {
             String myDB = "jdbc:derby://localhost:1527/MealProject";
             Connection DBConn = DriverManager.getConnection(myDB, "itkstu", "student");
-            for (int i = 0; i < numDonations; i++) {
-                afterAdd++;
-                
-                int xPixel = afterAdd % 1155;
-                int yPixel = afterAdd / 1155;
                 
                 String insertString;
                 Statement stmt = DBConn.createStatement();
-                insertString = "INSERT INTO DONATIONS (donationNum, userNum, pixelX, pixelY) VALUES("
-                        + afterAdd
+                insertString = "INSERT INTO DONATIONS (donationNum, userNum, pixelStart, pixelEnd) VALUES("
+                        + createNextDonationNum()
                         + "," + userNum
-                        + "," + xPixel
-                        + "," + yPixel
+                        + "," + fistPixel
+                        + "," + lastPixel
                         + ")";      
 
                 rowCount = stmt.executeUpdate(insertString);
                 System.out.println("insert string =" + insertString);
-            }
-           
             DBConn.close();
         } catch (SQLException e) {
             System.err.println(e.getMessage());
-        }
-
-        // nothing was added
-        if (afterAdd == rowCount) {
-            return -1;
         }
         return rowCount;
     }

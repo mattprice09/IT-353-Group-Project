@@ -11,65 +11,73 @@
         <f:metadata>
             <f:event type="preRenderView" listener="#{dashboardController.updateProgress()}"/>
         </f:metadata>
-        <meta charset="utf-8"></meta>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta> 
-        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <title>Aiming Higher</title>
-
-        <!-- Custom styles for this template -->
-        <link href="resources/styles.css" rel="stylesheet"></link>
         
-        <!-- JQuery -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <title>Aiming Higher</title>
         
     </h:head>
 
     <h:body>
-      <!-- Include navbar template-->
-        <div id="navBarSlot">
-            <ui:insert name="navBarTemplate">
-                <ui:include src="templates/navBarTemplate.xhtml" />
-            </ui:insert>
-        </div>
-      
-        <!-- Container containing dashboard and main image -->
-        <b:container>
-          
-            <!-- Test Buy for presentation -->
-<!--            <b:container>
-                <b:row>
-                <h:form>
-                    <b:inputText a:placeholder="# of Donations" id="numDonations" value="#{transactionController.numDonations}"></b:inputText>
-                    <b:commandButton id="buyBtn" value="Buy" action="#{transactionController.testBuy()}"  look="danger"/>
-                </h:form>
-            </b:row>
-            </b:container>-->
-          
-            <b:row> <!-- Dashboard row -->
-                <b:column span="12">
-                    <h3 align="center"><strong>Progress Towards Our Goal</strong></h3>
-                </b:column>
-                <b:column span="12">
-                    <p:progressBar value="#{dashboardController.progress}" labelTemplate="{value}%" ></p:progressBar>
-                </b:column>
-            </b:row> <!--row (Dashboard) -->
-          
-            <hr/>
-          
-            <b:row> <!-- Main image row -->
-                <div class="popover" style="z-index:1000">
-                    <p id="popupMsg"></p>
-                </div>
-                <b:column span="12">
-                    <canvas id="MainCanvas" width="1155" height="866" class="imageStyle"/>
-                </b:column>
-            </b:row><!--row (main image) -->
-          
-        </b:container><!--container (main container)-->
-      
-        <hr/>
+        <!-- Main template-->
+        <ui:composition template="templates/MainTemplate.xhtml">
+            
+            <!-- Override main content facelet -->
+            <ui:define name="mainContent">
+                <!-- Container containing dashboard and main image -->
+                <b:container>
 
+                    <!-- Test Buy for presentation -->
+                    <b:container>
+                        <b:row>
+                            <h:form>
+                                <b:inputText a:placeholder="# of Donations" id="numDonations" value="#{transactionController.numDonations}"></b:inputText>
+                                <b:commandButton id="buyBtn" value="Buy" action="#{transactionController.testBuy()}"  look="danger"/>
+                            </h:form>
+                        </b:row>
+                    </b:container>
+                    
+                    <!-- Dashboard row -->
+                    <b:row> 
+                        <b:column span="12">
+                            <h3 align="center"><strong>Progress Towards Our Goal</strong></h3>
+                        </b:column>
+                        <b:column span="12">
+                            <p:progressBar value="#{dashboardController.progress}" labelTemplate="{value}%" ></p:progressBar>
+                        </b:column>
+                    </b:row> <!--row (Dashboard) -->
+
+                    <hr/>
+
+                    <!-- Main image row -->
+                    <b:row> 
+                        <div class="popover" style="z-index:1000">
+                            <p id="popupMsg"></p>
+                        </div>
+                        <b:column span="12">
+                            <canvas id="MainCanvas" width="1155" height="866" class="imageStyle"/>
+                        </b:column>
+                    </b:row><!--row (main image) -->
+
+                </b:container><!--container (main container)-->
+
+                <hr/>
+            </ui:define> <!-- end of main content container -->
+            
+            <!-- Override section to store bean values to be accessed by JS -->
+            <ui:define name="hiddenValues">
+                <h:inputHidden id="loggedIn" value="#{loginController.loggedIn}"/>
+                <h:inputHidden id="numSold" value="#{dashboardController.numSold}"/>
+            </ui:define>
+            
+            <!-- Override the JQuery.document(ready) function -->
+            <ui:define name="onReadyJS">
+                <script type="text/javascript">
+                    $(document).ready(function() {
+                        initializeHomePage();
+                    });
+                </script>
+            </ui:define>
+            
+        </ui:composition> <!-- end of template -->
     </h:body>
 </html>
 

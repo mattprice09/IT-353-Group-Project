@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
@@ -16,17 +16,32 @@
         
         <title>Make a Donation</title>
         
-        <!-- Custom styles for this template -->
-        <link href="resources/styles.css" rel="stylesheet"></link>
     </h:head>
     
     <h:body>
-        <!-- Include navbar template-->
-        <div id="navBarSlot">
-            <ui:insert name="navBarTemplate">
-                <ui:include src="templates/navBarTemplate.xhtml" />
-            </ui:insert>
-        </div>
-
+        <!-- Main template-->
+        <ui:composition template="templates/MainTemplate.xhtml">
+            
+            <!-- Override main content facelet -->
+            <ui:define name="mainContent">
+                
+            </ui:define> <!-- end of main content container -->
+            
+            <!-- Override section to store bean values to be accessed by JS -->
+            <ui:define name="hiddenValues">
+                <h:inputHidden id="loggedIn" value="#{loginController.loggedIn}"/>
+                <h:inputHidden id="numSold" value="#{dashboardController.numSold}"/>
+            </ui:define>
+            
+            <!-- Override the JQuery.document(ready) function -->
+            <ui:define name="onReadyJS">
+                <script type="text/javascript">
+                    $(document).ready(function() {
+                        setLoginBar();
+                    });
+                </script>
+            </ui:define>
+            
+        </ui:composition> <!-- end of template -->
     </h:body>
 </html>
