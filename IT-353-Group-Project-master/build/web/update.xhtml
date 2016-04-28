@@ -9,25 +9,55 @@ and open the template in the editor.
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:b="http://bootsfaces.net/ui">
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    
     <h:head>
-        <title>Sign Up</title>
+        <meta charset="utf-8"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta> 
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+        
+        <title>Update Account</title>
+        
     </h:head>
     
-    <body>
-        <div class="container">
-            <div class="row">
-                <h2 align="center"><strong>Update Account Information</strong></h2>
-            </div>
-            <hr/>
-            <div class="row">
-                <div class="col-xs-4 col-xs-offset-4 borderedCol">
-                    <h:form>
-                        User ID:<br/>#{loginController.currentUser.userName}<br/>
+    <h:body>
+        <!-- Main template-->
+        <ui:composition template="templates/MainTemplate.xhtml">
+            
+            <!-- Override section to store bean values to be accessed by JS -->
+            <ui:define name="hiddenValues">
+                <h:inputHidden id="loggedIn" value="#{loginController.loggedIn}"/>
+                <h:inputHidden id="numSold" value="#{dashboardController.numSold}"/>
+            </ui:define>
+            
+            <!-- Override main content facelet -->
+            <ui:define name="mainContent">
+                <div class="container">
+                    <div class="row">
+                        <h2 align="center"><strong>Update Account Information</strong></h2>
+                    </div>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-xs-4 col-xs-offset-4 borderedCol">
+                            <h:form>
+                                User ID:<br/>#{loginController.currentUser.userName}<br/>
 
-                    </h:form>
-                </div><!--col-xs-4-->
-            </div><!--row-->
-        </div><!--container-->
-    </body>
+                            </h:form>
+                        </div><!--col-xs-4-->
+                    </div><!--row-->
+                </div><!--container-->
+            </ui:define> <!-- end of main content container -->
+            
+            <!-- Override the JQuery.document(ready) function -->
+            <ui:define name="onReadyJS">
+                <script type="text/javascript">
+                    $(document).ready(function() {
+                        setLoginBar();
+                    });
+                </script>
+            </ui:define>
+            
+        </ui:composition> <!-- end of template -->
+    </h:body>
 </html>

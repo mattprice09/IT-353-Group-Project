@@ -1,136 +1,80 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:b="http://bootsfaces.net/ui"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets" >
     <h:head>
-        <f:metadata>
-            <f:event type="preRenderView" listener="#{dashboardController.updateProgress()}"/>
-        </f:metadata>
         <meta charset="utf-8"></meta>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta> 
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        
+        <f:metadata>
+            <f:event type="preRenderView" listener="#{dashboardController.updateProgress()}"/>
+        </f:metadata>
+        
         <title>Aiming Higher</title>
-
-        <!-- Custom styles for this template -->
-        <link href="resources/styles.css" rel="stylesheet"></link>
         
-        <!-- JQuery -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-        
-  </h:head>
+    </h:head>
 
-  <h:body>
-      <!-- NAV BAR begin-->
-        <b:navBar brand="Aiming Higher" brandHref="faces/index.xhtml" inverse="true" static="true">
-            <b:navbarLinks>
-                <b:navLink active="true" value="Home" href="faces/index.xhtml"></b:navLink>
-                <b:navLink value="Donate" href="#"></b:navLink>
-                <b:navLink value="Register" href="faces/register.xhtml"></b:navLink>
-            </b:navbarLinks>
+    <h:body>
+        <!-- Main template-->
+        <ui:decorate template="templates/MainTemplate.xhtml">
             
-            <!-- this is the login form (if user is not logged in) -->
-            <b:container id="loginContainer" class="navbarLogin">
-                <h:form class="navbar-form navbar-right">
-                    <!-- hidden Bean variables to access from JS -->
-                    <div class="form-group">
-                        <b:row>
-                            <b:column span="6">
-                                <b:inputText a:placeholder="Username" id="userID" value="#{loginController.currentUser.userName}"
-                                         validatorMessage="Invalid username. Please try again.">
-                                    <f:validateLength
-                                        minimum="2"
-                                        maximum="20"/>
-                                </b:inputText>
-                            </b:column><!--b:column (userName input)-->
-                            <b:column span="6">
-                                <b:inputSecret a:placeholder="Password" id="password" value="#{loginController.currentUser.password}"
-                                               validatorMessage="Invalid password. Please try again.">
-                                    <f:validateLength
-                                        minimum="2"
-                                        maximum="20"/>
-                                </b:inputSecret>
-                            </b:column><!--b:column (password input)-->
-                        </b:row><!--b:row (login input row)-->
-                        <b:row>
-                            <b:column span="6">
-                                <b:message 
-                                    class="errorMsg"
-                                    showDetail="true"
-                                    id="errors1"
-                                    for="userID"/>
-                            </b:column>
-                            <b:column span="6">
-                                <b:message 
-                                    class="errorMsg"
-                                    showDetail="true"
-                                    id="errors2"
-                                    for="password"/>
-                            </b:column>
-                        </b:row><!--b:row (error msg row)-->
-                    </div><!--form-group -->
-                    <b:commandButton id="loginBtn" value="Login" action="#{loginController.authenticate()}"  look="primary"/>
-                    <b:button id="registerBtn" value="Register" outcome="#{loginController.registerUser()}" look="primary"/>
-                </h:form>
-            </b:container>
+            <!-- Override section to store bean values to be accessed by JS -->
+            <ui:define name="hiddenValues">
+                <h:inputHidden id="loggedIn" value="#{loginController.loggedIn}"/>
+                <h:inputHidden id="numSold" value="#{dashboardController.numSold}"/>
+                <h:inputText id="currentPixel" value="0" style ="display:none">
+                    <f:ajax onevent="change" listener="#{ImageController.getUserInfoDB()}" render="userInfo" />
+                </h:inputText>
+                <h:inputHidden value="#{ImageController.userInfo}" id="userInfo"/>
+            </ui:define>
             
-            <!-- this container only shows if user is logged in -->
-            <b:container id="welcomeContainer" class="navbarLogin">
-                <h:form class="navbar-right">
-                    <h:outputLabel class="navbar-text">Welcome, <strong>#{loginController.currentUser.userName}!</strong></h:outputLabel>
-                    <h:commandLink class="navbar-text italicText" value="Log Out" action="#{loginController.logOut()}"/>
-                </h:form>
-            </b:container>
+            <!-- Override main content facelet -->
+            <ui:define name="mainContent">
+                <!-- Container containing dashboard and main image -->
+                <b:container>
+                    <!-- Dashboard row -->
+                    <b:row> 
+                        <b:column span="12">
+                            <h2 align="center"><strong>Progress Towards Our Goal</strong></h2>
+                        </b:column>
+                        <b:column span="12">
+                            <p:progressBar value="#{dashboardController.progress}" labelTemplate="{value}%" style="height:25px;"></p:progressBar>
+                        </b:column>
+                    </b:row> <!--row (Dashboard) -->
+
+                    <hr/>
+
+                    <!-- Main image row -->
+                    <b:row> 
+                        <div class="popover" style="z-index:1000">
+                            <p id="popupMsg"></p>
+                        </div>
+                        <b:column span="12">
+                            <canvas id="MainCanvas" width="1155" height="866" class="imageStyle"/>
+                        </b:column>
+                    </b:row><!--row (main image) -->
+
+                </b:container><!--container (main container)-->
+
+                <hr/>
+            </ui:define> <!-- end of main content container -->
             
-        </b:navBar>
-      <!-- NAV BAR end-->
-      
-      <!-- Container containing dashboard and main image -->
-      <b:container>
-          
-          <!-- Test Buy for presentation -->
-          <b:container>
-              <b:row>
-              <h:form>
-                  <b:inputText a:placeholder="# of Donations" id="numDonations" value="#{transactionController.numDonations}"></b:inputText>
-                  <b:commandButton id="buyBtn" value="Buy" action="#{transactionController.testBuy()}"  look="danger"/>
-              </h:form>
-          </b:row>
-          </b:container>
-          
-          <b:row> <!-- Dashboard row -->
-              <b:column span="12">
-                  <h3 align="center"><strong>Progress Towards Our Goal</strong></h3>
-              </b:column>
-              <b:column span="12">
-                  <p:progressBar value="#{dashboardController.progress}" labelTemplate="{value}%" ></p:progressBar>
-              </b:column>
-          </b:row> <!--row (Dashboard) -->
-          
-          <hr/>
-          
-          <b:row> <!-- Main image row -->
-              <div class="popover" style="z-index:1000">
-                  <p id="popupMsg"></p>
-              </div>
-              <b:column span="12">
-                  <canvas id="MainCanvas" width="1155" height="866" class="imageStyle"/>
-              </b:column>
-          </b:row><!--row (main image) -->
-          
-      </b:container><!--container (main container)-->
-      
-      <hr/>
-      
-        <!-- Store variables to be accessed from JavaScript client side -->
-        <h:inputText id="loggedIn" value="#{loginController.loggedIn}" style="display:none"/>
-        <h:inputText id="numSold" value="#{dashboardController.numSold}" style="display:none"/>
-    
-      <script type="text/javascript" src="functionality.js"></script>
-  </h:body>
-</html>
+            <!-- Override the JQuery.document(ready) function -->
+            <ui:define name="onReadyJS">
+                <script type="text/javascript">
+                    $(document).ready(function() {
+                        initializeHomePage();
+                    });
+                </script>
+            </ui:define>
+            
+        </ui:decorate> <!-- end of template -->
+    </h:body>
+</ui:composition>
 
