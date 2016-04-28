@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui" 
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough" >
+    
+    <h:head>
+        <meta charset="utf-8"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta> 
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+        
+        <title>Make a Donation</title>
+        
+        <!-- Redirect user to register.xhtml if they're not logged in -->
+<!--        <f:event listener="#{loginController.checkLoggedIn}" type="preRenderView" />-->
+    </h:head>
+    
+    <h:body>
+        <!-- Main template-->
+        <ui:composition template="templates/MainTemplate.xhtml">
+            
+            <!-- Override section to store bean values to be accessed by JS -->
+            <ui:define name="hiddenValues">
+                <h:inputHidden id="loggedIn" value="#{loginController.loggedIn}"/>
+                <h:inputHidden id="numSold" value="#{dashboardController.numSold}"/>
+            </ui:define>
+            
+            <!-- Override main content facelet -->
+            <ui:define name="mainContent">
+                <b:container>
+                    
+                    <!-- "make purchase" row -->
+                    <b:row>
+                        <b:panel collapsible="false" class="my-panel-title">
+                            
+                            <!-- custom panel title -->
+                            <f:facet name="heading">
+                                <h2 align="center"><strong>Saving Lives One Pixel at a Time</strong></h2>
+                            </f:facet>
+                            
+                            <!-- panel-body -->
+                            <b:container fluid="true" class="my-panel-body">
+                                <b:row>
+                                    <h3><strong>Please enter # of pixels to buy: </strong></h3>
+                                </b:row>
+                                <!-- Purchase form -->
+                                <b:row>
+                                    <b:column span="3">
+                                        <b:column span="10">
+                                            <h:form>
+                                                <b:inputText a:placeholder="# of Donations" id="numDonations" value="#{transactionController.numDonations}" >
+                                                    <f:ajax onevent="change" listener="#{transactionController.updateCost()}" render="costStr" />
+                                                </b:inputText>
+                                                <h:outputText value="#{transactionController.costStr}" id="costStr"/>
+                                                <b:commandButton id="buyBtn" value="Donate" action="#{transactionController.purchase()}" styleClass="btn-main">
+                                                    <f:ajax render="costStr"/>
+                                                </b:commandButton>
+                                            </h:form>
+                                        </b:column>
+                                    </b:column>
+                                </b:row>
+                                <!---->
+                                
+                            </b:container>
+                        </b:panel>
+                    </b:row>
+                </b:container>
+            </ui:define> <!-- end of main content container -->
+            
+            <!-- Override the JQuery.document(ready) function -->
+            <ui:define name="onReadyJS">
+                <script type="text/javascript">
+                    $(document).ready(function() {
+                        setLoginBar();
+                    });
+                </script>
+            </ui:define>
+            
+        </ui:composition> <!-- end of template -->
+    </h:body>
+</html>

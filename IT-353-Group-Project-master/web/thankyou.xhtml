@@ -17,7 +17,7 @@ and open the template in the editor.
         <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta> 
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
         
-        <title>Update Account</title>
+        <title>Thank You</title>
         
     </h:head>
     
@@ -28,23 +28,13 @@ and open the template in the editor.
             <!-- Override section to store bean values to be accessed by JS -->
             <ui:define name="hiddenValues">
                 <h:inputHidden id="loggedIn" value="#{loginController.loggedIn}"/>
-                <h:inputHidden id="numSold" value="#{dashboardController.numSold}"/>
             </ui:define>
             
             <!-- Override main content facelet -->
             <ui:define name="mainContent">
                 <div class="container">
                     <div class="row">
-                        <h2 align="center"><strong>Update Account Information</strong></h2>
-                    </div>
-                    <hr/>
-                    <div class="row">
-                        <div class="col-xs-4 col-xs-offset-4 borderedCol">
-                            <h:form>
-                                User ID:<br/>#{loginController.currentUser.userName}<br/>
-
-                            </h:form>
-                        </div><!--col-xs-4-->
+                        <h4><strong>Thank you</strong> for your generous donation.</h4>
                     </div><!--row-->
                 </div><!--container-->
             </ui:define> <!-- end of main content container -->

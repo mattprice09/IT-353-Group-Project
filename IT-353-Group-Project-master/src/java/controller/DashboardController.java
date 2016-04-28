@@ -28,15 +28,17 @@ public class DashboardController implements Serializable {
      */
     public DashboardController() {
         numSold = 0;
-        progress = 20;
+        progress = 0;
         numRemaining = 0;
     }
     
     public void updateProgress(){
+        System.out.println("Progress before update: " + this.progress);
         MainDaoImpl aUserDAO = new MainDaoImpl();    // Creating a new object each time.
         numSold = Integer.parseInt(aUserDAO.getNumDonations()); // Doing anything with the object after this?
         numRemaining = total - numSold;
         progress = (int)(((double)numSold / total) * 100);
+        System.out.println("Progress after update: " + this.progress);
     }
 
     /**
