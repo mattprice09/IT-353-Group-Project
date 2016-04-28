@@ -52,8 +52,10 @@
                                     <b:column span="3">
                                         <b:column span="10">
                                             <h:form>
-                                                <b:inputText a:placeholder="# of Donations" id="numDonations" value="#{transactionController.numDonations}" >
-                                                    <f:ajax onevent="change" listener="#{transactionController.updateCost()}" render="costStr" />
+                                                <b:inputText a:placeholder="# of Donations" id="numDonations" value="#{transactionController.numDonations}" required="true"
+                                                             validatorMessage="Please enter a value greater than 0.">
+                                                    <f:ajax event="change" execute="numDonations" render="costStr" />
+                                                    <f:convertNumber currencySymbol="$" groupingUsed="true" maxFractionDigits="2" type="currency"/>
                                                 </b:inputText>
                                                 <h:outputText value="#{transactionController.costStr}" id="costStr"/>
                                                 <b:commandButton id="buyBtn" value="Donate" action="#{transactionController.purchase()}" styleClass="btn-main">

@@ -2,6 +2,7 @@ package controller;
 
 import dao.MainDaoImpl;
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedProperty;
@@ -13,6 +14,7 @@ public class TransactionController implements Serializable{
     private int userNum;
     private int numDonations;
     private String costStr;
+    private final DecimalFormat df = new DecimalFormat("#.00");
     
     @ManagedProperty(value="#{LoginController}")
     private LoginController masterBean;
@@ -77,6 +79,13 @@ public class TransactionController implements Serializable{
      */
     public void setNumDonations(int numDonations) {
         this.numDonations = numDonations;
+        if (numDonations == 0) {
+            this.costStr = "Please enter a value greater than 0.";
+        } else if (numDonations > 1000000) {
+            this.costStr = "Please enter a value of less than 1,000,000.";
+        } else {
+            this.costStr = "Your current total is: $" + this.df.format((((double)numDonations) * 0.22));
+        }
     }
 
     /**
