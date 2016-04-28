@@ -36,13 +36,19 @@ public class LoginController implements Serializable {
         if (status == 1) {
             currentUser = (User) dao.getUser(currentUser.getUserName());
             this.loggedIn = "Y";
-            return "faces/index.xhtml";
+            return this.getCurrentPage();
         } else {
             numAttempts++;
             return "faces/login.xhtml";
         }
     }
 
+    // get current page string
+    private String getCurrentPage() {
+        FacesContext context = FacesContext.getCurrentInstance(); 
+        String currPage = context.getViewRoot().getViewId();
+        return "faces" + currPage;
+    }
     // Update's the current user's login info
     public String updateUser() {
         MainDaoImpl dao = new MainDaoImpl();

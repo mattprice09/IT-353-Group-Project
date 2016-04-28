@@ -80,3 +80,22 @@
     top: 50%;
     margin-top: -11px;
 }
+
+/*Custom panel*/
+.panel-default > .panel-heading{
+    background-image: none;
+    background-color: #2e2e2f;
+    color: #ffffff;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.my-panel-title {
+    /*background-color: #ecf0f1;*/
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.my-panel-body {
+    background-color: #F0F0F0;
+}
