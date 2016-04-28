@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:b="http://bootsfaces.net/ui"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <meta charset="utf-8"></meta>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta> 
@@ -30,318 +31,318 @@
                         <h4>Last name: <h:inputText id="lName" value="#{loginController.currentUser.lastName}" required ="true">
                             </h:inputText></h4>
                         <!-- Source for country/state list: http://www.mediacollege.com/internet/samples/html/country-list.html -->
-                        <h4>Country: <select id ="country" onchange="displayState(this.options[this.selectedIndex].value)" 
+                        <h4>Country: <h:selectOneListbox id ="country" onchange="displayState(this.options[this.selectedIndex].value)" size = "1"
                                              value="#{loginController.currentUser.country}" 
                                              required = "true">
-                                <option value="">Country...</option>
-                                <option value="Afganistan">Afghanistan</option>
-                                <option value="Albania">Albania</option>
-                                <option value="Algeria">Algeria</option>
-                                <option value="American Samoa">American Samoa</option>
-                                <option value="Andorra">Andorra</option>
-                                <option value="Angola">Angola</option>
-                                <option value="Anguilla">Anguilla</option>
-                                <option value="Antigua &amp; Barbuda">Antigua &amp; Barbuda</option>
-                                <option value="Argentina">Argentina</option>
-                                <option value="Armenia">Armenia</option>
-                                <option value="Aruba">Aruba</option>
-                                <option value="Australia">Australia</option>
-                                <option value="Austria">Austria</option>
-                                <option value="Azerbaijan">Azerbaijan</option>
-                                <option value="Bahamas">Bahamas</option>
-                                <option value="Bahrain">Bahrain</option>
-                                <option value="Bangladesh">Bangladesh</option>
-                                <option value="Barbados">Barbados</option>
-                                <option value="Belarus">Belarus</option>
-                                <option value="Belgium">Belgium</option>
-                                <option value="Belize">Belize</option>
-                                <option value="Benin">Benin</option>
-                                <option value="Bermuda">Bermuda</option>
-                                <option value="Bhutan">Bhutan</option>
-                                <option value="Bolivia">Bolivia</option>
-                                <option value="Bonaire">Bonaire</option>
-                                <option value="Bosnia &amp; Herzegovina">Bosnia &amp; Herzegovina</option>
-                                <option value="Botswana">Botswana</option>
-                                <option value="Brazil">Brazil</option>
-                                <option value="British Indian Ocean Ter">British Indian Ocean Ter</option>
-                                <option value="Brunei">Brunei</option>
-                                <option value="Bulgaria">Bulgaria</option>
-                                <option value="Burkina Faso">Burkina Faso</option>
-                                <option value="Burundi">Burundi</option>
-                                <option value="Cambodia">Cambodia</option>
-                                <option value="Cameroon">Cameroon</option>
-                                <option value="Canada">Canada</option>
-                                <option value="Canary Islands">Canary Islands</option>
-                                <option value="Cape Verde">Cape Verde</option>
-                                <option value="Cayman Islands">Cayman Islands</option>
-                                <option value="Central African Republic">Central African Republic</option>
-                                <option value="Chad">Chad</option>
-                                <option value="Channel Islands">Channel Islands</option>
-                                <option value="Chile">Chile</option>
-                                <option value="China">China</option>
-                                <option value="Christmas Island">Christmas Island</option>
-                                <option value="Cocos Island">Cocos Island</option>
-                                <option value="Colombia">Colombia</option>
-                                <option value="Comoros">Comoros</option>
-                                <option value="Congo">Congo</option>
-                                <option value="Cook Islands">Cook Islands</option>
-                                <option value="Costa Rica">Costa Rica</option>
-                                <option value="Cote DIvoire">Cote D'Ivoire</option>
-                                <option value="Croatia">Croatia</option>
-                                <option value="Cuba">Cuba</option>
-                                <option value="Curaco">Curacao</option>
-                                <option value="Cyprus">Cyprus</option>
-                                <option value="Czech Republic">Czech Republic</option>
-                                <option value="Denmark">Denmark</option>
-                                <option value="Djibouti">Djibouti</option>
-                                <option value="Dominica">Dominica</option>
-                                <option value="Dominican Republic">Dominican Republic</option>
-                                <option value="East Timor">East Timor</option>
-                                <option value="Ecuador">Ecuador</option>
-                                <option value="Egypt">Egypt</option>
-                                <option value="El Salvador">El Salvador</option>
-                                <option value="Equatorial Guinea">Equatorial Guinea</option>
-                                <option value="Eritrea">Eritrea</option>
-                                <option value="Estonia">Estonia</option>
-                                <option value="Ethiopia">Ethiopia</option>
-                                <option value="Falkland Islands">Falkland Islands</option>
-                                <option value="Faroe Islands">Faroe Islands</option>
-                                <option value="Fiji">Fiji</option>
-                                <option value="Finland">Finland</option>
-                                <option value="France">France</option>
-                                <option value="French Guiana">French Guiana</option>
-                                <option value="French Polynesia">French Polynesia</option>
-                                <option value="French Southern Ter">French Southern Ter</option>
-                                <option value="Gabon">Gabon</option>
-                                <option value="Gambia">Gambia</option>
-                                <option value="Georgia">Georgia</option>
-                                <option value="Germany">Germany</option>
-                                <option value="Ghana">Ghana</option>
-                                <option value="Gibraltar">Gibraltar</option>
-                                <option value="Great Britain">Great Britain</option>
-                                <option value="Greece">Greece</option>
-                                <option value="Greenland">Greenland</option>
-                                <option value="Grenada">Grenada</option>
-                                <option value="Guadeloupe">Guadeloupe</option>
-                                <option value="Guam">Guam</option>
-                                <option value="Guatemala">Guatemala</option>
-                                <option value="Guinea">Guinea</option>
-                                <option value="Guyana">Guyana</option>
-                                <option value="Haiti">Haiti</option>
-                                <option value="Hawaii">Hawaii</option>
-                                <option value="Honduras">Honduras</option>
-                                <option value="Hong Kong">Hong Kong</option>
-                                <option value="Hungary">Hungary</option>
-                                <option value="Iceland">Iceland</option>
-                                <option value="India">India</option>
-                                <option value="Indonesia">Indonesia</option>
-                                <option value="Iran">Iran</option>
-                                <option value="Iraq">Iraq</option>
-                                <option value="Ireland">Ireland</option>
-                                <option value="Isle of Man">Isle of Man</option>
-                                <option value="Israel">Israel</option>
-                                <option value="Italy">Italy</option>
-                                <option value="Jamaica">Jamaica</option>
-                                <option value="Japan">Japan</option>
-                                <option value="Jordan">Jordan</option>
-                                <option value="Kazakhstan">Kazakhstan</option>
-                                <option value="Kenya">Kenya</option>
-                                <option value="Kiribati">Kiribati</option>
-                                <option value="Korea North">Korea North</option>
-                                <option value="Korea Sout">Korea South</option>
-                                <option value="Kuwait">Kuwait</option>
-                                <option value="Kyrgyzstan">Kyrgyzstan</option>
-                                <option value="Laos">Laos</option>
-                                <option value="Latvia">Latvia</option>
-                                <option value="Lebanon">Lebanon</option>
-                                <option value="Lesotho">Lesotho</option>
-                                <option value="Liberia">Liberia</option>
-                                <option value="Libya">Libya</option>
-                                <option value="Liechtenstein">Liechtenstein</option>
-                                <option value="Lithuania">Lithuania</option>
-                                <option value="Luxembourg">Luxembourg</option>
-                                <option value="Macau">Macau</option>
-                                <option value="Macedonia">Macedonia</option>
-                                <option value="Madagascar">Madagascar</option>
-                                <option value="Malaysia">Malaysia</option>
-                                <option value="Malawi">Malawi</option>
-                                <option value="Maldives">Maldives</option>
-                                <option value="Mali">Mali</option>
-                                <option value="Malta">Malta</option>
-                                <option value="Marshall Islands">Marshall Islands</option>
-                                <option value="Martinique">Martinique</option>
-                                <option value="Mauritania">Mauritania</option>
-                                <option value="Mauritius">Mauritius</option>
-                                <option value="Mayotte">Mayotte</option>
-                                <option value="Mexico">Mexico</option>
-                                <option value="Midway Islands">Midway Islands</option>
-                                <option value="Moldova">Moldova</option>
-                                <option value="Monaco">Monaco</option>
-                                <option value="Mongolia">Mongolia</option>
-                                <option value="Montserrat">Montserrat</option>
-                                <option value="Morocco">Morocco</option>
-                                <option value="Mozambique">Mozambique</option>
-                                <option value="Myanmar">Myanmar</option>
-                                <option value="Nambia">Nambia</option>
-                                <option value="Nauru">Nauru</option>
-                                <option value="Nepal">Nepal</option>
-                                <option value="Netherland Antilles">Netherland Antilles</option>
-                                <option value="Netherlands">Netherlands (Holland, Europe)</option>
-                                <option value="Nevis">Nevis</option>
-                                <option value="New Caledonia">New Caledonia</option>
-                                <option value="New Zealand">New Zealand</option>
-                                <option value="Nicaragua">Nicaragua</option>
-                                <option value="Niger">Niger</option>
-                                <option value="Nigeria">Nigeria</option>
-                                <option value="Niue">Niue</option>
-                                <option value="Norfolk Island">Norfolk Island</option>
-                                <option value="Norway">Norway</option>
-                                <option value="Oman">Oman</option>
-                                <option value="Pakistan">Pakistan</option>
-                                <option value="Palau Island">Palau Island</option>
-                                <option value="Palestine">Palestine</option>
-                                <option value="Panama">Panama</option>
-                                <option value="Papua New Guinea">Papua New Guinea</option>
-                                <option value="Paraguay">Paraguay</option>
-                                <option value="Peru">Peru</option>
-                                <option value="Phillipines">Philippines</option>
-                                <option value="Pitcairn Island">Pitcairn Island</option>
-                                <option value="Poland">Poland</option>
-                                <option value="Portugal">Portugal</option>
-                                <option value="Puerto Rico">Puerto Rico</option>
-                                <option value="Qatar">Qatar</option>
-                                <option value="Republic of Montenegro">Republic of Montenegro</option>
-                                <option value="Republic of Serbia">Republic of Serbia</option>
-                                <option value="Reunion">Reunion</option>
-                                <option value="Romania">Romania</option>
-                                <option value="Russia">Russia</option>
-                                <option value="Rwanda">Rwanda</option>
-                                <option value="St Barthelemy">St Barthelemy</option>
-                                <option value="St Eustatius">St Eustatius</option>
-                                <option value="St Helena">St Helena</option>
-                                <option value="St Kitts-Nevis">St Kitts-Nevis</option>
-                                <option value="St Lucia">St Lucia</option>
-                                <option value="St Maarten">St Maarten</option>
-                                <option value="St Pierre &amp; Miquelon">St Pierre &amp; Miquelon</option>
-                                <option value="St Vincent &amp; Grenadines">St Vincent &amp; Grenadines</option>
-                                <option value="Saipan">Saipan</option>
-                                <option value="Samoa">Samoa</option>
-                                <option value="Samoa American">Samoa American</option>
-                                <option value="San Marino">San Marino</option>
-                                <option value="Sao Tome &amp; Principe">Sao Tome &amp; Principe</option>
-                                <option value="Saudi Arabia">Saudi Arabia</option>
-                                <option value="Senegal">Senegal</option>
-                                <option value="Serbia">Serbia</option>
-                                <option value="Seychelles">Seychelles</option>
-                                <option value="Sierra Leone">Sierra Leone</option>
-                                <option value="Singapore">Singapore</option>
-                                <option value="Slovakia">Slovakia</option>
-                                <option value="Slovenia">Slovenia</option>
-                                <option value="Solomon Islands">Solomon Islands</option>
-                                <option value="Somalia">Somalia</option>
-                                <option value="South Africa">South Africa</option>
-                                <option value="Spain">Spain</option>
-                                <option value="Sri Lanka">Sri Lanka</option>
-                                <option value="Sudan">Sudan</option>
-                                <option value="Suriname">Suriname</option>
-                                <option value="Swaziland">Swaziland</option>
-                                <option value="Sweden">Sweden</option>
-                                <option value="Switzerland">Switzerland</option>
-                                <option value="Syria">Syria</option>
-                                <option value="Tahiti">Tahiti</option>
-                                <option value="Taiwan">Taiwan</option>
-                                <option value="Tajikistan">Tajikistan</option>
-                                <option value="Tanzania">Tanzania</option>
-                                <option value="Thailand">Thailand</option>
-                                <option value="Togo">Togo</option>
-                                <option value="Tokelau">Tokelau</option>
-                                <option value="Tonga">Tonga</option>
-                                <option value="Trinidad &amp; Tobago">Trinidad &amp; Tobago</option>
-                                <option value="Tunisia">Tunisia</option>
-                                <option value="Turkey">Turkey</option>
-                                <option value="Turkmenistan">Turkmenistan</option>
-                                <option value="Turks &amp; Caicos Is">Turks &amp; Caicos Is</option>
-                                <option value="Tuvalu">Tuvalu</option>
-                                <option value="Uganda">Uganda</option>
-                                <option value="Ukraine">Ukraine</option>
-                                <option value="United Arab Erimates">United Arab Emirates</option>
-                                <option value="United Kingdom">United Kingdom</option>
-                                <option value="United States of America">United States of America</option>
-                                <option value="Uraguay">Uruguay</option>
-                                <option value="Uzbekistan">Uzbekistan</option>
-                                <option value="Vanuatu">Vanuatu</option>
-                                <option value="Vatican City State">Vatican City State</option>
-                                <option value="Venezuela">Venezuela</option>
-                                <option value="Vietnam">Vietnam</option>
-                                <option value="Virgin Islands (Brit)">Virgin Islands (Brit)</option>
-                                <option value="Virgin Islands (USA)">Virgin Islands (USA)</option>
-                                <option value="Wake Island">Wake Island</option>
-                                <option value="Wallis &amp; Futana Is">Wallis &amp; Futana Is</option>
-                                <option value="Yemen">Yemen</option>
-                                <option value="Zaire">Zaire</option>
-                                <option value="Zambia">Zambia</option>
-                                <option value="Zimbabwe">Zimbabwe</option>
-                            </select></h4>
-                        <div id ="stateSelect" ><h4>State: <select id="state" size="1" value="#{loginController.currentUser.state}">
-                                    <option value="">State...</option>
-                                    <option value="Alabama">Alabama</option>
-                                    <option value="Alaska">Alaska</option>
-                                    <option value="Arizona">Arizona</option>
-                                    <option value="Arkansas">Arkansas</option>
-                                    <option value="California">California</option>
-                                    <option value="Colorado">Colorado</option>
-                                    <option value="Connecticut">Connecticut</option>
-                                    <option value="Delaware">Delaware</option>
-                                    <option value="Florida">Florida</option>
-                                    <option value="Georgia">Georgia</option>
-                                    <option value="Hawaii">Hawaii</option>
-                                    <option value="Idaho">Idaho</option>
-                                    <option value="Illinois">Illinois</option>
-                                    <option value="Indiana">Indiana</option>
-                                    <option value="Iowa">Iowa</option>
-                                    <option value="Kansas">Kansas</option>
-                                    <option value="Kentucky">Kentucky</option>
-                                    <option value="Louisiana">Louisiana</option>
-                                    <option value="Maine">Maine</option>
-                                    <option value="Maryland">Maryland</option>
-                                    <option value="Massachusetts">Massachusetts</option>
-                                    <option value="Michigan">Michigan</option>
-                                    <option value="Minnesota">Minnesota</option>
-                                    <option value="Mississippi">Mississippi</option>
-                                    <option value="Missouri">Missouri</option>
-                                    <option value="Montana">Montana</option>
-                                    <option value="Nebraska">Nebraska</option>
-                                    <option value="Nevada">Nevada</option>
-                                    <option value="New Hampshire">New Hampshire</option>
-                                    <option value="New Jersey">New Jersey</option>
-                                    <option value="New Mexico">New Mexico</option>
-                                    <option value="New York">New York</option>
-                                    <option value="North Carolina">North Carolina</option>
-                                    <option value="North Dakota">North Dakota</option>
-                                    <option value="Ohio">Ohio</option>
-                                    <option value="Oklahoma">Oklahoma</option>
-                                    <option value="Oregon">Oregon</option>
-                                    <option value="Pennsylvania">Pennsylvania</option>
-                                    <option value="Rhode Island">Rhode Island</option>
-                                    <option value="South Carolina">South Carolina</option>
-                                    <option value="South Dakota">South Dakota</option>
-                                    <option value="Tennessee">Tennessee</option>
-                                    <option value="Texas">Texas</option>
-                                    <option value="Utah">Utah</option>
-                                    <option value="Vermont">Vermont</option>
-                                    <option value="Virginia">Virginia</option>
-                                    <option value="Washington">Washington</option>
-                                    <option value="West Virginia">West Virginia</option>
-                                    <option value="Wisconsin">Wisconsin</option>
-                                    <option value="Wyoming">Wyoming</option>
-                                </select></h4></div>
+                                <f:selectItem itemValue="" itemLabel="Country..."/>
+                                <f:selectItem itemValue="Afganistan" itemLabel="Afghanistan"/>
+                                <f:selectItem itemValue="Albania" itemLabel="Albania"/>
+                                <f:selectItem itemValue="Algeria" itemLabel="Algeria"/>
+                                <f:selectItem itemValue="American Samoa" itemLabel="American Samoa"/>
+                                <f:selectItem itemValue="Andorra" itemLabel="Andorra"/>
+                                <f:selectItem itemValue="Angola" itemLabel="Angola"/>
+                                <f:selectItem itemValue="Anguilla" itemLabel="Anguilla"/>
+                                <f:selectItem itemValue="Antigua &amp; Barbuda" itemLabel="Antigua &amp; Barbuda"/>
+                                <f:selectItem itemValue="Argentina" itemLabel="Argentina"/>
+                                <f:selectItem itemValue="Armenia" itemLabel="Armenia"/>
+                                <f:selectItem itemValue="Aruba" itemLabel="Aruba"/>
+                                <f:selectItem itemValue="Australia" itemLabel="Australia"/>
+                                <f:selectItem itemValue="Austria" itemLabel="Austria"/>
+                                <f:selectItem itemValue="Azerbaijan" itemLabel="Azerbaijan"/>
+                                <f:selectItem itemValue="Bahamas" itemLabel="Bahamas"/>
+                                <f:selectItem itemValue="Bahrain" itemLabel="Bahrain"/>
+                                <f:selectItem itemValue="Bangladesh" itemLabel="Bangladesh"/>
+                                <f:selectItem itemValue="Barbados" itemLabel="Barbados"/>
+                                <f:selectItem itemValue="Belarus" itemLabel="Belarus"/>
+                                <f:selectItem itemValue="Belgium" itemLabel="Belgium"/>
+                                <f:selectItem itemValue="Belize" itemLabel="Belize"/>
+                                <f:selectItem itemValue="Benin" itemLabel="Benin"/>
+                                <f:selectItem itemValue="Bermuda" itemLabel="Bermuda"/>
+                                <f:selectItem itemValue="Bhutan" itemLabel="Bhutan"/>
+                                <f:selectItem itemValue="Bolivia" itemLabel="Bolivia"/>
+                                <f:selectItem itemValue="Bonaire" itemLabel="Bonaire"/>
+                                <f:selectItem itemValue="Bosnia &amp; Herzegovina" itemLabel="Bosnia &amp; Herzegovina"/>
+                                <f:selectItem itemValue="Botswana" itemLabel="Botswana"/>
+                                <f:selectItem itemValue="Brazil" itemLabel="Brazil"/>
+                                <f:selectItem itemValue="British Indian Ocean Ter" itemLabel="British Indian Ocean Ter"/>
+                                <f:selectItem itemValue="Brunei" itemLabel="Brunei"/>
+                                <f:selectItem itemValue="Bulgaria" itemLabel="Bulgaria"/>
+                                <f:selectItem itemValue="Burkina Faso" itemLabel="Burkina Faso"/>
+                                <f:selectItem itemValue="Burundi" itemLabel="Burundi"/>
+                                <f:selectItem itemValue="Cambodia" itemLabel="Cambodia"/>
+                                <f:selectItem itemValue="Cameroon" itemLabel="Cameroon"/>
+                                <f:selectItem itemValue="Canada" itemLabel="Canada"/>
+                                <f:selectItem itemValue="Canary Islands" itemLabel="Canary Islands"/>
+                                <f:selectItem itemValue="Cape Verde" itemLabel="Cape Verde"/>
+                                <f:selectItem itemValue="Cayman Islands" itemLabel="Cayman Islands"/>
+                                <f:selectItem itemValue="Central African Republic" itemLabel="Central African Republic"/>
+                                <f:selectItem itemValue="Chad" itemLabel="Chad"/>
+                                <f:selectItem itemValue="Channel Islands" itemLabel="Channel Islands"/>
+                                <f:selectItem itemValue="Chile" itemLabel="Chile"/>
+                                <f:selectItem itemValue="China" itemLabel="China"/>
+                                <f:selectItem itemValue="Christmas Island" itemLabel="Christmas Island"/>
+                                <f:selectItem itemValue="Cocos Island" itemLabel="Cocos Island"/>
+                                <f:selectItem itemValue="Colombia" itemLabel="Colombia"/>
+                                <f:selectItem itemValue="Comoros" itemLabel="Comoros"/>
+                                <f:selectItem itemValue="Congo" itemLabel="Congo"/>
+                                <f:selectItem itemValue="Cook Islands" itemLabel="Cook Islands"/>
+                                <f:selectItem itemValue="Costa Rica" itemLabel="Costa Rica"/>
+                                <f:selectItem itemValue="Cote DIvoire" itemLabel="Cote D'Ivoire"/>
+                                <f:selectItem itemValue="Croatia" itemLabel="Croatia"/>
+                                <f:selectItem itemValue="Cuba" itemLabel="Cuba"/>
+                                <f:selectItem itemValue="Curaco" itemLabel="Curacao"/>
+                                <f:selectItem itemValue="Cyprus" itemLabel="Cyprus"/>
+                                <f:selectItem itemValue="Czech Republic" itemLabel="Czech Republic"/>
+                                <f:selectItem itemValue="Denmark" itemLabel="Denmark"/>
+                                <f:selectItem itemValue="Djibouti" itemLabel="Djibouti"/>
+                                <f:selectItem itemValue="Dominica" itemLabel="Dominica"/>
+                                <f:selectItem itemValue="Dominican Republic" itemLabel="Dominican Republic"/>
+                                <f:selectItem itemValue="East Timor" itemLabel="East Timor"/>
+                                <f:selectItem itemValue="Ecuador" itemLabel="Ecuador"/>
+                                <f:selectItem itemValue="Egypt" itemLabel="Egypt"/>
+                                <f:selectItem itemValue="El Salvador" itemLabel="El Salvador"/>
+                                <f:selectItem itemValue="Equatorial Guinea" itemLabel="Equatorial Guinea"/>
+                                <f:selectItem itemValue="Eritrea" itemLabel="Eritrea"/>
+                                <f:selectItem itemValue="Estonia" itemLabel="Estonia"/>
+                                <f:selectItem itemValue="Ethiopia" itemLabel="Ethiopia"/>
+                                <f:selectItem itemValue="Falkland Islands" itemLabel="Falkland Islands"/>
+                                <f:selectItem itemValue="Faroe Islands" itemLabel="Faroe Islands"/>
+                                <f:selectItem itemValue="Fiji" itemLabel="Fiji"/>
+                                <f:selectItem itemValue="Finland" itemLabel="Finland"/>
+                                <f:selectItem itemValue="France" itemLabel="France"/>
+                                <f:selectItem itemValue="French Guiana" itemLabel="French Guiana"/>
+                                <f:selectItem itemValue="French Polynesia" itemLabel="French Polynesia"/>
+                                <f:selectItem itemValue="French Southern Ter" itemLabel="French Southern Ter"/>
+                                <f:selectItem itemValue="Gabon" itemLabel="Gabon"/>
+                                <f:selectItem itemValue="Gambia" itemLabel="Gambia"/>
+                                <f:selectItem itemValue="Georgia" itemLabel="Georgia"/>
+                                <f:selectItem itemValue="Germany" itemLabel="Germany"/>
+                                <f:selectItem itemValue="Ghana" itemLabel="Ghana"/>
+                                <f:selectItem itemValue="Gibraltar" itemLabel="Gibraltar"/>
+                                <f:selectItem itemValue="Great Britain" itemLabel="Great Britain"/>
+                                <f:selectItem itemValue="Greece" itemLabel="Greece"/>
+                                <f:selectItem itemValue="Greenland" itemLabel="Greenland"/>
+                                <f:selectItem itemValue="Grenada" itemLabel="Grenada"/>
+                                <f:selectItem itemValue="Guadeloupe" itemLabel="Guadeloupe"/>
+                                <f:selectItem itemValue="Guam" itemLabel="Guam"/>
+                                <f:selectItem itemValue="Guatemala" itemLabel="Guatemala"/>
+                                <f:selectItem itemValue="Guinea" itemLabel="Guinea"/>
+                                <f:selectItem itemValue="Guyana" itemLabel="Guyana"/>
+                                <f:selectItem itemValue="Haiti" itemLabel="Haiti"/>
+                                <f:selectItem itemValue="Hawaii" itemLabel="Hawaii"/>
+                                <f:selectItem itemValue="Honduras" itemLabel="Honduras"/>
+                                <f:selectItem itemValue="Hong Kong" itemLabel="Hong Kong"/>
+                                <f:selectItem itemValue="Hungary" itemLabel="Hungary"/>
+                                <f:selectItem itemValue="Iceland" itemLabel="Iceland"/>
+                                <f:selectItem itemValue="India" itemLabel="India"/>
+                                <f:selectItem itemValue="Indonesia" itemLabel="Indonesia"/>
+                                <f:selectItem itemValue="Iran" itemLabel="Iran"/>
+                                <f:selectItem itemValue="Iraq" itemLabel="Iraq"/>
+                                <f:selectItem itemValue="Ireland" itemLabel="Ireland"/>
+                                <f:selectItem itemValue="Isle of Man" itemLabel="Isle of Man"/>
+                                <f:selectItem itemValue="Israel" itemLabel="Israel"/>
+                                <f:selectItem itemValue="Italy" itemLabel="Italy"/>
+                                <f:selectItem itemValue="Jamaica" itemLabel="Jamaica"/>
+                                <f:selectItem itemValue="Japan" itemLabel="Japan"/>
+                                <f:selectItem itemValue="Jordan" itemLabel="Jordan"/>
+                                <f:selectItem itemValue="Kazakhstan" itemLabel="Kazakhstan"/>
+                                <f:selectItem itemValue="Kenya" itemLabel="Kenya"/>
+                                <f:selectItem itemValue="Kiribati" itemLabel="Kiribati"/>
+                                <f:selectItem itemValue="Korea North" itemLabel="Korea North"/>
+                                <f:selectItem itemValue="Korea South" itemLabel="Korea South"/>
+                                <f:selectItem itemValue="Kuwait" itemLabel="Kuwait"/>
+                                <f:selectItem itemValue="Kyrgyzstan" itemLabel="Kyrgyzstan"/>
+                                <f:selectItem itemValue="Laos" itemLabel="Laos"/>
+                                <f:selectItem itemValue="Latvia" itemLabel="Latvia"/>
+                                <f:selectItem itemValue="Lebanon" itemLabel="Lebanon"/>
+                                <f:selectItem itemValue="Lesotho" itemLabel="Lesotho"/>
+                                <f:selectItem itemValue="Liberia" itemLabel="Liberia"/>
+                                <f:selectItem itemValue="Libya" itemLabel="Libya"/>
+                                <f:selectItem itemValue="Liechtenstein" itemLabel="Liechtenstein"/>
+                                <f:selectItem itemValue="Lithuania" itemLabel="Lithuania"/>
+                                <f:selectItem itemValue="Luxembourg" itemLabel="Luxembourg"/>
+                                <f:selectItem itemValue="Macau" itemLabel="Macau"/>
+                                <f:selectItem itemValue="Macedonia" itemLabel="Macedonia"/>
+                                <f:selectItem itemValue="Madagascar" itemLabel="Madagascar"/>
+                                <f:selectItem itemValue="Malaysia" itemLabel="Malaysia"/>
+                                <f:selectItem itemValue="Malawi" itemLabel="Malawi"/>
+                                <f:selectItem itemValue="Maldives" itemLabel="Maldives"/>
+                                <f:selectItem itemValue="Mali" itemLabel="Mali"/>
+                                <f:selectItem itemValue="Malta" itemLabel="Malta"/>
+                                <f:selectItem itemValue="Marshall Islands" itemLabel="Marshall Islands"/>
+                                <f:selectItem itemValue="Martinique" itemLabel="Martinique"/>
+                                <f:selectItem itemValue="Mauritania" itemLabel="Mauritania"/>
+                                <f:selectItem itemValue="Mauritius" itemLabel="Mauritius"/>
+                                <f:selectItem itemValue="Mayotte" itemLabel="Mayotte"/>
+                                <f:selectItem itemValue="Mexico" itemLabel="Mexico"/>
+                                <f:selectItem itemValue="Midway Islands" itemLabel="Midway Islands"/>
+                                <f:selectItem itemValue="Moldova" itemLabel="Moldova"/>
+                                <f:selectItem itemValue="Monaco" itemLabel="Monaco"/>
+                                <f:selectItem itemValue="Mongolia" itemLabel="Mongolia"/>
+                                <f:selectItem itemValue="Montserrat" itemLabel="Montserrat"/>
+                                <f:selectItem itemValue="Morocco" itemLabel="Morocco"/>
+                                <f:selectItem itemValue="Mozambique" itemLabel="Mozambique"/>
+                                <f:selectItem itemValue="Myanmar" itemLabel="Myanmar"/>
+                                <f:selectItem itemValue="Nambia" itemLabel="Nambia"/>
+                                <f:selectItem itemValue="Nauru" itemLabel="Nauru"/>
+                                <f:selectItem itemValue="Nepal" itemLabel="Nepal"/>
+                                <f:selectItem itemValue="Netherland Antilles" itemLabel="Netherland Antilles"/>
+                                <f:selectItem itemValue="Netherlands" itemLabel="Netherlands (Holland, Europe)"/>
+                                <f:selectItem itemValue="Nevis" itemLabel="Nevis"/>
+                                <f:selectItem itemValue="New Caledonia" itemLabel="New Caledonia"/>
+                                <f:selectItem itemValue="New Zealand" itemLabel="New Zealand"/>
+                                <f:selectItem itemValue="Nicaragua" itemLabel="Nicaragua"/>
+                                <f:selectItem itemValue="Niger" itemLabel="Niger"/>
+                                <f:selectItem itemValue="Nigeria" itemLabel="Nigeria"/>
+                                <f:selectItem itemValue="Niue" itemLabel="Niue"/>
+                                <f:selectItem itemValue="Norfolk Island" itemLabel="Norfolk Island"/>
+                                <f:selectItem itemValue="Norway" itemLabel="Norway"/>
+                                <f:selectItem itemValue="Oman" itemLabel="Oman"/>
+                                <f:selectItem itemValue="Pakistan" itemLabel="Pakistan"/>
+                                <f:selectItem itemValue="Palau Island" itemLabel="Palau Island"/>
+                                <f:selectItem itemValue="Palestine" itemLabel="Palestine"/>
+                                <f:selectItem itemValue="Panama" itemLabel="Panama"/>
+                                <f:selectItem itemValue="Papua New Guinea" itemLabel="Papua New Guinea"/>
+                                <f:selectItem itemValue="Paraguay" itemLabel="Paraguay"/>
+                                <f:selectItem itemValue="Peru" itemLabel="Peru"/>
+                                <f:selectItem itemValue="Phillipines" itemLabel="Philippines"/>
+                                <f:selectItem itemValue="Pitcairn Island" itemLabel="Pitcairn Island"/>
+                                <f:selectItem itemValue="Poland" itemLabel="Poland"/>
+                                <f:selectItem itemValue="Portugal" itemLabel="Portugal"/>
+                                <f:selectItem itemValue="Puerto Rico" itemLabel="Puerto Rico"/>
+                                <f:selectItem itemValue="Qatar" itemLabel="Qatar"/>
+                                <f:selectItem itemValue="Republic of Montenegro" itemLabel="Republic of Montenegro"/>
+                                <f:selectItem itemValue="Republic of Serbia" itemLabel="Republic of Serbia"/>
+                                <f:selectItem itemValue="Reunion" itemLabel="Reunion"/>
+                                <f:selectItem itemValue="Romania" itemLabel="Romania"/>
+                                <f:selectItem itemValue="Russia" itemLabel="Russia"/>
+                                <f:selectItem itemValue="Rwanda" itemLabel="Rwanda"/>
+                                <f:selectItem itemValue="St Barthelemy" itemLabel="St Barthelemy"/>
+                                <f:selectItem itemValue="St Eustatius" itemLabel="St Eustatius"/>
+                                <f:selectItem itemValue="St Helena" itemLabel="St Helena"/>
+                                <f:selectItem itemValue="St Kitts-Nevis" itemLabel="St Kitts-Nevis"/>
+                                <f:selectItem itemValue="St Lucia" itemLabel="St Lucia"/>
+                                <f:selectItem itemValue="St Maarten" itemLabel="St Maarten"/>
+                                <f:selectItem itemValue="St Pierre &amp; Miquelon" itemLabel="St Pierre &amp; Miquelon"/>
+                                <f:selectItem itemValue="St Vincent &amp; Grenadines" itemLabel="St Vincent &amp; Grenadines"/>
+                                <f:selectItem itemValue="Saipan" itemLabel="Saipan"/>
+                                <f:selectItem itemValue="Samoa" itemLabel="Samoa"/>
+                                <f:selectItem itemValue="Samoa American" itemLabel="Samoa American"/>
+                                <f:selectItem itemValue="San Marino" itemLabel="San Marino"/>
+                                <f:selectItem itemValue="Sao Tome &amp; Principe" itemLabel="Sao Tome &amp; Principe"/>
+                                <f:selectItem itemValue="Saudi Arabia" itemLabel="Saudi Arabia"/>
+                                <f:selectItem itemValue="Senegal" itemLabel="Senegal"/>
+                                <f:selectItem itemValue="Serbia" itemLabel="Serbia"/>
+                                <f:selectItem itemValue="Seychelles" itemLabel="Seychelles"/>
+                                <f:selectItem itemValue="Sierra Leone" itemLabel="Sierra Leone"/>
+                                <f:selectItem itemValue="Singapore" itemLabel="Singapore"/>
+                                <f:selectItem itemValue="Slovakia" itemLabel="Slovakia"/>
+                                <f:selectItem itemValue="Slovenia" itemLabel="Slovenia"/>
+                                <f:selectItem itemValue="Solomon Islands" itemLabel="Solomon Islands"/>
+                                <f:selectItem itemValue="Somalia" itemLabel="Somalia"/>
+                                <f:selectItem itemValue="South Africa" itemLabel="South Africa"/>
+                                <f:selectItem itemValue="Spain" itemLabel="Spain"/>
+                                <f:selectItem itemValue="Sri Lanka" itemLabel="Sri Lanka"/>
+                                <f:selectItem itemValue="Sudan" itemLabel="Sudan"/>
+                                <f:selectItem itemValue="Suriname" itemLabel="Suriname"/>
+                                <f:selectItem itemValue="Swaziland" itemLabel="Swaziland"/>
+                                <f:selectItem itemValue="Sweden" itemLabel="Sweden"/>
+                                <f:selectItem itemValue="Switzerland" itemLabel="Switzerland"/>
+                                <f:selectItem itemValue="Syria" itemLabel="Syria"/>
+                                <f:selectItem itemValue="Tahiti" itemLabel="Tahiti"/>
+                                <f:selectItem itemValue="Taiwan" itemLabel="Taiwan"/>
+                                <f:selectItem itemValue="Tajikistan" itemLabel="Tajikistan"/>
+                                <f:selectItem itemValue="Tanzania" itemLabel="Tanzania"/>
+                                <f:selectItem itemValue="Thailand" itemLabel="Thailand"/>
+                                <f:selectItem itemValue="Togo" itemLabel="Togo"/>
+                                <f:selectItem itemValue="Tokelau" itemLabel="Tokelau"/>
+                                <f:selectItem itemValue="Tonga" itemLabel="Tonga"/>
+                                <f:selectItem itemValue="Trinidad &amp; Tobago" itemLabel="Trinidad &amp; Tobago"/>
+                                <f:selectItem itemValue="Tunisia" itemLabel="Tunisia"/>
+                                <f:selectItem itemValue="Turkey" itemLabel="Turkey"/>
+                                <f:selectItem itemValue="Turkmenistan" itemLabel="Turkmenistan"/>
+                                <f:selectItem itemValue="Turks &amp; Caicos Is" itemLabel="Turks &amp; Caicos Is"/>
+                                <f:selectItem itemValue="Tuvalu" itemLabel="Tuvalu"/>
+                                <f:selectItem itemValue="Uganda" itemLabel="Uganda"/>
+                                <f:selectItem itemValue="Ukraine" itemLabel="Ukraine"/>
+                                <f:selectItem itemValue="United Arab Erimates" itemLabel="United Arab Emirates"/>
+                                <f:selectItem itemValue="United Kingdom" itemLabel="United Kingdom"/>
+                                <f:selectItem itemValue="United States of America" itemLabel="United States of America"/>
+                                <f:selectItem itemValue="Uraguay" itemLabel="Uruguay"/>
+                                <f:selectItem itemValue="Uzbekistan" itemLabel="Uzbekistan"/>
+                                <f:selectItem itemValue="Vanuatu" itemLabel="Vanuatu"/>
+                                <f:selectItem itemValue="Vatican City State" itemLabel="Vatican City State"/>
+                                <f:selectItem itemValue="Venezuela" itemLabel="Venezuela"/>
+                                <f:selectItem itemValue="Vietnam" itemLabel="Vietnam"/>
+                                <f:selectItem itemValue="Virgin Islands (Brit)" itemLabel="Virgin Islands (Brit)"/>
+                                <f:selectItem itemValue="Virgin Islands (USA)" itemLabel="Virgin Islands (USA)"/>
+                                <f:selectItem itemValue="Wake Island" itemLabel="Wake Island"/>
+                                <f:selectItem itemValue="Wallis &amp; Futana Is" itemLabel="Wallis &amp; Futana Is"/>
+                                <f:selectItem itemValue="Yemen" itemLabel="Yemen"/>
+                                <f:selectItem itemValue="Zaire" itemLabel="Zaire"/>
+                                <f:selectItem itemValue="Zambia" itemLabel="Zambia"/>
+                                <f:selectItem itemValue="Zimbabwe" itemLabel="Zimbabwe"/>
+                            </h:selectOneListbox></h4>
+                        <div id ="stateSelect" ><h4>State: <h:selectOneListbox id="state" size="1" value="#{loginController.currentUser.state}">
+                                    <f:selectItem itemValue="" itemLabel="State..."/>
+                                    <f:selectItem itemValue="Alabama" itemLabel="Alabama"/>
+                                    <f:selectItem itemValue="Alaska" itemLabel="Alaska"/>
+                                    <f:selectItem itemValue="Arizona" itemLabel="Arizona"/>
+                                    <f:selectItem itemValue="Arkansas" itemLabel="Arkansas"/>
+                                    <f:selectItem itemValue="California" itemLabel="California"/>
+                                    <f:selectItem itemValue="Colorado" itemLabel="Colorado"/>
+                                    <f:selectItem itemValue="Connecticut" itemLabel="Connecticut"/>
+                                    <f:selectItem itemValue="Delaware" itemLabel="Delaware"/>
+                                    <f:selectItem itemValue="Florida" itemLabel="Florida"/>
+                                    <f:selectItem itemValue="Georgia" itemLabel="Georgia"/>
+                                    <f:selectItem itemValue="Hawaii" itemLabel="Hawaii"/>
+                                    <f:selectItem itemValue="Idaho" itemLabel="Idaho"/>
+                                    <f:selectItem itemValue="Illinois" itemLabel="Illinois"/>
+                                    <f:selectItem itemValue="Indiana" itemLabel="Indiana"/>
+                                    <f:selectItem itemValue="Iowa" itemLabel="Iowa"/>
+                                    <f:selectItem itemValue="Kansas" itemLabel="Kansas"/>
+                                    <f:selectItem itemValue="Kentucky" itemLabel="Kentucky"/>
+                                    <f:selectItem itemValue="Louisiana" itemLabel="Louisiana"/>
+                                    <f:selectItem itemValue="Maine" itemLabel="Maine"/>
+                                    <f:selectItem itemValue="Maryland" itemLabel="Maryland"/>
+                                    <f:selectItem itemValue="Massachusetts" itemLabel="Massachusetts"/>
+                                    <f:selectItem itemValue="Michigan" itemLabel="Michigan"/>
+                                    <f:selectItem itemValue="Minnesota" itemLabel="Minnesota"/>
+                                    <f:selectItem itemValue="Mississippi" itemLabel="Mississippi"/>
+                                    <f:selectItem itemValue="Missouri" itemLabel="Missouri"/>
+                                    <f:selectItem itemValue="Montana" itemLabel="Montana"/>
+                                    <f:selectItem itemValue="Nebraska" itemLabel="Nebraska"/>
+                                    <f:selectItem itemValue="Nevada" itemLabel="Nevada"/>
+                                    <f:selectItem itemValue="New Hampshire" itemLabel="New Hampshire"/>
+                                    <f:selectItem itemValue="New Jersey" itemLabel="New Jersey"/>
+                                    <f:selectItem itemValue="New Mexico" itemLabel="New Mexico"/>
+                                    <f:selectItem itemValue="New York" itemLabel="New York"/>
+                                    <f:selectItem itemValue="North Carolina" itemLabel="North Carolina"/>
+                                    <f:selectItem itemValue="North Dakota" itemLabel="North Dakota"/>
+                                    <f:selectItem itemValue="Ohio" itemLabel="Ohio"/>
+                                    <f:selectItem itemValue="Oklahoma" itemLabel="Oklahoma"/>
+                                    <f:selectItem itemValue="Oregon" itemLabel="Oregon"/>
+                                    <f:selectItem itemValue="Pennsylvania" itemLabel="Pennsylvania"/>
+                                    <f:selectItem itemValue="Rhode Island" itemLabel="Rhode Island"/>
+                                    <f:selectItem itemValue="South Carolina" itemLabel="South Carolina"/>
+                                    <f:selectItem itemValue="South Dakota" itemLabel="South Dakota"/>
+                                    <f:selectItem itemValue="Tennessee" itemLabel="Tennessee"/>
+                                    <f:selectItem itemValue="Texas" itemLabel="Texas"/>
+                                    <f:selectItem itemValue="Utah" itemLabel="Utah"/>
+                                    <f:selectItem itemValue="Vermont" itemLabel="Vermont"/>
+                                    <f:selectItem itemValue="Virginia" itemLabel="Virginia"/>
+                                    <f:selectItem itemValue="Washington" itemLabel="Washington"/>
+                                    <f:selectItem itemValue="West Virginia" itemLabel="West Virginia"/>
+                                    <f:selectItem itemValue="Wisconsin" itemLabel="Wisconsin"/>
+                                    <f:selectItem itemValue="Wyoming" itemLabel="Wyoming"/>
+                                </h:selectOneListbox></h4></div>
                         <h4>Username: <h:inputText id="userID" value="#{loginController.currentUser.userName}" required ="true">
                             </h:inputText></h4>
-                        <h4>Password: <input type = "password" id="passcode" value="#{loginController.currentUser.password}" required="true">
-                            </input></h4>
-                        <h4>Confirm password: <input type = "password" id="passVerification" required ="true">
-                            </input></h4><br></br>
-                                    <span id="message" class="message"></span>
+                        <h4>Password: <h:inputSecret id="passcode" value="#{loginController.currentUser.password}" required="true">
+                            </h:inputSecret></h4>
+                        <h4>Confirm password: <h:inputSecret id="passVerification" required ="true">
+                            </h:inputSecret></h4><br></br>
+                                    <span id="message" class="message"></span>
                         <h:commandButton id="submitID" value="Submit" action="response.xhtml" styleClass="btn-main"/>
                     </h:form>
                 </b:container>             
@@ -351,7 +352,6 @@
                             document.getElementById("stateSelect").style.display = 'initial';
                         } else
                             document.getElementById("stateSelect").style.display = 'none';
-
                     }
                     function matchPass(value) {
                         var green = "#66cc66";
@@ -359,7 +359,6 @@
                         if (value != document.getElementById("password").value) {
                             document.getElementById("message").style.color = red;
                             message.innerHTML = "Passwords Match!"
-
                         }
                     }
                 </script>

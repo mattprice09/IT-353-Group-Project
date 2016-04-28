@@ -28,22 +28,16 @@
             <ui:define name="hiddenValues">
                 <h:inputHidden id="loggedIn" value="#{loginController.loggedIn}"/>
                 <h:inputHidden id="numSold" value="#{dashboardController.numSold}"/>
+                <h:inputText id="currentPixel" value="0" style ="display:none">
+                    <f:ajax onevent="change" listener="#{ImageController.getUserInfoDB()}" render="userInfo" />
+                </h:inputText>
+                <h:inputHidden value="#{ImageController.userInfo}" id="userInfo"/>
             </ui:define>
             
             <!-- Override main content facelet -->
             <ui:define name="mainContent">
                 <!-- Container containing dashboard and main image -->
                 <b:container>
-
-                    <!-- Test Buy for presentation -->
-                    <b:container>
-                        <b:row>
-                            <h:form>
-                                <b:inputText a:placeholder="# of Donations" id="numDonations" value="#{transactionController.numDonations}"></b:inputText>
-                                <b:commandButton id="buyBtn" value="Buy" action="#{transactionController.testBuy()}" styleClass="btn-main"/>
-                            </h:form>
-                        </b:row>
-                    </b:container>
                     
                     <!-- Dashboard row -->
                     <b:row> 

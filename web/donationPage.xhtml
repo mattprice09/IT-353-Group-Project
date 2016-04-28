@@ -49,20 +49,23 @@
                                 </b:row>
                                 <!-- Purchase form -->
                                 <b:row>
-                                    <b:column span="3">
-                                        <b:column span="10">
+                                    <b:column span="4">
+                                        <!--<b:column span="2">-->
                                             <h:form>
                                                 <b:inputText a:placeholder="# of Donations" id="numDonations" value="#{transactionController.numDonations}" required="true"
                                                              validatorMessage="Please enter a value greater than 0.">
                                                     <f:ajax event="change" execute="numDonations" render="costStr" />
-                                                    <f:convertNumber currencySymbol="$" groupingUsed="true" maxFractionDigits="2" type="currency"/>
+                                                    <f:validateLongRange minimum="0" maximum="1000000" />
+                                                    <!--<f:convertNumber currencySymbol="$" groupingUsed="true" maxFractionDigits="2" type="currency"/>-->
                                                 </b:inputText>
-                                                <h:outputText value="#{transactionController.costStr}" id="costStr"/>
-                                                <b:commandButton id="buyBtn" value="Donate" action="#{transactionController.purchase()}" styleClass="btn-main">
+                                                <h:outputText class="costStyle" value="#{transactionController.costStr}" id="costStr"/>
+                                                <br />
+                                                
+                                                <b:commandButton id="buyBtn" value="Buy" action="#{transactionController.purchase()}" styleClass="btn-main">
                                                     <f:ajax render="costStr"/>
                                                 </b:commandButton>
                                             </h:form>
-                                        </b:column>
+                                        <!--</b:column>-->
                                     </b:column>
                                 </b:row>
                                 <!---->
