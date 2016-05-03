@@ -14,7 +14,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta> 
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
         
-        <title>Retry Login</title>
+        <title>Login</title>
     </h:head>
     
     <h:body>
@@ -28,7 +28,89 @@
             
             <!-- Override main content facelet -->
             <ui:define name="mainContent">
-                "Login page"
+                <b:container>
+                    <b:row>
+                        <b:panel collapsible="false" class="my-panel-title">
+                            
+                            <!-- custom panel title -->
+                            <f:facet name="heading">
+                                <h2 align="center"><strong>Login</strong></h2>
+                            </f:facet>
+                            
+                            <!-- panel-body -->
+                            <b:container fluid="true" class="my-panel-body">
+                                
+                                <b:row>
+                                    <b:column span="6" class="verticalLine">
+                                        <h:form>
+                                            <!-- Username row -->
+                                            <b:row>
+                                                <b:column span="3" offset="2">
+                                                    Username:
+                                                </b:column>
+                                                <b:column span="4">
+                                                    <b:inputText id="userIDfield" value="#{loginController.currentUser.userName}"
+                                                             validatorMessage="Invalid username. Please try again.">
+                                                        <f:validateLength
+                                                            minimum="2"
+                                                            maximum="20"/>
+                                                    </b:inputText>
+                                                </b:column>
+                                            </b:row> <!--row (username) -->
+                                            
+                                            <b:row>
+                                                <b:column span="3" offset="2">
+                                                    <b:message 
+                                                        class="errorMsg"
+                                                        showDetail="true"
+                                                        id="errors3"
+                                                        for="userIDfield"/>
+                                                </b:column>
+                                            </b:row>
+                                            
+                                            <b:row>
+                                                <b:column span="3" offset="2">
+                                                    Password:
+                                                </b:column>
+                                                <b:column span="4">
+                                                    <b:inputSecret a:placeholder="Password" id="passwordField" value="#{loginController.currentUser.password}"
+                                                                   validatorMessage="Invalid password. Please try again.">
+                                                        <f:validateLength
+                                                            minimum="2"
+                                                            maximum="20"/>
+                                                    </b:inputSecret>
+                                                </b:column>
+                                            </b:row>
+                                            
+                                            <b:row>
+                                                <b:column span="3" offset="2">
+                                                    <b:message 
+                                                        class="errorMsg"
+                                                        showDetail="true"
+                                                        id="errors4"
+                                                        for="passwordField"/>
+                                                </b:column>
+                                            </b:row>
+                                            
+                                            <b:row>
+                                                <b:column span="3" offset="4">
+                                                    <b:commandButton id="logBtn" value="Login" action="#{loginController.authenticate()}" styleClass="btn-main"/>
+                                                </b:column>
+                                            </b:row>
+                                            
+                                        </h:form>
+                                    </b:column>
+                                    
+                                    <b:column span="6">
+                                        
+                                    </b:column>
+                                </b:row>
+                                <!---->
+                                
+                            </b:container>
+                        </b:panel>
+                    </b:row>
+                </b:container>
             </ui:define> <!-- end of main content container -->
             
             <!-- Override the JQuery.document(ready) function -->

@@ -68,21 +68,28 @@ var initializeHomePage = function() {
         var low_bound = Math.floor(numBought / W);
         var right_bound = numBought - (low_bound * W);
 
-        // Show the popover if the mouse is hovering on a COLORED pixel
+        // Get popover text
+        var popupText = "";
         if (event.offsetY < low_bound || (event.offsetX < right_bound && event.offsetY == low_bound)) {
-            var popupText = "X-coord is " + event.offsetX + ", y-coord is " + event.offsetY;
-            $("#popupMsg").text(popupText);
-
-            // display popover at specified location
-            var left = e.pageX;
-            var top = e.pageY;
-            var height = $(".popover").height();
-            $(".popover").show();
-            $('.popover').css('left', (left + 20)+'px');
-            $('.popover').css('top', (top-(height/2)-10) + 'px');
+            popupText = "X-coord is " + event.offsetX + ", y-coord is " + event.offsetY;
+            $("#popoverID").addClass("popover");
+            $("#popoverID").removeClass("popover-donate");
         } else {
-            $(".popover").hide();
+            popupText = "Donate to reveal more pixels!";
+            $("#popoverID").removeClass("popover");
+            $("#popoverID").addClass("popover-donate");
+//            $(".popover").hide();
         }
+        
+        $("#popupMsg").text(popupText);
+
+        // display popover at specified location
+        var left = e.pageX;
+        var top = e.pageY;
+        var height = $("#popoverID").height();
+        $("#popoverID").show();
+        $('#popoverID').css('left', (left + 20)+'px');
+        $('#popoverID').css('top', (top-(height/2)-10) + 'px');
     });
     
     $("#MainCanvas").mouseout(function(e) {

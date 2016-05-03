@@ -330,6 +330,10 @@ public class MainDaoImpl implements MainDAO {
         String userName = user.getUserName();
         String password = user.getPassword();
         
+        if (userName.equals("") || password.equals("")) {
+            return 0;
+        }
+        
         System.out.println("these ar the vals of current user!!!!!!!");
         System.out.println(userName + "    " + password);
         

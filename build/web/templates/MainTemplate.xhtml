@@ -63,26 +63,18 @@
                         <div class="form-group">
                             <b:row>
                                 <b:column span="3" offset="4">
-                                    <b:inputText a:placeholder="Username" id="userID" value="#{loginController.currentUser.userName}"
-                                             validatorMessage="Invalid username. Please try again.">
-                                        <f:validateLength
-                                            minimum="2"
-                                            maximum="20"/>
-                                    </b:inputText>
+                                    <b:inputText a:placeholder="Username" id="userID" value="#{loginController.currentUser.userName}"/>
                                 </b:column><!--b:column (userName input)-->
 
                                 <b:column span="3">
-                                    <b:inputSecret a:placeholder="Password" id="password" value="#{loginController.currentUser.password}"
-                                                   validatorMessage="Invalid password. Please try again.">
-                                        <f:validateLength
-                                            minimum="2"
-                                            maximum="20"/>
-                                    </b:inputSecret>
+                                    <b:inputSecret a:placeholder="Password" id="password" value="#{loginController.currentUser.password}"/>
                                 </b:column><!--b:column (password input)-->
 
                                 <!-- "Login" button -->
                                 <b:column span="1">
-                                    <b:commandButton id="loginBtn" value="Login" action="#{loginController.authenticate()}" styleClass="btn-main"/>
+                                    <b:commandButton id="loginBtn" value="Login" action="#{loginController.authenticate()}" styleClass="btn-main">
+                                        <f:ajax execute="@form"/>
+                                    </b:commandButton>
                                 </b:column>
 
                                 <!-- "Register" button -->
@@ -91,7 +83,7 @@
                                 </b:column>
 
                             </b:row><!--b:row (login input row)-->
-                            <b:row>
+<!--                            <b:row>
                                 <b:column span="5">
                                     <b:message 
                                         class="errorMsg"
@@ -108,7 +100,7 @@
                                 </b:column>
 
 
-                            </b:row><!--b:row (error msg row)-->
+                            </b:row>b:row (error msg row)-->
                         </div><!--form-group -->
 
                     </h:form>

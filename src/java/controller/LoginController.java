@@ -27,26 +27,39 @@ public class LoginController implements Serializable {
         this.loggedIn = "N";
     }
 
-    public String authenticate() {
+    public void authenticate() {
         MainDaoImpl dao = new MainDaoImpl();
 //        if (numAttempts == 3) {
 //            return "MaxAttempts.xhtml";
 //        }
-        int status = dao.authenticate(this.currentUser);
+        int status = dao.authenticate(currentUser);
         if (status == 1) {
             currentUser = (User) dao.getUser(currentUser.getUserName());
-            this.loggedIn = "Y";
-            return this.getCurrentPage();
+            loggedIn = "Y";
+//            return getCurrentPage();
+            navigateTo(getCurrentPage().replace("faces/", ""));
         } else {
             numAttempts++;
-            return "faces/login.xhtml";
+            navigateTo("login.xhtml");
+//            return "faces/login.xhtml";
         }
+    }
+    
+    private void navigateTo(String url) {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler) fc.getApplication().getNavigationHandler();
+        nav.performNavigation(url + "?faces-redirect=true");
     }
 
     // get current page string
     private String getCurrentPage() {
         FacesContext context = FacesContext.getCurrentInstance(); 
         String currPage = context.getViewRoot().getViewId();
+        
+        // Don't return to the login page after logging in
+        if (currPage.equals("/login.xhtml")) {
+            currPage = "/index.xhtml";
+        }
         return "faces" + currPage;
     }
     // Update's the current user's login info

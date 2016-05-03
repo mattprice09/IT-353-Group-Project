@@ -15,8 +15,6 @@
         
         <title>Make a Donation</title>
         
-        <!-- Redirect user to register.xhtml if they're not logged in -->
-<!--        <f:event listener="#{loginController.checkLoggedIn}" type="preRenderView" />-->
     </h:head>
     
     <h:body>
@@ -52,11 +50,10 @@
                                     <b:column span="4">
                                         <!--<b:column span="2">-->
                                             <h:form>
-                                                <b:inputText a:placeholder="# of Donations" id="numDonations" value="#{transactionController.numDonations}" required="true"
-                                                             validatorMessage="Please enter a value greater than 0.">
+                                                <b:inputText a:placeholder="Enter a custom name" id="custName" value="#{transactionController.customName}" />
+                                                <b:inputText a:placeholder="# of Donations" id="numDonations" value="#{transactionController.numDonations}" required="true">
                                                     <f:ajax event="change" execute="numDonations" render="costStr" />
                                                     <f:validateLongRange minimum="0" maximum="1000000" />
-                                                    <!--<f:convertNumber currencySymbol="$" groupingUsed="true" maxFractionDigits="2" type="currency"/>-->
                                                 </b:inputText>
                                                 <h:outputText class="costStyle" value="#{transactionController.costStr}" id="costStr"/>
                                                 <br />
