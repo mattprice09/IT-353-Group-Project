@@ -13,13 +13,15 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta> 
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
         
-        <title>Confirm Purchase</title>
-        
     </h:head>
     
     <h:body>
         <!-- Main template-->
         <ui:composition template="templates/MainTemplate.xhtml">
+            
+            <ui:define name="titleInsert">
+                <title>Confirm Purchase</title>
+            </ui:define>
             
             <!-- Override section to store bean values to be accessed by JS -->
             <ui:define name="hiddenValues">
@@ -42,7 +44,7 @@
                             <!-- panel-body -->
                             <b:container fluid="true" class="my-panel-body">
                                 <b:row>
-                                    <h3><strong>Please Confirm your payment of #{transactionController.totalCost}: </strong></h3>
+                                    <h4><strong><em>Please Confirm your payment of #{transactionController.totalCost}: </em></strong></h4>
                                 </b:row>
                                 <b:row>
                                     <b:column span="4">

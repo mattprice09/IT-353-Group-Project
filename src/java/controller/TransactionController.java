@@ -36,14 +36,6 @@ public class TransactionController implements Serializable{
         customName = "";
     }
     
-    public void resetBean() {
-        userNum = 0;
-        numDonations = 0;
-        costStr = "";
-        totalCost = "";
-        customName = "";
-    }
-    
     private void navigateTo(String url) {
         FacesContext fc = FacesContext.getCurrentInstance();
         ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler) fc.getApplication().getNavigationHandler();
@@ -95,9 +87,10 @@ public class TransactionController implements Serializable{
         
         // Reset transactionController vars if purchase was successful
         if (responsePage.equals("faces/thankyou.xhtml")) {
-            resetBean();
+//            numDonations = 0;
+            costStr = "";
+            totalCost = "";
         }
-        
         navigateTo(responsePage);
     }
 

@@ -17,13 +17,15 @@ and open the template in the editor.
         <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta> 
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
         
-        <title>Update Account</title>
-        
     </h:head>
     
     <h:body>
         <!-- Main template-->
         <ui:composition template="templates/MainTemplate.xhtml">
+            
+            <ui:define name="titleInsert">
+                <title>Update Account</title>
+            </ui:define>
             
             <!-- Override section to store bean values to be accessed by JS -->
             <ui:define name="hiddenValues">

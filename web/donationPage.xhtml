@@ -13,13 +13,15 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta> 
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
         
-        <title>Make a Donation</title>
-        
     </h:head>
     
     <h:body>
         <!-- Main template-->
         <ui:composition template="templates/MainTemplate.xhtml">
+            
+            <ui:define name="titleInsert">
+                <title>Make a Donation</title>
+            </ui:define>
             
             <!-- Override section to store bean values to be accessed by JS -->
             <ui:define name="hiddenValues">
@@ -37,35 +39,76 @@
                             
                             <!-- custom panel title -->
                             <f:facet name="heading">
-                                <h2 align="center"><strong>Saving Lives One Pixel at a Time</strong></h2>
+                                <h2 align="center"><strong>Make a Donation Today</strong></h2>
                             </f:facet>
                             
                             <!-- panel-body -->
                             <b:container fluid="true" class="my-panel-body">
-                                <b:row>
-                                    <h3><strong>Please enter # of pixels to buy: </strong></h3>
-                                </b:row>
-                                <!-- Purchase form -->
-                                <b:row>
-                                    <b:column span="4">
-                                        <!--<b:column span="2">-->
-                                            <h:form>
-                                                <b:inputText a:placeholder="Enter a custom name" id="custName" value="#{transactionController.customName}" />
-                                                <b:inputText a:placeholder="# of Donations" id="numDonations" value="#{transactionController.numDonations}" required="true">
-                                                    <f:ajax event="change" execute="numDonations" render="costStr" />
-                                                    <f:validateLongRange minimum="0" maximum="1000000" />
-                                                </b:inputText>
-                                                <h:outputText class="costStyle" value="#{transactionController.costStr}" id="costStr"/>
-                                                <br />
-                                                
-                                                <b:commandButton id="buyBtn" value="Buy" action="#{transactionController.purchase()}" styleClass="btn-main">
-                                                    <f:ajax render="costStr"/>
-                                                </b:commandButton>
-                                            </h:form>
-                                        <!--</b:column>-->
-                                    </b:column>
-                                </b:row>
-                                <!---->
+                                
+                                <!-- left half of panel body -->
+                                <b:column span="6">
+                                    <b:row>
+                                        <!-- Log In before donation -->
+                                        <b:container class="#{loginController.loggedIn == 'N' ? 'visible' : 'hidden'}">
+                                            <b:row>
+                                                Please <h:link onclick="#{loginController.setPrevPage('/donationPage.xhtml')}" outcome="faces/login.xhtml">Log In</h:link> before you donate.
+                                            </b:row>
+                                        </b:container>
+
+                                        <!-- Donate container, visible only after logging in -->
+                                        <b:container class="#{loginController.loggedIn == 'Y' ? 'visible' : 'hidden'}">
+                                            <b:row>
+                                                <h3><strong>Please enter # of pixels to buy: </strong></h3>
+                                            </b:row>
+                                            <!-- Purchase form -->
+                                            <b:row>
+                                                <b:column span="4">
+                                                    <!--<b:column span="2">-->
+                                                        <h:form>
+                                                            <b:inputText a:placeholder="Enter a custom name" id="custName" value="#{transactionController.customName}" />
+                                                            <b:inputText a:placeholder="# of Donations" id="numDonations" value="#{transactionController.numDonations}" required="true">
+                                                                <f:ajax event="change" execute="numDonations" render="costStr" />
+                                                                <f:validateLongRange minimum="0" maximum="1000000" />
+                                                            </b:inputText>
+                                                            <h:outputText class="costStyle" value="#{transactionController.costStr}" id="costStr"/>
+                                                            <br />
+
+                                                            <b:commandButton id="buyBtn" value="Continue" action="#{transactionController.purchase()}" styleClass="btn-main">
+                                                                <f:ajax render="costStr"/>
+                                                            </b:commandButton>
+                                                        </h:form>
+                                                    <!--</b:column>-->
+                                                </b:column>
+                                            </b:row>
+                                        </b:container>
+                                    </b:row>
+                                </b:column><!-- end left half of panel body -->
+                                
+                                <!-- right half of panel body -->
+                                <b:column span="6" class="verticalLineLeft">
+                                    <b:container style="padding-left: 15px">
+                                        <b:row>
+                                            <h4><strong><em>How to Donate:</em></strong></h4>
+                                            <ol>
+                                                <li>
+                                                    Sign up for a quick, free account.
+                                                </li>
+                                                <li>
+                                                    Enter a display name along with the amount you wish to donate.
+                                                </li>
+                                                <li>
+                                                    Use your PayPal account for an easy, seamless transaction.
+                                                </li>
+
+                                            </ol>
+                                        </b:row>
+                                        <hr/>
+                                        <b:row>
+                                            Please visit our <h:link outcome="faces/aboutUs.xhtml">About Us</h:link> page for more information.
+                                        </b:row>
+                                    </b:container>
+                                    
+                                </b:column>
                                 
                             </b:container>
                         </b:panel>
@@ -82,6 +125,7 @@
                 </script>
             </ui:define>
             
+            
         </ui:composition> <!-- end of template -->
-    </h:body>
+    </h:body>    
 </html>

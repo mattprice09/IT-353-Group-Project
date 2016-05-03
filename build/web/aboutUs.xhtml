@@ -4,55 +4,55 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:b="http://bootsfaces.net/ui" 
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough" >
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     
     <h:head>
         <meta charset="utf-8"></meta>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta> 
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
         
+        <title>About Us</title>
     </h:head>
     
     <h:body>
         <!-- Main template-->
         <ui:composition template="templates/MainTemplate.xhtml">
             
-            <ui:define name="titleInsert">
-                <title>Confirm Purchase</title>
-            </ui:define>
-            
             <!-- Override section to store bean values to be accessed by JS -->
             <ui:define name="hiddenValues">
                 <h:inputHidden id="loggedIn" value="#{loginController.loggedIn}"/>
-                <h:inputHidden id="numSold" value="#{dashboardController.numSold}"/>
             </ui:define>
             
             <!-- Override main content facelet -->
             <ui:define name="mainContent">
                 <b:container>
-                    
-                    <!-- "make purchase" row -->
                     <b:row>
                         <b:panel collapsible="false" class="my-panel-title">
+                            
                             <!-- custom panel title -->
                             <f:facet name="heading">
-                                <h2 align="center"><strong>Saving Lives One Pixel at a Time</strong></h2>
+                                <h2 align="center"><strong>About Us</strong></h2>
                             </f:facet>
                             
                             <!-- panel-body -->
                             <b:container fluid="true" class="my-panel-body">
+                                
                                 <b:row>
-                                    <h4><strong><em>Please Confirm your payment of #{transactionController.totalCost}: </em></strong></h4>
-                                </b:row>
-                                <b:row>
-                                    <b:column span="4">
-                                        <h:form>
-                                            <b:commandButton id="confirmBtn" value="Confirm" action="#{transactionController.confirmPurchase()}" styleClass="btn-main"/>
-                                        </h:form>
+                                    
+                                    <!-- Left side of panel body -->
+                                    <b:column span="6" class="verticalLine">
+                                        
+                                    </b:column>
+                                    
+                                    <!-- Right side of panel body -->
+                                    <b:column span="6">
+                                        
                                     </b:column>
                                 </b:row>
+                                <!---->
                                 
                             </b:container>
                         </b:panel>

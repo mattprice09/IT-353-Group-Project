@@ -12,6 +12,9 @@
     background: linear-gradient(to bottom right, #D2D8FA, #F5F6FA); /* Standard syntax (must be last) */
 }
 
+.brandLogo {
+   
+}
 .costStyle {
     font-weight: bold;
     color: #49247A;
@@ -51,7 +54,19 @@
     border-right: 2px solid #49247A;
 }
 
+.verticalLineLeft {
+    border-left: 2px solid #49247A;
+}
+
 .navbarLogin {
+    display: none;
+}
+
+.visible {
+    
+}
+
+.hidden {
     display: none;
 }
 
@@ -140,4 +155,12 @@
 
 .my-panel-body {
     background-color: #F0F0F0;
+}
+
+.footer-style {
+    background-image: none;
+    background-color: #2e2e2f;
+    color: #ffffff;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }

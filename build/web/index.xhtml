@@ -16,13 +16,15 @@
             <f:event type="preRenderView" listener="#{dashboardController.updateProgress()}"/>
         </f:metadata>
         
-        <title>Aiming Higher</title>
-        
     </h:head>
 
     <h:body>
         <!-- Main template-->
         <ui:decorate template="templates/MainTemplate.xhtml">
+            
+            <ui:define name="titleInsert">
+                <title>Aiming Higher</title>
+            </ui:define>
             
             <!-- Override section to store bean values to be accessed by JS -->
             <ui:define name="hiddenValues">
