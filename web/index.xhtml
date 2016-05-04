@@ -23,7 +23,7 @@
         <ui:composition template="templates/MainTemplate.xhtml">
             
             <ui:define name="titleInsert">
-                <title>Aiming Higher</title>
+                <title>Feed My Starving Children</title>
             </ui:define>
             
             <!-- Override section to store bean values to be accessed by JS -->
@@ -44,7 +44,7 @@
                     <!-- Dashboard row -->
                     <b:row> 
                         <b:column span="12">
-                            <h2 align="center"><strong>Progress Towards Our Goal</strong></h2>
+                            <h3 align="center" class="blue-text"><strong><em>Progress Towards Our Goal</em></strong></h3>
                         </b:column>
                         <b:column span="12">
                             <p:progressBar value="#{dashboardController.progress}" labelTemplate="{value}%" style="height:25px;"></p:progressBar>

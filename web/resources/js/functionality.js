@@ -13,6 +13,11 @@ var setLoginBar = function() {
         $("#loginContainer").css('display', 'block');
         $("#registerNav").css('display', 'block');
     }
+    
+    // Auto-highlight text input boxes upon focus
+    $("input[type=text]").focus(function(){
+        this.select();
+    });
 }
 var W = 1155;
 var H = 866;

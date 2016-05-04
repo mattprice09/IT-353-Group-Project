@@ -36,10 +36,18 @@ public class TransactionController implements Serializable{
         customName = "";
     }
     
+    private void resetBean() {
+        userNum = 0;
+        numDonations = 0;
+        costStr = "";
+        totalCost = "";
+        customName = "";
+    }
+    
     private void navigateTo(String url) {
         FacesContext fc = FacesContext.getCurrentInstance();
         ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler) fc.getApplication().getNavigationHandler();
-        nav.performNavigation(url + "?faces-redirect=true");
+        nav.performNavigation(url + "?faces-redirect=true");        
     }
 
     // get current page string
@@ -88,10 +96,11 @@ public class TransactionController implements Serializable{
         // Reset transactionController vars if purchase was successful
         if (responsePage.equals("faces/thankyou.xhtml")) {
 //            numDonations = 0;
-            costStr = "";
-            totalCost = "";
+//            costStr = "";
+//            totalCost = "";
         }
-        navigateTo(responsePage);
+        navigateTo(responsePage.replace("faces/", ""));
+//        resetBean();
     }
 
     /**

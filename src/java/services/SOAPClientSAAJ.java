@@ -29,17 +29,6 @@ public class SOAPClientSAAJ {
                 response = "faces/confirmation.xhtml";
             }
 
-            
-//            Iterator iter = soapResponse.getSOAPBody().getChildElements();
-//            while (iter.hasNext()) {
-//                Node curr = (Node)iter.next();
-//                if (curr.getNodeType() == Node.ELEMENT_NODE) {
-//                    Element ele = (Element)curr;
-//                    if (ele.getNodeName() == "SetExpressCheckoutResponse") {
-//                        return ele.getLastChild().getTextContent();
-//                    }
-//                }
-//            }
             // Process the SOAP Response
             printSOAPResponse(soapResponse);
 
