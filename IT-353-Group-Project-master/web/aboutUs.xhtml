@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    
+    <h:head>
+        <meta charset="utf-8"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta> 
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+        
+        <title>About Us</title>
+    </h:head>
+    
+    <h:body>
+        <!-- Main template-->
+        <ui:composition template="templates/MainTemplate.xhtml">
+            
+            <!-- Override section to store bean values to be accessed by JS -->
+            <ui:define name="hiddenValues">
+                <h:inputHidden id="loggedIn" value="#{loginController.loggedIn}"/>
+            </ui:define>
+            
+            <!-- Override main content facelet -->
+            <ui:define name="mainContent">
+                <b:container>
+                    <b:row>
+                        <b:panel collapsible="false" class="my-panel-title">
+                            
+                            <!-- custom panel title -->
+                            <f:facet name="heading">
+                                <h2 align="center"><strong>About Us</strong></h2>
+                            </f:facet>
+                            
+                            <!-- panel-body -->
+                            <b:container fluid="true" class="my-panel-body">
+                                                                    
+                                    Founded in 1987, Feed My Starving Children (FMSC) is a Christian non-profit organization committed to feeding God's children hungry in body and spirit. The approach is simple: volunteers hand-pack meals specially formulated for malnourished children, and we send them to partners around the world where they're used to operate orphanages, schools, clinics and feeding programs to break the cycle of poverty. FMSC food has reached nearly 70 countries in our history.
+                                    <br/><br/>
+                                    <center>More Information can be found here at: 
+                                    <a href="http://www.fmsc.org/"> www.fmsc.org </a></center>
+                            </b:container>
+                        </b:panel>
+                    </b:row>
+                </b:container>
+            </ui:define> <!-- end of main content container -->
+            
+            <!-- Override the JQuery.document(ready) function -->
+            <ui:define name="onReadyJS">
+                <script type="text/javascript">
+                    $(document).ready(function() {
+                        setLoginBar();
+                    });
+                </script>
+            </ui:define>
+            
+        </ui:composition> <!-- end of template -->
+    </h:body>
+</html>

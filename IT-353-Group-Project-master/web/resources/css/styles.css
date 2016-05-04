@@ -12,6 +12,13 @@
     background: linear-gradient(to bottom right, #D2D8FA, #F5F6FA); /* Standard syntax (must be last) */
 }
 
+.brandLogo {
+   
+}
+.costStyle {
+    font-weight: bold;
+    color: #49247A;
+}
 .loginField {
     width: 100%;
     margin-right: 1em;
@@ -43,7 +50,23 @@
     margin: 0 auto;
 }
 
+.verticalLine {
+    border-right: 2px solid #49247A;
+}
+
+.verticalLineLeft {
+    border-left: 2px solid #49247A;
+}
+
 .navbarLogin {
+    display: none;
+}
+
+.visible {
+    
+}
+
+.hidden {
     display: none;
 }
 
@@ -81,6 +104,40 @@
     margin-top: -11px;
 }
 
+/* "donate more" popover */
+.popover-donate {
+    position:absolute;
+    display:none;
+    background: #FAD2D2;
+    border: 1px solid #999;
+    padding:10px;
+    width:auto;
+    box-shadow:0 0 10px rgba(0, 0, 0, .5);
+}
+.popover-donate:after, .popover-donate:before {
+    right: 100%;
+    border: solid transparent;
+    content:" ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
+.popover-donate:after {
+    border-color: rgba(255, 255, 255, 0);
+    border-right-color: #ffffff;
+    border-width: 10px;
+    top: 50%;
+    margin-top: -10px;
+}
+.popover-donate:before {
+    border-color: rgba(201, 201, 201, 0);
+    border-right-color: #c9c9c9;
+    border-width: 11px;
+    top: 50%;
+    margin-top: -11px;
+}
+
 /*Custom panel*/
 .panel-default > .panel-heading{
     background-image: none;
@@ -98,4 +155,12 @@
 
 .my-panel-body {
     background-color: #F0F0F0;
+}
+
+.footer-style {
+    background-image: none;
+    background-color: #2e2e2f;
+    color: #ffffff;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }

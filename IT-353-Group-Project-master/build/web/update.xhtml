@@ -17,13 +17,15 @@ and open the template in the editor.
         <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta> 
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
         
-        <title>Update Account</title>
-        
     </h:head>
     
     <h:body>
         <!-- Main template-->
         <ui:composition template="templates/MainTemplate.xhtml">
+            
+            <ui:define name="titleInsert">
+                <title>Update Account</title>
+            </ui:define>
             
             <!-- Override section to store bean values to be accessed by JS -->
             <ui:define name="hiddenValues">
@@ -31,23 +33,47 @@ and open the template in the editor.
                 <h:inputHidden id="numSold" value="#{dashboardController.numSold}"/>
             </ui:define>
             
-            <!-- Override main content facelet -->
-            <ui:define name="mainContent">
-                <div class="container">
-                    <div class="row">
-                        <h2 align="center"><strong>Update Account Information</strong></h2>
-                    </div>
-                    <hr/>
-                    <div class="row">
-                        <div class="col-xs-4 col-xs-offset-4 borderedCol">
-                            <h:form>
-                                User ID:<br/>#{loginController.currentUser.userName}<br/>
-
-                            </h:form>
-                        </div><!--col-xs-4-->
-                    </div><!--row-->
-                </div><!--container-->
-            </ui:define> <!-- end of main content container -->
+             <ui:define name="mainContent">
+                <b:container>
+                    <b:row>
+                        <b:panel collapsible="false" class="my-panel-title">
+                            
+                            <!-- custom panel title -->
+                            <f:facet name="heading">
+                                <h2 align="center"><strong>Account Information</strong></h2>
+                            </f:facet>
+                            
+                            <!-- panel-body -->
+                            <b:container fluid="true" class="my-panel-body">
+                                <b:row>
+                                    <b:column span="2" offset="2">
+                                        <h4>User ID: </h4>
+                                    </b:column>
+                                    <b:column span="2" offset="5">
+                                        <h4>#{loginController.currentUser.userName}</h4>
+                                    </b:column>
+                                </b:row>
+                                <b:row>
+                                    <b:column span="2" offset="2">
+                                        <h4>Location: </h4>
+                                    </b:column>
+                                    <b:column span="2" offset="5">
+                                        <h4>#{loginController.currentUser.country}   #{loginController.currentUser.state}</h4>
+                                    </b:column>
+                                </b:row>
+                                <b:row>
+                                    <b:column span="2" offset="2">
+                                        <h4>Meals Donated: </h4>
+                                    </b:column>
+                                    <b:column span="2" offset="5">
+                                        <h4>#{loginController.currentUser.numDonated}</h4>
+                                    </b:column>
+                                </b:row>
+                            </b:container>
+                        </b:panel>
+                    </b:row>
+                </b:container>
+            </ui:define><!-- end of main content container -->
             
             <!-- Override the JQuery.document(ready) function -->
             <ui:define name="onReadyJS">

@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:b="http://bootsfaces.net/ui"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui" 
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough" >
     
     <h:head>
         <meta charset="utf-8"></meta>
@@ -24,7 +20,7 @@ and open the template in the editor.
         <ui:composition template="templates/MainTemplate.xhtml">
             
             <ui:define name="titleInsert">
-                <title>Update Account</title>
+                <title>Confirm Purchase</title>
             </ui:define>
             
             <!-- Override section to store bean values to be accessed by JS -->
@@ -33,47 +29,36 @@ and open the template in the editor.
                 <h:inputHidden id="numSold" value="#{dashboardController.numSold}"/>
             </ui:define>
             
-             <ui:define name="mainContent">
+            <!-- Override main content facelet -->
+            <ui:define name="mainContent">
                 <b:container>
+                    
+                    <!-- "make purchase" row -->
                     <b:row>
                         <b:panel collapsible="false" class="my-panel-title">
-                            
                             <!-- custom panel title -->
                             <f:facet name="heading">
-                                <h2 align="center"><strong>Account Information</strong></h2>
+                                <h2 align="center"><strong>Saving Lives One Pixel at a Time</strong></h2>
                             </f:facet>
                             
                             <!-- panel-body -->
                             <b:container fluid="true" class="my-panel-body">
                                 <b:row>
-                                    <b:column span="2" offset="2">
-                                        <h4>User ID: </h4>
-                                    </b:column>
-                                    <b:column span="2" offset="5">
-                                        <h4>#{loginController.currentUser.userName}</h4>
-                                    </b:column>
+                                    <h4><strong><em>Please Confirm your payment of #{transactionController.totalCost}: </em></strong></h4>
                                 </b:row>
                                 <b:row>
-                                    <b:column span="2" offset="2">
-                                        <h4>Location: </h4>
-                                    </b:column>
-                                    <b:column span="2" offset="5">
-                                        <h4>#{loginController.currentUser.country}   #{loginController.currentUser.state}</h4>
-                                    </b:column>
-                                </b:row>
-                                <b:row>
-                                    <b:column span="2" offset="2">
-                                        <h4>Meals Donated: </h4>
-                                    </b:column>
-                                    <b:column span="2" offset="5">
-                                        <h4>#{loginController.currentUser.numDonated}</h4>
+                                    <b:column span="4">
+                                        <h:form>
+                                            <b:commandButton id="confirmBtn" value="Confirm" action="#{transactionController.confirmPurchase(loginController)}" styleClass="btn-main"/>
+                                        </h:form>
                                     </b:column>
                                 </b:row>
+                                
                             </b:container>
                         </b:panel>
                     </b:row>
                 </b:container>
-            </ui:define><!-- end of main content container -->
+            </ui:define> <!-- end of main content container -->
             
             <!-- Override the JQuery.document(ready) function -->
             <ui:define name="onReadyJS">

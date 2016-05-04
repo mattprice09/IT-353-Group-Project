@@ -16,10 +16,21 @@
         <!-- JQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
         
-        <!-- Bootstrap import -->
-<!--        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"></link>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"></link>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>-->
+        <div id="titleInsert">
+            <!-- This tag is used to store hidden values -->
+            <ui:insert name="titleInsert">
+                <title>Aiming Higher</title>
+            </ui:insert>
+        </div>
+        
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&amp;version=v2.6&amp;appId=216346721755881";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
         
     </h:head>
     
@@ -49,10 +60,11 @@
             <!-- Navbar section -->
             <div id="navSection">
                 <!-- navbar links -->
-                <b:navBar brand="Aiming Higher" inverse="true" class="navbar-default" brandHref="./faces/index.xhtml" >
+                <b:navBar brand="FMSC" inverse="true" class="navbar-default" brandHref="http://www.fmsc.org/" >
                     <b:navbarLinks>
                         <b:navLink class="#{view.viewId == '/index.xhtml' ? 'active' : ''}" value="Home" outcome="index.xhtml" />
                         <b:navLink class="#{view.viewId == '/donationPage.xhtml' ? 'active' : ''}" value="Donate" outcome="donationPage.xhtml" />
+                        <b:navLink class="#{view.viewId == '/aboutUs.xhtml' ? 'active' : ''}" value="About Us" outcome="aboutUs.xhtml" />
                         <b:navLink id="registerNav" class="#{view.viewId == '/register.xhtml' ? 'active' : ''} navbarLogin" value="Register" outcome="register.xhtml" />
                         <b:navLink id="updateNav" class="#{view.viewId == '/update.xhtml' ? 'active' : ''} navbarLogin" value="My Account" outcome="update.xhtml" />
                     </b:navbarLinks>
@@ -63,52 +75,26 @@
                         <div class="form-group">
                             <b:row>
                                 <b:column span="3" offset="4">
-                                    <b:inputText a:placeholder="Username" id="userID" value="#{loginController.currentUser.userName}"
-                                             validatorMessage="Invalid username. Please try again.">
-                                        <f:validateLength
-                                            minimum="2"
-                                            maximum="20"/>
-                                    </b:inputText>
+                                    <b:inputText a:placeholder="Username" id="userID" value="#{loginController.currentUser.userName}"/>
                                 </b:column><!--b:column (userName input)-->
 
                                 <b:column span="3">
-                                    <b:inputSecret a:placeholder="Password" id="password" value="#{loginController.currentUser.password}"
-                                                   validatorMessage="Invalid password. Please try again.">
-                                        <f:validateLength
-                                            minimum="2"
-                                            maximum="20"/>
-                                    </b:inputSecret>
+                                    <b:inputSecret a:placeholder="Password" id="password" value="#{loginController.currentUser.password}"/>
                                 </b:column><!--b:column (password input)-->
 
                                 <!-- "Login" button -->
                                 <b:column span="1">
-                                    <b:commandButton id="loginBtn" value="Login" action="#{loginController.authenticate()}" styleClass="btn-main"/>
+                                    <b:commandButton id="loginBtn" value="Login" action="#{loginController.authenticate()}" styleClass="btn-main">
+                                        <f:ajax execute="@form"/>
+                                    </b:commandButton>
                                 </b:column>
 
                                 <!-- "Register" button -->
                                 <b:column span="1">
-                                    <b:button id="registerBtn" value="Register" outcome="#{loginController.registerUser()}" styleClass="btn-main"/>
+                                    <b:button id="registerBtn" value="Register" outcome="faces/register.xhtml" styleClass="btn-main"/>
                                 </b:column>
 
                             </b:row><!--b:row (login input row)-->
-                            <b:row>
-                                <b:column span="5">
-                                    <b:message 
-                                        class="errorMsg"
-                                        showDetail="true"
-                                        id="errors1"
-                                        for="userID"/>
-                                </b:column>
-                                <b:column span="5">
-                                    <b:message 
-                                        class="errorMsg"
-                                        showDetail="true"
-                                        id="errors2"
-                                        for="password"/>
-                                </b:column>
-
-
-                            </b:row><!--b:row (error msg row)-->
                         </div><!--form-group -->
 
                     </h:form>
@@ -141,4 +127,22 @@
             </div>
         </div> <!-- end of template -->
     </h:body>
+    
+<!--    <div id="footer">
+        <b:container fluid="true" class="footer-style">
+            <div id="fb-root"></div>
+            <script>(function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) return;
+              js = d.createElement(s); js.id = id;
+              js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&amp;version=v2.6&amp;appId=216346721755881";
+              fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>
+
+            <div class="fb-share-button" 
+             data-href="http://localhost:8080/IT-353-Group-Project/faces/index.xhtml" 
+             data-layout="button" data-mobile-iframe="true"></div>
+
+        </b:container>
+    </div>-->
 </html>

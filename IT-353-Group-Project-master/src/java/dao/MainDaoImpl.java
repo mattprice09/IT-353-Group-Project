@@ -13,45 +13,6 @@ public class MainDaoImpl implements MainDAO {
     @Override
     public int updateUser(User user) {
         return 0;
-//        // Create credentials in UserLogin table
-//        int authStatus = updatePassword(user);
-//        if (authStatus == 0) {
-//            return 0;
-//        }
-//        
-//        // Copied DB code formatting from Dr. Bee Lim's ProfileMatchApp
-//        try {
-//            Class.forName("org.apache.derby.jdbc.ClientDriver");
-//        } catch (ClassNotFoundException e) {
-//            System.err.println(e.getMessage());
-//            System.exit(0);
-//        }
-//
-//        int rowCount = 0;
-//        try {
-//            String myDB = "jdbc:derby://localhost:1527/FinalProject";
-//            Connection DBConn = DriverManager.getConnection(myDB, "itkstu", "itkstu");
-//            String temp = "";
-//            
-//            String updateString;
-//            Statement stmt = DBConn.createStatement();
-//            updateString = "UPDATE Project353.Users Set "
-//                    + "firstName = '" + user.getFirstName().replace("'", "''") + "', "
-//                    + "lastName = '" + user.getLastName().replace("'", "''") + "', "
-//                    + "email = '" + user.getEmail().replace("'", "''") + "', "
-//                    + "securityQuestion = '" + user.getSecurityQuestion().replace("'", "''") + "', "
-//                    + "securityAnswer = '" + user.getSecurityAnswer().replace("'", "''") + "' "
-//                    + "WHERE userid = '" + user.getUserID().replace("'", "''") + "'";
-//
-//            rowCount = stmt.executeUpdate(updateString);
-//            System.out.println("insert string =" + updateString);
-//            DBConn.close();
-//        } catch (SQLException e) {
-//            System.err.println(e.getMessage());
-//        }
-//
-//        // if insert is successful, rowCount will be set to 1 (1 row inserted successfully). Else, insert failed.
-//        return rowCount;
     }
     
     //Ryan's code
@@ -258,11 +219,9 @@ public class MainDaoImpl implements MainDAO {
 
         int fistPixel = Integer.parseInt(getNumDonations()) + 1;
         int lastPixel = fistPixel + numDonations - 1;
-        System.out.println("The last pixel is:   " + lastPixel);
         if(lastPixel > 1000230){
             lastPixel = 1000230;
         }
-        System.out.println("The last pixel is:   " + lastPixel);
         int rowCount = 0;
         try {
             String myDB = "jdbc:derby://localhost:1527/MealProject";
@@ -284,6 +243,51 @@ public class MainDaoImpl implements MainDAO {
             System.err.println(e.getMessage());
         }
         return rowCount;
+    }
+    
+    public int updateUserNumDonated(int user, int additionalDonations) {
+        int numDonated = 0;
+        String query1 = "SELECT NUMDONATED FROM USERS "
+                + "WHERE USERNUM = " + user;
+        String query2;
+        Connection DBConn = null;
+        try {
+            DBHelper.loadDriver("org.apache.derby.jdbc.ClientDriver");
+            // if doing the above in Oracle: DBHelper.loadDriver("oracle.jdbc.driver.OracleDriver");
+            String myDB = "jdbc:derby://localhost:1527/MealProject";
+            // if doing the above in Oracle:  String myDB = "jdbc:oracle:thin:@oracle.itk.ilstu.edu:1521:ora478";
+            DBConn = DBHelper.connect2DB(myDB, "itkstu", "student");
+
+            // With the connection made, create a statement to talk to the DB server.
+            // Create a SQL statement to query, retrieve the rows one by one (by going to the
+            // columns), and formulate the result string to send back to the client.
+            Statement stmt = DBConn.createStatement();
+            System.out.println(query1);
+            ResultSet rs = stmt.executeQuery(query1);
+            if(rs.next()){
+                numDonated = Integer.parseInt(rs.getString(1));
+                numDonated += additionalDonations; 
+            }
+            query2 = "UPDATE USERS "
+                + "SET NUMDONATED = " + numDonated +
+                " WHERE USERNUM = " + user;
+            
+            System.out.println(query2);
+            stmt.executeUpdate(query2);
+            rs.close();
+            stmt.close();
+        }catch (Exception e) {
+            System.err.println("ERROR: Problems with SQL select");
+            e.printStackTrace();
+        }
+        try {
+            DBConn.close();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        
+        //System.out.print(rs.getString(1));
+        return numDonated;
     }
     
     public int getUsernumFromDonation(int pixelNum){
@@ -329,6 +333,10 @@ public class MainDaoImpl implements MainDAO {
         
         String userName = user.getUserName();
         String password = user.getPassword();
+        
+        if (userName.equals("") || password.equals("")) {
+            return 0;
+        }
         
         System.out.println("these ar the vals of current user!!!!!!!");
         System.out.println(userName + "    " + password);
