@@ -68,7 +68,7 @@
                                                                 <b:inputText a:placeholder="Enter a custom name" id="custName" value="#{transactionController.customName}" />
                                                                 <b:inputText a:placeholder="# of Donations" a:autofocus="true" id="numDonations" value="#{transactionController.numDonations}" required="true">
                                                                     <f:ajax event="change" execute="numDonations" render="costStr" />
-                                                                    <f:validateLongRange minimum="10" maximum="1000000" />
+                                                                    <f:validateLongRange minimum="0" maximum="1000000" />
                                                                 </b:inputText>
                                                                 <h:outputText class="costStyle" value="#{transactionController.costStr}" id="costStr"/>
                                                                 <br />

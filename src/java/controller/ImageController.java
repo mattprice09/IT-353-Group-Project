@@ -11,7 +11,6 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
-import javax.faces.event.AjaxBehaviorEvent;
 
 /**
  *
@@ -29,6 +28,11 @@ public class ImageController implements Serializable {
         userInfo = "";
         coordString = "";
         
+        MainDaoImpl dao = new MainDaoImpl();
+        map = dao.getCoordNameMap();
+    }
+    
+    public void updateMap() {
         MainDaoImpl dao = new MainDaoImpl();
         map = dao.getCoordNameMap();
     }

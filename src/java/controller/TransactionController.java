@@ -92,12 +92,22 @@ public class TransactionController implements Serializable{
             MainDaoImpl dao = new MainDaoImpl();
             int response = dao.makePurchase(userNum, numDonations, customName);
             
-            FacesContext context = FacesContext.getCurrentInstance();
-            LoginController bean = (LoginController) context.getApplication().evaluateExpressionGet(context, "#{loginController}", LoginController.class);
-            bean.getCurrentUser().setNumDonated(dao.updateUserNumDonated(userNum, numDonations));
+            updateOtherBeans();
         }
         navigateTo(responsePage.replace("faces/", ""));
 //        resetBean();
+    }
+    
+    private void updateOtherBeans() {
+        MainDaoImpl dao = new MainDaoImpl();
+        
+        FacesContext context = FacesContext.getCurrentInstance();
+        LoginController bean = (LoginController) context.getApplication().evaluateExpressionGet(context, "#{loginController}", LoginController.class);
+        bean.getCurrentUser().setNumDonated(dao.updateUserNumDonated(userNum, numDonations));
+        
+        ImageController iBean = (ImageController) context.getApplication().evaluateExpressionGet(context, "#{imageController}", ImageController.class);
+//        bean.getCurrentUser().setNumDonated(dao.updateUserNumDonated(userNum, numDonations));
+        iBean.updateMap();
     }
 
     /**
@@ -128,8 +138,8 @@ public class TransactionController implements Serializable{
         this.numDonations = numDonations;
         double cost = (((double)numDonations) * 0.22);
         totalCost = "$" + this.df.format(cost);
-        if (numDonations == 0) {
-            this.costStr = "Please enter a value greater than 0.";
+        if (numDonations < 10) {
+            this.costStr = "Please enter a value greater than 10.";
         } else if (numDonations > 1000000) {
             this.costStr = "Please enter a value of less than 1,000,000.";
         } else {
