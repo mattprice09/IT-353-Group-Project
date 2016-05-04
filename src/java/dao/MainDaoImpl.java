@@ -11,6 +11,8 @@ import model.User;
 
 public class MainDaoImpl implements MainDAO {
     
+//    private final String myDB = "jdbc:derby://gfish2.it.ilstu.edu:1527/IT353Spring2016_MattRyanAlzbeta;create=true";
+    private final String myDB = "jdbc:derby://localhost:1527/MealProject";
     @Override
     public int updateUser(User user) {
         return 0;
@@ -28,7 +30,7 @@ public class MainDaoImpl implements MainDAO {
 
         int rowCount = 0;
         try {
-            String myDB = "jdbc:derby://localhost:1527/MealProject";
+//            String myDB = "jdbc:derby://localhost:1527/MealProject";
             Connection DBConn = DriverManager.getConnection(myDB, "itkstu", "student");
             if(!checkIfUsed(user.getUserName())){
                 String insertString;
@@ -66,7 +68,7 @@ public class MainDaoImpl implements MainDAO {
         try {
             DBHelper.loadDriver("org.apache.derby.jdbc.ClientDriver");
             // if doing the above in Oracle: DBHelper.loadDriver("oracle.jdbc.driver.OracleDriver");
-            String myDB = "jdbc:derby://localhost:1527/MealProject";
+//            String myDB = "jdbc:derby://localhost:1527/MealProject";
             // if doing the above in Oracle:  String myDB = "jdbc:oracle:thin:@oracle.itk.ilstu.edu:1521:ora478";
             DBConn = DBHelper.connect2DB(myDB, "itkstu", "student");
 
@@ -103,7 +105,7 @@ public class MainDaoImpl implements MainDAO {
         try {
             DBHelper.loadDriver("org.apache.derby.jdbc.ClientDriver");
             // if doing the above in Oracle: DBHelper.loadDriver("oracle.jdbc.driver.OracleDriver");
-            String myDB = "jdbc:derby://localhost:1527/MealProject";
+//            String myDB = "jdbc:derby://localhost:1527/MealProject";
             // if doing the above in Oracle:  String myDB = "jdbc:oracle:thin:@oracle.itk.ilstu.edu:1521:ora478";
             DBConn = DBHelper.connect2DB(myDB, "itkstu", "student");
 
@@ -143,7 +145,7 @@ public class MainDaoImpl implements MainDAO {
         try {
             DBHelper.loadDriver("org.apache.derby.jdbc.ClientDriver");
             // if doing the above in Oracle: DBHelper.loadDriver("oracle.jdbc.driver.OracleDriver");
-            String myDB = "jdbc:derby://localhost:1527/MealProject";
+//            String myDB = "jdbc:derby://localhost:1527/MealProject";
             // if doing the above in Oracle:  String myDB = "jdbc:oracle:thin:@oracle.itk.ilstu.edu:1521:ora478";
             DBConn = DBHelper.connect2DB(myDB, "itkstu", "student");
 
@@ -185,7 +187,7 @@ public class MainDaoImpl implements MainDAO {
         try {
             DBHelper.loadDriver("org.apache.derby.jdbc.ClientDriver");
             // if doing the above in Oracle: DBHelper.loadDriver("oracle.jdbc.driver.OracleDriver");
-            String myDB = "jdbc:derby://localhost:1527/MealProject";
+//            String myDB = "jdbc:derby://localhost:1527/MealProject";
             // if doing the above in Oracle:  String myDB = "jdbc:oracle:thin:@oracle.itk.ilstu.edu:1521:ora478";
             DBConn = DBHelper.connect2DB(myDB, "itkstu", "student");
 
@@ -228,7 +230,7 @@ public class MainDaoImpl implements MainDAO {
         }
         int rowCount = 0;
         try {
-            String myDB = "jdbc:derby://localhost:1527/MealProject";
+//            String myDB = "jdbc:derby://localhost:1527/MealProject";
             Connection DBConn = DriverManager.getConnection(myDB, "itkstu", "student");
                 
                 String insertString;
@@ -259,7 +261,7 @@ public class MainDaoImpl implements MainDAO {
         try {
             DBHelper.loadDriver("org.apache.derby.jdbc.ClientDriver");
             // if doing the above in Oracle: DBHelper.loadDriver("oracle.jdbc.driver.OracleDriver");
-            String myDB = "jdbc:derby://localhost:1527/MealProject";
+//            String myDB = "jdbc:derby://localhost:1527/MealProject";
             // if doing the above in Oracle:  String myDB = "jdbc:oracle:thin:@oracle.itk.ilstu.edu:1521:ora478";
             DBConn = DBHelper.connect2DB(myDB, "itkstu", "student");
 
@@ -304,7 +306,7 @@ public class MainDaoImpl implements MainDAO {
         try {
             DBHelper.loadDriver("org.apache.derby.jdbc.ClientDriver");
             // if doing the above in Oracle: DBHelper.loadDriver("oracle.jdbc.driver.OracleDriver");
-            String myDB = "jdbc:derby://localhost:1527/MealProject";
+//            String myDB = "jdbc:derby://localhost:1527/MealProject";
             // if doing the above in Oracle:  String myDB = "jdbc:oracle:thin:@oracle.itk.ilstu.edu:1521:ora478";
             DBConn = DBHelper.connect2DB(myDB, "itkstu", "student");
 
@@ -349,7 +351,7 @@ public class MainDaoImpl implements MainDAO {
         System.out.println(query);
         
         DBHelper.loadDriver("org.apache.derby.jdbc.ClientDriver");
-        String myDB = "jdbc:derby://localhost:1527/MealProject";
+//        String myDB = "jdbc:derby://localhost:1527/MealProject";
         Connection DBConn = DBHelper.connect2DB(myDB, "itkstu", "student");
         
         try {
@@ -383,7 +385,7 @@ public class MainDaoImpl implements MainDAO {
         String query = "SELECT * FROM DONATIONS ";
         
         DBHelper.loadDriver("org.apache.derby.jdbc.ClientDriver");
-        String myDB = "jdbc:derby://localhost:1527/MealProject";
+//        String myDB = "jdbc:derby://localhost:1527/MealProject";
         Connection DBConn = DBHelper.connect2DB(myDB, "itkstu", "student");
 
         try {
@@ -393,7 +395,8 @@ public class MainDaoImpl implements MainDAO {
             // If the result set has data, then the ID exists
             while (rs.next()) {
                 int userNum = rs.getInt("userNum");
-                String userName = getUser(userNum).getUserName();
+//                String userName = getUser(userNum).getUserName();
+                String userName = rs.getString("donorAlias");
                 int currPixel = rs.getInt("pixelstart");
                 int endPix = rs.getInt("pixelend");
                 
@@ -431,7 +434,7 @@ public class MainDaoImpl implements MainDAO {
                 + userName + "'";
         
         DBHelper.loadDriver("org.apache.derby.jdbc.ClientDriver");
-        String myDB = "jdbc:derby://localhost:1527/MealProject";
+//        String myDB = "jdbc:derby://localhost:1527/MealProject";
         Connection DBConn = DBHelper.connect2DB(myDB, "itkstu", "student");
 
         try {
@@ -480,7 +483,7 @@ public class MainDaoImpl implements MainDAO {
         String query = "SELECT * FROM Users " + "WHERE userNum=" + userNum;
         
         DBHelper.loadDriver("org.apache.derby.jdbc.ClientDriver");
-        String myDB = "jdbc:derby://localhost:1527/MealProject";
+//        String myDB = "jdbc:derby://localhost:1527/MealProject";
         Connection DBConn = DBHelper.connect2DB(myDB, "itkstu", "student");
 
         try {

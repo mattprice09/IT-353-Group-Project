@@ -1,7 +1,7 @@
-ALTER TABLE DONATIONS
-DROP CONSTRAINT users_userNum_fk;
-DROP TABLE USERS;
-DROP TABLE DONATIONS;
+-- ALTER TABLE DONATIONS
+-- DROP CONSTRAINT users_userNum_fk;
+-- DROP TABLE USERS;
+-- DROP TABLE DONATIONS;
 -- 
 -- --create user table
 -- --all value but numDonated will be entered in by the user
@@ -29,8 +29,8 @@ CREATE TABLE DONATIONS (
 );
 
 --test insertion for users
--- INSERT INTO USERS(userNum, firstName, lastName, homeState, country, userName, password)
---   VALUES(0, 'Ryan', 'Throw', 'Illinois', 'United States', 'oldchilly', 'carrot7');
+INSERT INTO USERS(userNum, firstName, lastName, homeState, country, userName, password)
+  VALUES(0, 'Ryan', 'Throw', 'Illinois', 'United States', 'oldchilly', 'carrot7');
 -- INSERT INTO USERS(userNum, firstName, lastName, homeState, country, userName, password) 
 --   VALUES(1, 'guy', 'name', NULL , 'United Kingdom', 'testUser', 'other');
   
