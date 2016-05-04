@@ -9,7 +9,9 @@ import dao.MainDaoImpl;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
-import java.util.Random;
+import java.util.HashMap;
+import java.util.Map;
+import javax.faces.event.AjaxBehaviorEvent;
 
 /**
  *
@@ -19,36 +21,25 @@ import java.util.Random;
 @SessionScoped
 public class ImageController implements Serializable {
     
-    private String userInfo = "";
+    private String userInfo;
+    private String coordString;
+    private Map<String, String> map;
 
-    private void getUserInfoDB(int x, int y){
-        MainDaoImpl dao = new MainDaoImpl();
-        
-        int userNum = dao.getUsernumFromDonation((y * 1155) + x);
-        System.out.println(userNum);
-    }
-    
-    private String message;
-    /**
-     * Creates a new instance of ImageController
-     */
     public ImageController() {
-        message = "";
+        userInfo = "";
+        coordString = "";
+        
+        MainDaoImpl dao = new MainDaoImpl();
+        map = dao.getCoordNameMap();
     }
     
-    public void setMessage(String msg) {
-        message = msg;
+    public void setUserInfoDB(){
+        
+        userInfo = map.get(coordString);
+        System.out.println("Must find: " + coordString);
+        System.out.println("Found: " + map.get(coordString));
     }
     
-    public String getMessage() {
-        return message;
-    }
-    
-    public String updateMessage(int x, int y) {
-        String output = "X-coord is " + x + ", y-coord is " + y;
-        return output;
-    }
-
     /**
      * @return the userInfo
      */
@@ -61,6 +52,34 @@ public class ImageController implements Serializable {
      */
     public void setUserInfo(String userInfo) {
         this.userInfo = userInfo;
+    }
+
+    /**
+     * @return the coordString
+     */
+    public String getCoordString() {
+        return coordString;
+    }
+
+    /**
+     * @param coordString the coordString to set
+     */
+    public void setCoordString(String coordString) {
+        this.coordString = coordString;
+    }
+
+    /**
+     * @return the map
+     */
+    public Map<String, String> getMap() {
+        return map;
+    }
+
+    /**
+     * @param map the map to set
+     */
+    public void setMap(HashMap<String, String> map) {
+        this.map = map;
     }
     
 }

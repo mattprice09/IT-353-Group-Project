@@ -42,19 +42,21 @@
                             </f:facet>
                             
                             <!-- panel-body -->
-                            <b:container fluid="true" class="my-panel-body">
-                                <b:row>
+                            <div class="my-panel-body">
+                                <b:row styleClass="padded-left">
                                     <h4><strong><em>Please Confirm your payment of #{transactionController.totalCost}: </em></strong></h4>
                                 </b:row>
-                                <b:row>
+                                <b:row styleClass="padded-left">
                                     <b:column span="4">
                                         <h:form>
-                                            <b:commandButton id="confirmBtn" value="Confirm" action="#{transactionController.confirmPurchase()}" styleClass="btn-main"/>
+                                            <b:commandButton id="confirmBtn" value="Confirm" action="#{transactionController.confirmPurchase}" styleClass="btn-main">
+                                                <f:ajax execute="@form"/>
+                                            </b:commandButton>
                                         </h:form>
                                     </b:column>
                                 </b:row>
                                 
-                            </b:container>
+                            </div>
                         </b:panel>
                     </b:row>
                 </b:container>

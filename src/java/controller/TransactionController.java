@@ -11,6 +11,7 @@ import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.mail.FetchProfile.Item;
 
 @Named(value = "transactionController")
 @SessionScoped
@@ -29,14 +30,6 @@ public class TransactionController implements Serializable{
      * Creates a new instance of TransactionController
      */
     public TransactionController() {
-        userNum = 0;
-        numDonations = 0;
-        costStr = "";
-        totalCost = "";
-        customName = "";
-    }
-    
-    private void resetBean() {
         userNum = 0;
         numDonations = 0;
         costStr = "";
@@ -69,6 +62,11 @@ public class TransactionController implements Serializable{
     }
     
     public void purchase() throws IOException {
+        // update userNum
+//        userNum = controller.getCurrentUser().getUserNum();
+        FacesContext context = FacesContext.getCurrentInstance();
+        LoginController bean = (LoginController) context.getApplication().evaluateExpressionGet(context, "#{loginController}", LoginController.class);
+        userNum = bean.getCurrentUser().getUserNum();
         updateCost();
         
         // Request token from PayPal
@@ -76,28 +74,27 @@ public class TransactionController implements Serializable{
         token = requester.getPurchaseToken(this.numDonations);
         
         // Redirect user to PayPal
-        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        ExternalContext externalContext = context.getExternalContext();
         externalContext.redirect("https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=" + token);
     }
     
     public void confirmPurchase() {
-        MainDaoImpl dao = new MainDaoImpl();
-        int response = dao.makePurchase(userNum, numDonations);
-        
-        // Do something?
-        if (response != -1) {
-//            masterBean.getCurrentUser().
-        }
         SOAPClientSAAJ saaj = new SOAPClientSAAJ();
         payerID = saaj.getPayerID(token);
         
         String responsePage = saaj.executePurchase(token, payerID, numDonations);
         
         // Reset transactionController vars if purchase was successful
-        if (responsePage.equals("faces/thankyou.xhtml")) {
+        if (responsePage.equals("faces/thankyou.xhtml") && totalCost != "") {
 //            numDonations = 0;
 //            costStr = "";
 //            totalCost = "";
+            MainDaoImpl dao = new MainDaoImpl();
+            int response = dao.makePurchase(userNum, numDonations, customName);
+            
+            FacesContext context = FacesContext.getCurrentInstance();
+            LoginController bean = (LoginController) context.getApplication().evaluateExpressionGet(context, "#{loginController}", LoginController.class);
+            bean.getCurrentUser().setNumDonated(dao.updateUserNumDonated(userNum, numDonations));
         }
         navigateTo(responsePage.replace("faces/", ""));
 //        resetBean();

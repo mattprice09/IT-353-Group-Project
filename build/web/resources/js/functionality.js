@@ -53,7 +53,7 @@ var initializeHomePage = function() {
     };
     coverImg.width = W;
     coverImg.height = H;
-    coverImg.src = "resources/images/MainSealed3.jpg";
+    coverImg.src = "resources/images/MainSealed8.jpg";
     
     // Popups on scrollover for the image
     $("#MainCanvas").mousemove(function(e){
@@ -63,17 +63,21 @@ var initializeHomePage = function() {
         // Get popover text
         var popupText = "";
         if (event.offsetY < low_bound || (event.offsetX < right_bound && event.offsetY == low_bound)) {
-            popupText = "X-coord is " + event.offsetX + ", y-coord is " + event.offsetY;
+            // send coordinates to bean
+            $("#parentC\\:currentPixel").val(event.offsetX + ",," + event.offsetY);
+            $("#parentC\\:currentPixel").change();
+            // set text and display config for popup
+            var donorName = $("#parentC\\:userInfo").val();
+            popupText = "This pixel was donated by <strong>" + donorName + "</strong>.";
             $("#popoverID").addClass("popover");
             $("#popoverID").removeClass("popover-donate");
         } else {
             popupText = "Donate to reveal more pixels!";
             $("#popoverID").removeClass("popover");
             $("#popoverID").addClass("popover-donate");
-//            $(".popover").hide();
         }
-        
-        $("#popupMsg").text(popupText);
+        var span = $('<span />').html(popupText);
+        $("#popupMsg").html(span);
 
         // display popover at specified location
         var left = e.pageX;
@@ -85,7 +89,7 @@ var initializeHomePage = function() {
     });
     
     $("#MainCanvas").mouseout(function(e) {
-        $(".popover").hide();
+        $("#popoverID").hide();
     });
 }
 

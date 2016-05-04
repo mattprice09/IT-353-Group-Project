@@ -34,13 +34,24 @@ public class LoginController implements Serializable {
         
         int status = dao.authenticate(currentUser);
         if (status == 1) {
-            currentUser = (User) dao.getUser(currentUser.getUserName());
+            String usern = currentUser.getUserName();
+            currentUser = (User) dao.getUser(usern);
+            
+            updateOtherBeans();
             loggedIn = "Y";
             navigateTo(getCurrentPage().replace("faces", ""));
         } else {
             numAttempts++;
             navigateTo("login.xhtml");
         }
+    }
+    
+    private void updateOtherBeans() {
+        
+        // get username from loginController
+        FacesContext context = FacesContext.getCurrentInstance();
+        TransactionController bean = (TransactionController) context.getApplication().evaluateExpressionGet(context, "#{transactionController}", TransactionController.class);
+        bean.setCustomName(this.currentUser.getUserName());
     }
     
     public void navigateTo(String url) {
@@ -54,9 +65,7 @@ public class LoginController implements Serializable {
     private String getCurrentPage() {
         FacesContext context = FacesContext.getCurrentInstance(); 
         String currPage = context.getViewRoot().getViewId();
-        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$4");
-        System.out.println(this.prevPage);
-        System.out.println(currPage);
+        
         // Don't return to the login page after logging in
         if (currPage.equals("/login.xhtml")) {
             
@@ -86,18 +95,17 @@ public class LoginController implements Serializable {
         int rowCount = aUserDAO.createUser(currentUser); // Doing anything with the object after this?
         System.out.println(rowCount);
         if (rowCount == 1) {
-//            return "faces/response.xhtml"; // navigate to "response.xhtml"
             loggedIn = "Y";
             navigateTo("response.xhtml");
-        } else 
-//            return "faces/register.xhtml";
+        } else {
             navigateTo("register.xhtml");
+        }
     }
 
     // Redirect user if they're not logged in
     public String checkLoggedIn(ComponentSystemEvent event) {
         String navi = null;
-        System.out.println("Logged in: " + loggedIn);
+        
         if (loggedIn.equals("N")) {
             FacesContext fc = FacesContext.getCurrentInstance();
             ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler) fc.getApplication().getNavigationHandler();

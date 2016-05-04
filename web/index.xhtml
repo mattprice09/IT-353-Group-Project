@@ -30,10 +30,15 @@
             <ui:define name="hiddenValues">
                 <h:inputHidden id="loggedIn" value="#{loginController.loggedIn}"/>
                 <h:inputHidden id="numSold" value="#{dashboardController.numSold}"/>
-                <h:inputText id="currentPixel" value="0" style ="display:none">
-                    <f:ajax onevent="change" listener="#{ImageController.getUserInfoDB()}" render="userInfo" />
-                </h:inputText>
-                <h:inputHidden value="#{ImageController.userInfo}" id="userInfo"/>
+                
+                <h:form id="parentC">
+                    <h:inputText id="currentPixel" value="#{imageController.coordString}" style="display:none">
+                        <f:ajax event="change" execute="@form" render="userInfo" listener="#{imageController.setUserInfoDB}">
+                        </f:ajax>
+                    </h:inputText>
+                    <h:inputText value="#{imageController.userInfo}" id="userInfo" style="display:none"/>
+                </h:form>
+                
             </ui:define>
             
             <!-- Override main content facelet -->

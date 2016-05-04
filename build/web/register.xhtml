@@ -416,7 +416,9 @@
                             <!-- Submit Registration -->
                             <b:row>
                                 <b:column span="2" offset="3">
-                                    <b:commandButton id="submitID" value="Submit" action="#{loginController.registerUser()}" styleClass="btn-main" style="float:right;"/>
+                                    <b:commandButton id="submitID" value="Submit" action="#{loginController.registerUser()}" styleClass="btn-main" style="float:right;">
+                                        <f:ajax execute="@form"/>
+                                    </b:commandButton>
                                 </b:column>
                             </b:row>
                             
